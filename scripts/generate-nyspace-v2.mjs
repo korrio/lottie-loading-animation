@@ -11,8 +11,9 @@
  * raster by skeletonizing the mark mask (Zhang–Suen) and walking the
  * skeleton tail → arch → teardrop circuit → stub tip.
  *
- * Timeline (60fps, 240 frames, 800×600):
- *   [0..90] intro   [90..210] seamless loop (bob period 60, breath 60)
+ * Timeline (60fps, 240 frames, 800×600) — longer intro than the others so
+ * the ride can be slow and deliberate:
+ *   [0..120] intro   [120..240] seamless loop (bob period 60, breath 60)
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -95,9 +96,9 @@ const at = (u) => {
 };
 const easeInOutCubic = (u) => (u < 0.5 ? 4 * u * u * u : 1 - (-2 * u + 2) ** 3 / 2);
 
-// travel: frames 32..78, one key every 2 frames
-const T0 = 32;
-const T1 = 78;
+// travel: frames 36..106, one key every 2 frames — slow, deliberate ride
+const T0 = 36;
+const T1 = 106;
 const SPIN = -720; // stylized roll, lands at 0°
 const travelP = [];
 const travelR = [];
@@ -112,10 +113,10 @@ const TIP = at(1); // stub tip, where the ball pops off toward home
 // --- ball -------------------------------------------------------------------
 const ball = layer(1, 'ball', {
   o: anim([
-    [24, 0, linear],
-    [26, 100],
+    [22, 0, linear],
+    [24, 100],
   ]),
-  r: anim([...travelR, [90, 0]]),
+  r: anim([...travelR, [120, 0]]),
   p: {
     a: 1,
     k: [
@@ -123,29 +124,28 @@ const ball = layer(1, 'ball', {
       { t: T1, s: [...TIP, 0], o: easeOut.o, i: easeOut.i },
       // pop off the tip, small arc up to the dot spot
       {
-        t: 82,
+        t: 111,
         s: [(TIP[0] + BX) / 2 - 6, Math.min(TIP[1], BY) - 22, 0],
         o: easeInOut.o,
         i: easeInOut.i,
       },
       ...kf([
-        [86, [BX, BY, 0], easeInOut],
-        [90, [BX, BY, 0], easeInOut],
-        [120, [BX, BY - 9, 0], easeInOut],
-        [150, [BX, BY, 0], easeInOut],
-        [180, [BX, BY - 9, 0], easeInOut],
-        [210, [BX, BY, 0], easeInOut],
-        [240, [BX, BY - 9, 0]],
+        [116, [BX, BY, 0], easeInOut],
+        [120, [BX, BY, 0], easeInOut],
+        [150, [BX, BY - 9, 0], easeInOut],
+        [180, [BX, BY, 0], easeInOut],
+        [210, [BX, BY - 9, 0], easeInOut],
+        [240, [BX, BY, 0]],
       ]),
     ],
   },
   s: anim([
-    [26, [0, 0, 100], easeOut],
-    [32, [S * 1.1, S * 1.1, 100], easeInOut],
-    [38, [S, S, 100], easeInOut],
-    [84, [S, S, 100], easeOut],
-    [86, [S * 1.08, S * 0.94, 100], easeOut],
-    [92, [S, S, 100]],
+    [24, [0, 0, 100], easeOut],
+    [30, [S * 1.1, S * 1.1, 100], easeInOut],
+    [36, [S, S, 100], easeInOut],
+    [114, [S, S, 100], easeOut],
+    [116, [S * 1.08, S * 0.94, 100], easeOut],
+    [122, [S, S, 100]],
   ]),
 });
 
@@ -161,29 +161,28 @@ const mark = layer(2, 'mark', {
     [4, [0, 0, 100], easeOut],
     [16, [S * 1.06, S * 1.06, 100], easeInOut],
     [24, [S, S, 100], easeInOut],
-    [90, [S, S, 100], easeInOut],
-    [120, [S * 1.015, S * 1.015, 100], easeInOut],
-    [150, [S, S, 100], easeInOut],
-    [180, [S * 1.015, S * 1.015, 100], easeInOut],
-    [210, [S, S, 100], easeInOut],
-    [240, [S * 1.015, S * 1.015, 100]],
+    [120, [S, S, 100], easeInOut],
+    [150, [S * 1.015, S * 1.015, 100], easeInOut],
+    [180, [S, S, 100], easeInOut],
+    [210, [S * 1.015, S * 1.015, 100], easeInOut],
+    [240, [S, S, 100]],
   ]),
 });
 
 // --- wordmark: tracks in (letterspacing tightens as it fades up) -----------
 const wordmark = layer(4, 'wordmark', {
   o: anim([
-    [50, 0, easeOut],
-    [62, 100],
+    [84, 0, easeOut],
+    [96, 100],
   ]),
   r: still(0),
   s: anim([
-    [50, [58, 47, 100], easeOut],
-    [64, [47, 47, 100]],
+    [84, [58, 47, 100], easeOut],
+    [98, [47, 47, 100]],
   ]),
   p: anim([
-    [50, [400, 462, 0], easeOut],
-    [62, [400, 448, 0]],
+    [84, [400, 462, 0], easeOut],
+    [96, [400, 448, 0]],
   ]),
 });
 
@@ -224,8 +223,8 @@ const lottie = {
   assets,
   layers: [ball, mark, wordmark, bg],
   markers: [
-    { tm: 0, cm: 'intro', dr: 90 },
-    { tm: 90, cm: 'loop', dr: 120 },
+    { tm: 0, cm: 'intro', dr: 120 },
+    { tm: 120, cm: 'loop', dr: 120 },
   ],
 };
 
