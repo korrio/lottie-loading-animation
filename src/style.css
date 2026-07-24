@@ -256,6 +256,48 @@ body.theme-club {
   background: rgba(28, 49, 94, 0.16);
 }
 
+/* playful purple theme for the Pantip page */
+body.theme-tip {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f7f3fb 55%, #ece2f5 100%);
+  color: #3a2159;
+}
+
+.theme-tip header p,
+.theme-tip .meta p,
+.theme-tip .chip {
+  color: #8a76a3;
+}
+
+.theme-tip .panel {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(82, 41, 129, 0.18);
+}
+
+.theme-tip .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.95), transparent);
+}
+
+.theme-tip .meta {
+  border-top-color: rgba(82, 41, 129, 0.12);
+}
+
+.theme-tip .chip {
+  background: rgba(82, 41, 129, 0.06);
+  border-color: rgba(82, 41, 129, 0.22);
+}
+
+.theme-tip .actions button,
+.theme-tip .actions a {
+  color: #522981;
+  background: rgba(82, 41, 129, 0.07);
+  border-color: rgba(82, 41, 129, 0.28);
+}
+
+.theme-tip .actions button:hover,
+.theme-tip .actions a:hover {
+  background: rgba(82, 41, 129, 0.16);
+}
+
 /* fresh green theme for the Bitkub page */
 body.theme-kub {
   background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f2faf5 55%, #e6f5ec 100%);

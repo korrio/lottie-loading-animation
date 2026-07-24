@@ -12,6 +12,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | สร้างสรรค์ปัญญา (Creative Intelligent) | [/sspy/](https://spinbase-animation.web.app/sspy/) | Pen nib rises, idea bulb pops and glows, Thai + English text reveal |
 | BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 2 variants: counter-rotating balls, roll-in-and-rest |
 | Bitkub Capital | [/bitkub/](https://spinbase-animation.web.app/bitkub/) | Diamond-mark hooks fly in from opposite corners and interlock, coin dots pop in |
+| Pantip | [/pantip/](https://spinbase-animation.web.app/pantip/) | Face pops in like a sticker, letters pop one by one, the i-dot bounces in last |
 
 ## Quick start
 
@@ -30,6 +31,7 @@ node scripts/generate-sspy.mjs          # สร้างสรรค์ปั�
 node scripts/generate-balance.mjs       # BALANCE v1 → public/balance-loading.json
 node scripts/generate-balance-v2.mjs    # BALANCE v2 → public/balance-loading-v2.json
 node scripts/generate-bitkub.mjs        # Bitkub     → public/bitkub-loading.json
+node scripts/generate-pantip.mjs        # Pantip     → public/pantip-loading.json
 ```
 
 Deploy:

@@ -11,6 +11,7 @@ export default defineConfig({
         sspy: resolve(import.meta.dirname, 'sspy/index.html'),
         balance: resolve(import.meta.dirname, 'balance/index.html'),
         bitkub: resolve(import.meta.dirname, 'bitkub/index.html'),
+        pantip: resolve(import.meta.dirname, 'pantip/index.html'),
       },
     },
   },
