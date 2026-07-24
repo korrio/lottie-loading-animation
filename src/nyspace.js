@@ -4,27 +4,34 @@ import lottie from 'lottie-web';
 const INTRO = [0, 90];
 const LOOP = [90, 210];
 
-const chip = document.querySelector('#chip');
+const PANELS = [
+  { id: 'v1', path: '/nyspace-loading.json' },
+  { id: 'v2', path: '/nyspace-loading-v2.json' },
+];
 
-const anim = lottie.loadAnimation({
-  container: document.querySelector('#stage'),
-  renderer: 'svg',
-  loop: false,
-  autoplay: false,
-  path: '/nyspace-loading.json',
-});
+for (const { id, path } of PANELS) {
+  const chip = document.querySelector(`#chip-${id}`);
 
-const playIntro = () => {
-  chip.textContent = 'intro';
-  anim.loop = false;
-  anim.playSegments(INTRO, true);
-};
+  const anim = lottie.loadAnimation({
+    container: document.querySelector(`#stage-${id}`),
+    renderer: 'svg',
+    loop: false,
+    autoplay: false,
+    path,
+  });
 
-anim.addEventListener('DOMLoaded', playIntro);
-anim.addEventListener('complete', () => {
-  chip.textContent = 'loop';
-  anim.loop = true;
-  anim.playSegments(LOOP, true);
-});
+  const playIntro = () => {
+    chip.textContent = 'intro';
+    anim.loop = false;
+    anim.playSegments(INTRO, true);
+  };
 
-document.querySelector('#replay').addEventListener('click', playIntro);
+  anim.addEventListener('DOMLoaded', playIntro);
+  anim.addEventListener('complete', () => {
+    chip.textContent = 'loop';
+    anim.loop = true;
+    anim.playSegments(LOOP, true);
+  });
+
+  document.querySelector(`#replay-${id}`).addEventListener('click', playIntro);
+}
