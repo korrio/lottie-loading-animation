@@ -256,6 +256,48 @@ body.theme-club {
   background: rgba(28, 49, 94, 0.16);
 }
 
+/* fresh green theme for the Bitkub page */
+body.theme-kub {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f2faf5 55%, #e6f5ec 100%);
+  color: #2b2b2b;
+}
+
+.theme-kub header p,
+.theme-kub .meta p,
+.theme-kub .chip {
+  color: #6f7f76;
+}
+
+.theme-kub .panel {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(2, 215, 103, 0.25);
+}
+
+.theme-kub .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.95), transparent);
+}
+
+.theme-kub .meta {
+  border-top-color: rgba(2, 215, 103, 0.18);
+}
+
+.theme-kub .chip {
+  background: rgba(2, 215, 103, 0.08);
+  border-color: rgba(2, 215, 103, 0.3);
+}
+
+.theme-kub .actions button,
+.theme-kub .actions a {
+  color: #0a7a42;
+  background: rgba(2, 215, 103, 0.08);
+  border-color: rgba(2, 215, 103, 0.35);
+}
+
+.theme-kub .actions button:hover,
+.theme-kub .actions a:hover {
+  background: rgba(2, 215, 103, 0.2);
+}
+
 /* warm paper theme for the สร้างสรรปัญญา page */
 body.theme-paper {
   background: radial-gradient(1200px 800px at 50% 30%, #fffdf6 0%, #faf3e2 55%, #f2e8d2 100%);
