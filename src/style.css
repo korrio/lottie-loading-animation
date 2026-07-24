@@ -1,0 +1,299 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: radial-gradient(1200px 800px at 50% 30%, #12202e 0%, #0a121c 55%, #060b12 100%);
+  color: #e8eef4;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+header h1 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+header p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #9db4c6;
+}
+
+.headlink {
+  color: inherit;
+}
+
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.03), transparent);
+}
+
+.meta {
+  padding: 18px 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.meta h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.meta p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #9db4c6;
+  min-height: 2.6em;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9db4c6;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.actions button,
+.actions a {
+  font-size: 13px;
+  color: #dfe9f1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.actions button:hover,
+.actions a:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.crosslink {
+  margin-left: auto;
+}
+
+/* single-animation page layout */
+#app.single {
+  max-width: 720px;
+}
+
+#app.single .stage {
+  aspect-ratio: 4 / 3;
+}
+
+/* warm theme for the COURTHAUS page */
+body.theme-cream {
+  background: radial-gradient(1200px 800px at 50% 30%, #faf3e7 0%, #f3e8d6 55%, #ecdfc9 100%);
+  color: #4a3527;
+}
+
+.theme-cream header p,
+.theme-cream .meta p,
+.theme-cream .chip {
+  color: #97785f;
+}
+
+.theme-cream .panel {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(176, 98, 52, 0.18);
+}
+
+.theme-cream .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.theme-cream .meta {
+  border-top-color: rgba(176, 98, 52, 0.14);
+}
+
+.theme-cream .chip {
+  background: rgba(176, 98, 52, 0.08);
+  border-color: rgba(176, 98, 52, 0.2);
+}
+
+.theme-cream .actions button,
+.theme-cream .actions a {
+  color: #7c4a26;
+  background: rgba(176, 98, 52, 0.1);
+  border-color: rgba(176, 98, 52, 0.25);
+}
+
+.theme-cream .actions button:hover,
+.theme-cream .actions a:hover {
+  background: rgba(176, 98, 52, 0.2);
+}
+
+/* monochrome gym theme for the FUZE page */
+body.theme-mono {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f0f0ee 55%, #e4e4e1 100%);
+  color: #141414;
+}
+
+.theme-mono header p,
+.theme-mono .meta p,
+.theme-mono .chip {
+  color: #6d6d6a;
+}
+
+.theme-mono .panel {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(20, 20, 20, 0.12);
+}
+
+.theme-mono .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.theme-mono .meta {
+  border-top-color: rgba(20, 20, 20, 0.1);
+}
+
+.theme-mono .chip {
+  background: rgba(20, 20, 20, 0.05);
+  border-color: rgba(20, 20, 20, 0.15);
+}
+
+.theme-mono .actions button,
+.theme-mono .actions a {
+  color: #141414;
+  background: rgba(20, 20, 20, 0.06);
+  border-color: rgba(20, 20, 20, 0.2);
+}
+
+.theme-mono .actions button:hover,
+.theme-mono .actions a:hover {
+  background: rgba(20, 20, 20, 0.14);
+}
+
+/* crisp club theme for the BALANCE page */
+body.theme-club {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f2f4f8 55%, #e6eaf2 100%);
+  color: #1c315e;
+}
+
+.theme-club header p,
+.theme-club .meta p,
+.theme-club .chip {
+  color: #6b7898;
+}
+
+.theme-club .panel {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(28, 49, 94, 0.14);
+}
+
+.theme-club .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.theme-club .meta {
+  border-top-color: rgba(28, 49, 94, 0.1);
+}
+
+.theme-club .chip {
+  background: rgba(28, 49, 94, 0.06);
+  border-color: rgba(28, 49, 94, 0.16);
+}
+
+.theme-club .actions button,
+.theme-club .actions a {
+  color: #1c315e;
+  background: rgba(28, 49, 94, 0.07);
+  border-color: rgba(28, 49, 94, 0.22);
+}
+
+.theme-club .actions button:hover,
+.theme-club .actions a:hover {
+  background: rgba(28, 49, 94, 0.16);
+}
+
+/* warm paper theme for the สร้างสรรปัญญา page */
+body.theme-paper {
+  background: radial-gradient(1200px 800px at 50% 30%, #fffdf6 0%, #faf3e2 55%, #f2e8d2 100%);
+  color: #3d3229;
+}
+
+.theme-paper header p,
+.theme-paper .meta p,
+.theme-paper .chip {
+  color: #8a7a66;
+}
+
+.theme-paper .panel {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(78, 138, 150, 0.25);
+}
+
+.theme-paper .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.8), transparent);
+}
+
+.theme-paper .meta {
+  border-top-color: rgba(78, 138, 150, 0.18);
+}
+
+.theme-paper .chip {
+  background: rgba(245, 200, 66, 0.15);
+  border-color: rgba(138, 122, 102, 0.3);
+}
+
+.theme-paper .actions button,
+.theme-paper .actions a {
+  color: #35606a;
+  background: rgba(78, 138, 150, 0.1);
+  border-color: rgba(78, 138, 150, 0.3);
+}
+
+.theme-paper .actions button:hover,
+.theme-paper .actions a:hover {
+  background: rgba(78, 138, 150, 0.22);
+}
