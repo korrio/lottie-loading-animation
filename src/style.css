@@ -340,6 +340,48 @@ body.theme-kub {
   background: rgba(2, 215, 103, 0.2);
 }
 
+/* court-green theme for the NY Space page */
+body.theme-space {
+  background: radial-gradient(1200px 800px at 50% 30%, #1e5c58 0%, #164743 55%, #0f3532 100%);
+  color: #e0cec2;
+}
+
+.theme-space header p,
+.theme-space .meta p,
+.theme-space .chip {
+  color: #9dbcb2;
+}
+
+.theme-space .panel {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(238, 254, 106, 0.22);
+}
+
+.theme-space .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(238, 254, 106, 0.05), transparent);
+}
+
+.theme-space .meta {
+  border-top-color: rgba(238, 254, 106, 0.14);
+}
+
+.theme-space .chip {
+  background: rgba(238, 254, 106, 0.08);
+  border-color: rgba(238, 254, 106, 0.25);
+}
+
+.theme-space .actions button,
+.theme-space .actions a {
+  color: #eefe6a;
+  background: rgba(238, 254, 106, 0.08);
+  border-color: rgba(238, 254, 106, 0.3);
+}
+
+.theme-space .actions button:hover,
+.theme-space .actions a:hover {
+  background: rgba(238, 254, 106, 0.18);
+}
+
 /* warm paper theme for the สร้างสรรปัญญา page */
 body.theme-paper {
   background: radial-gradient(1200px 800px at 50% 30%, #fffdf6 0%, #faf3e2 55%, #f2e8d2 100%);

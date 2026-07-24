@@ -12,6 +12,7 @@ export default defineConfig({
         balance: resolve(import.meta.dirname, 'balance/index.html'),
         bitkub: resolve(import.meta.dirname, 'bitkub/index.html'),
         pantip: resolve(import.meta.dirname, 'pantip/index.html'),
+        nyspace: resolve(import.meta.dirname, 'nyspace/index.html'),
       },
     },
   },
