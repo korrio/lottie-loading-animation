@@ -465,3 +465,45 @@ body.theme-fastcourt {
 .theme-fastcourt .actions a:hover {
   background: rgba(181, 224, 57, 0.18);
 }
+
+/* terminal black/green theme for the AQUARIO page */
+body.theme-aquario {
+  background: radial-gradient(1200px 800px at 50% 30%, #0a0f0a 0%, #050705 55%, #000000 100%);
+  color: #ffffff;
+}
+
+.theme-aquario header p,
+.theme-aquario .meta p,
+.theme-aquario .chip {
+  color: #8fa593;
+}
+
+.theme-aquario .panel {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(0, 255, 65, 0.22);
+}
+
+.theme-aquario .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(0, 255, 65, 0.05), transparent);
+}
+
+.theme-aquario .meta {
+  border-top-color: rgba(0, 255, 65, 0.15);
+}
+
+.theme-aquario .chip {
+  background: rgba(0, 255, 65, 0.06);
+  border-color: rgba(0, 255, 65, 0.25);
+}
+
+.theme-aquario .actions button,
+.theme-aquario .actions a {
+  color: #00ff41;
+  background: rgba(0, 255, 65, 0.07);
+  border-color: rgba(0, 255, 65, 0.3);
+}
+
+.theme-aquario .actions button:hover,
+.theme-aquario .actions a:hover {
+  background: rgba(0, 255, 65, 0.16);
+}

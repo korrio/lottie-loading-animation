@@ -14,7 +14,8 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | Bitkub Capital | [/bitkub/](https://spinbase-animation.web.app/bitkub/) | Diamond-mark hooks fly in from opposite corners and interlock, coin dots pop in |
 | Pantip | [/pantip/](https://spinbase-animation.web.app/pantip/) | Face pops in like a sticker, letters pop one by one, the i-dot bounces in last |
 | NY SPACE | [/nyspace/](https://spinbase-animation.web.app/nyspace/) | 2 variants: drop-and-bounce; trace the line — the ball rides the letterform's stroke and rests on its dot |
-| FastCourt | [/fastcourt/](https://spinbase-animation.web.app/fastcourt/) | The F mark dashes in stretched by its own speed, letters land in its wake, speed lines whoosh on loop |
+| FastCourt | [/fastcourt/](https://spinbase-animation.web.app/fastcourt/) | 2 variants (with/without tagline): the F mark dashes in stretched by its own speed, letters land in its wake, speed lines whoosh on loop |
+| AQUARIO | [/aquario/](https://spinbase-animation.web.app/aquario/) | 2 variants: type-on over the aq1.co ocean photo with a blinking matrix-green cursor; surface-and-float from the vertical lockup |
 
 ## Quick start
 
@@ -37,7 +38,10 @@ node scripts/generate-bitkub.mjs        # Bitkub     → public/bitkub-loading.j
 node scripts/generate-pantip.mjs        # Pantip     → public/pantip-loading.json
 node scripts/generate-nyspace.mjs       # NY SPACE v1 → public/nyspace-loading.json
 node scripts/generate-nyspace-v2.mjs    # NY SPACE v2 → public/nyspace-loading-v2.json
-node scripts/generate-fastcourt.mjs     # FastCourt  → public/fastcourt-loading.json
+node scripts/generate-fastcourt.mjs     # FastCourt v1 → public/fastcourt-loading.json
+node scripts/generate-fastcourt-v2.mjs  # FastCourt v2 → public/fastcourt-loading-v2.json
+node scripts/generate-aquario.mjs       # AQUARIO v1 → public/aquario-loading.json
+node scripts/generate-aquario-v2.mjs    # AQUARIO v2 → public/aquario-loading-v2.json
 ```
 
 Deploy:

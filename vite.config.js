@@ -14,6 +14,7 @@ export default defineConfig({
         pantip: resolve(import.meta.dirname, 'pantip/index.html'),
         nyspace: resolve(import.meta.dirname, 'nyspace/index.html'),
         fastcourt: resolve(import.meta.dirname, 'fastcourt/index.html'),
+        aquario: resolve(import.meta.dirname, 'aquario/index.html'),
       },
     },
   },

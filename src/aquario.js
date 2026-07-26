@@ -5,8 +5,8 @@ const INTRO = [0, 90];
 const LOOP = [90, 210];
 
 const PANELS = [
-  { id: 'v1', path: '/fastcourt-loading.json' },
-  { id: 'v2', path: '/fastcourt-loading-v2.json' },
+  { id: 'v1', path: '/aquario-loading.json' },
+  { id: 'v2', path: '/aquario-loading-v2.json' },
 ];
 
 for (const { id, path } of PANELS) {

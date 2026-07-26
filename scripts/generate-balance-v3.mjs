@@ -49,7 +49,7 @@ const S = 68; // assets are half-res, so layer scale = 0.34 * 2 * 100
 // [id, w, h, compX, compY] — positions are mapped bbox centers
 const IMAGES = [
   ['ball-top', 382, 382, 400.9, 213.0],
-  ['ball-bottom', 384, 315, 400.2, 405.4],
+  ['ball-bottom', 384, 377, 400.0, 381.8],
   ['bl0', 50, 51, 291.7, 87.2],
   ['bl1', 43, 52, 331.2, 67.4],
   ['bl2', 39, 47, 362.1, 54.5],
@@ -140,6 +140,8 @@ const ballBottom = layer(2, 'ball-bottom', {
     [4, 0, linear],
     [6, 100],
   ]),
+  // anchor at the ring's true center so the roll-in spin and loop sway are true
+  a: still([191.75, 184.33, 0]),
   r: anim([
     // rolls in from the left: spin shares the travel ease so the roll reads true
     [4, -270, easeOut],
@@ -151,8 +153,8 @@ const ballBottom = layer(2, 'ball-bottom', {
     [210, 0],
   ]),
   p: anim([
-    [4, [-190, 405.4, 0], easeOut],
-    [24, [400.2, 405.4, 0]],
+    [4, [-190, 381.8, 0], easeOut],
+    [24, [400.0, 381.8, 0]],
   ]),
   s: still([S, S, 100]),
 });
