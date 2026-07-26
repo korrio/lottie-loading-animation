@@ -3,9 +3,10 @@
  * from the stacked-lockup logo (arched BALANCE · solid ball over outline
  * ball · arched AUTO TENNIS).
  *
- * Story: the outline ball pops in first, the solid ball drops from above and
- * lands balanced on top of it with a squash — then the BALANCE letters pop in
- * along their arch and AUTO TENNIS fades up. In the loop the solid ball
+ * Story: the outline ball rolls in from the left, the solid ball flies in
+ * from the right and lands balanced on top of it with a squash — then the
+ * BALANCE letters pop in along their arch and AUTO TENNIS fades up. In the
+ * loop the solid ball
  * teeters gently on its contact point while the outline ball counter-sways,
  * like the pair is holding its balance.
  *
@@ -104,13 +105,13 @@ const PX = 400.7;
 const PY = 341.1;
 const ballTop = layer(1, 'ball-top', {
   o: anim([
-    [14, 0, linear],
-    [16, 100],
+    [22, 0, linear],
+    [24, 100],
   ]),
   a: still([190.75, 379.5, 0]),
   r: anim([
-    [14, -6, fall],
-    [30, 0, easeInOut],
+    [22, 10, easeOut],
+    [38, 0, easeInOut],
     // loop: teetering on the contact point (period 120, zero at 90/150/210)
     [90, 0, easeInOut],
     [120, 2.4, easeInOut],
@@ -119,42 +120,46 @@ const ballTop = layer(1, 'ball-top', {
     [210, 0],
   ]),
   p: anim([
-    [14, [PX, PY - 400, 0], fall],
-    [30, [PX, PY, 0], easeOut],
-    [34, [PX, PY - 5, 0], easeInOut],
-    [38, [PX, PY, 0]],
+    // flies in from the right in a shallow arc, settles on the contact point
+    [22, [1010, PY - 70, 0], easeOut],
+    [33, [PX + 42, PY - 22, 0], easeInOut],
+    [38, [PX, PY, 0], easeOut],
+    [42, [PX, PY - 4, 0], easeInOut],
+    [46, [PX, PY, 0]],
   ]),
   s: anim([
-    [26, [S, S, 100], easeOut],
-    [30, [S * 1.07, S * 0.9, 100], easeOut],
-    [38, [S, S, 100]],
+    [34, [S, S, 100], easeOut],
+    [38, [S * 1.07, S * 0.9, 100], easeOut],
+    [46, [S, S, 100]],
   ]),
 });
 
 // --- outline ball: pops in first, counter-sways in the loop -----------------
 const ballBottom = layer(2, 'ball-bottom', {
   o: anim([
-    [2, 0, linear],
-    [5, 100],
+    [4, 0, linear],
+    [6, 100],
   ]),
   r: anim([
+    // rolls in from the left: spin shares the travel ease so the roll reads true
+    [4, -270, easeOut],
+    [24, 0, easeInOut],
     [90, 0, easeInOut],
     [120, -0.9, easeInOut],
     [150, 0, easeInOut],
     [180, 0.9, easeInOut],
     [210, 0],
   ]),
-  p: still([400.2, 405.4, 0]),
-  s: anim([
-    [2, [0, 0, 100], easeOut],
-    [12, [S * 1.05, S * 1.05, 100], easeInOut],
-    [18, [S, S, 100]],
+  p: anim([
+    [4, [-190, 405.4, 0], easeOut],
+    [24, [400.2, 405.4, 0]],
   ]),
+  s: still([S, S, 100]),
 });
 
 // --- BALANCE: letters pop along the arch ------------------------------------
 const balanceLayers = IMAGES.slice(2, 9).map(([id, , , x, y], i) => {
-  const t0 = 36 + i * 3;
+  const t0 = 44 + i * 3;
   return layer(3 + i, id, {
     o: anim([
       [t0, 0, linear],
@@ -172,7 +177,7 @@ const balanceLayers = IMAGES.slice(2, 9).map(([id, , , x, y], i) => {
 
 // --- AUTO TENNIS: quiet staggered fade-up -----------------------------------
 const autoLayers = IMAGES.slice(9).map(([id, , , x, y], i) => {
-  const t0 = 58 + i * 2;
+  const t0 = 62 + i * 2;
   return layer(10 + i, id, {
     o: anim([
       [t0, 0, linear],
