@@ -114,3 +114,28 @@ src/<brand>.js      lottie-web player wiring (intro → seamless loop)
 src/style.css       shared UI + per-brand theme classes
 firebase.json       Firebase Hosting config (dist/, short JSON cache)
 ```
+
+## Rendering to video (for social media)
+
+No extra installs needed — Chrome records the animation itself:
+
+```bash
+node scripts/video-recv-server.mjs   # terminal 1: receives the recording → renders/
+npm run dev                          # terminal 2
+```
+
+Open the brand page, paste `scripts/record-lottie-video.js` into the DevTools
+console, then:
+
+```js
+await recordLottie('/aquario-loading.json', 'aquario-v1.webm')
+```
+
+That saves a 1600×1200 30fps WebM (intro + 2 seamless loops + a hold on the
+resting lockup, ~6s) into `renders/`. WebM uploads directly to YouTube/X.
+For Instagram/TikTok convert to MP4 (uses ffmpeg if present):
+
+```bash
+ffmpeg -i renders/aquario-v1.webm -c:v libx264 -pix_fmt yuv420p -crf 18 -r 30 \
+       -movflags +faststart renders/aquario-v1.mp4
+```
