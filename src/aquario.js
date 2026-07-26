@@ -7,6 +7,7 @@ const LOOP = [90, 210];
 const PANELS = [
   { id: 'v1', path: '/aquario-loading.json' },
   { id: 'v2', path: '/aquario-loading-v2.json' },
+  { id: 'v3', path: '/aquario-loading-v3.json' },
 ];
 
 for (const { id, path } of PANELS) {

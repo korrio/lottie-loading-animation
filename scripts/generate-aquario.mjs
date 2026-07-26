@@ -158,6 +158,7 @@ const cursor = {
   bm: 0,
   ks: {
     o: anim([
+      [0, 0, null, true],
       [22, 100, null, true],
       [84, 0, null, true],
       [114, 100, null, true],

@@ -15,7 +15,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | Pantip | [/pantip/](https://spinbase-animation.web.app/pantip/) | Face pops in like a sticker, letters pop one by one, the i-dot bounces in last |
 | NY SPACE | [/nyspace/](https://spinbase-animation.web.app/nyspace/) | 2 variants: drop-and-bounce; trace the line — the ball rides the letterform's stroke and rests on its dot |
 | FastCourt | [/fastcourt/](https://spinbase-animation.web.app/fastcourt/) | 2 variants (with/without tagline): the F mark dashes in stretched by its own speed, letters land in its wake, speed lines whoosh on loop |
-| AQUARIO | [/aquario/](https://spinbase-animation.web.app/aquario/) | 2 variants: type-on over the aq1.co ocean photo with a blinking matrix-green cursor; surface-and-float from the vertical lockup |
+| AQUARIO | [/aquario/](https://spinbase-animation.web.app/aquario/) | 3 variants: type-on over the aq1.co ocean photo; surface-and-float from the vertical lockup; the Aquarius glyph ♒ morphs into the mark |
 
 ## Quick start
 
@@ -42,6 +42,7 @@ node scripts/generate-fastcourt.mjs     # FastCourt v1 → public/fastcourt-load
 node scripts/generate-fastcourt-v2.mjs  # FastCourt v2 → public/fastcourt-loading-v2.json
 node scripts/generate-aquario.mjs       # AQUARIO v1 → public/aquario-loading.json
 node scripts/generate-aquario-v2.mjs    # AQUARIO v2 → public/aquario-loading-v2.json
+node scripts/generate-aquario-v3.mjs    # AQUARIO v3 → public/aquario-loading-v3.json
 ```
 
 Deploy:

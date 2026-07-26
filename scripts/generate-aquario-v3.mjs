@@ -1,19 +1,19 @@
 /**
- * Generates public/aquario-loading-v2.json — "surface & float" variant, built
- * from the vertical lockup (gray bar mark stacked over black AQUARIO, white).
+ * Generates public/aquario-loading-v3.json — "from the water sign" variant.
  *
  * Story: the Aquarius glyph ♒ — two zigzag wave ribbons in matrix green —
  * ripples for a beat, then flattens and morphs into the top and bottom bars
- * of the mark (turning brand gray as it goes) while the middle bar fades in
- * between them. The black wordmark letters rise in softly beneath, and in
- * the loop the bars float on a gentle cascading bob.
+ * of the mark (turning white as it goes) while the middle bar fades in
+ * between them. The true notched bars take over, AQUARIO types on behind
+ * the green cursor, and the loop ripples and blinks like v1.
  *
  * The morph is a real Lottie shape-path interpolation: each ribbon is a
  * closed polygon (zigzag top edge + offset bottom edge, 18 vertices) and the
- * flat bar is the same polygon with amplitude 0 — identical topology.
+ * flat bar is the same polygon with amplitude 0 — identical topology, so the
+ * vertices slide smoothly.
  *
  * Timeline (60fps, 240 frames, 800×600):
- *   [0..90] intro   [90..210] seamless loop (bob period 60, phase cascade)
+ *   [0..90] intro   [90..210] seamless loop (ripple + blink, period 60)
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -45,37 +45,38 @@ const kf = (frames) =>
 const anim = (frames) => ({ a: 1, k: kf(frames) });
 const still = (v) => ({ a: 0, k: v });
 
-// [id, file, w, h, compX, compY, scale]
+// v1 lockup layout
+const S = 70;
 const IMAGES = [
-  ['bar1', 'bar1v2.png', 282, 62, 400, 156.4, 73],
-  ['bar2', 'bar2v2.png', 282, 60, 400, 236.4, 73],
-  ['bar3', 'bar3v2.png', 282, 60, 400, 324.3, 73],
-  ['a1', 'a1-blk.png', 90, 98, 202.9, 420.1, 77],
-  ['q', 'q-blk.png', 99, 96, 281.0, 422.4, 77],
-  ['u', 'u-blk.png', 70, 94, 357.7, 423.2, 77],
-  ['a2', 'a2-blk.png', 90, 98, 428.5, 420.1, 77],
-  ['r', 'r-blk.png', 61, 92, 495.9, 422.4, 77],
-  ['i', 'i-blk.png', 17, 92, 536.7, 422.4, 77],
-  ['o', 'o-blk.png', 95, 96, 593.7, 422.4, 77],
+  ['bar1', 143, 33, 169.7, 260.1],
+  ['bar2', 143, 34, 169.7, 298.3],
+  ['bar3', 143, 33, 169.7, 340.6],
+  ['a1', 90, 98, 291.2, 298.3],
+  ['q', 99, 96, 362.2, 300.4],
+  ['u', 70, 94, 431.9, 301.1],
+  ['a2', 90, 98, 496.3, 298.3],
+  ['r', 61, 92, 557.5, 300.4],
+  ['i', 17, 92, 594.6, 300.4],
+  ['o', 95, 96, 646.4, 300.4],
 ];
 
-const assets = IMAGES.map(([id, file, w, h]) => ({
-  id: `v2-${id}`,
+const assets = IMAGES.map(([id, w, h]) => ({
+  id: `v3-${id}`,
   w,
   h,
   u: '',
-  p: `data:image/png;base64,${asset(file)}`,
+  p: `data:image/png;base64,${asset(`${id}.png`)}`,
   e: 1,
 }));
 
 const layer = (ind, id, ks, extra = {}) => {
-  const [, , w, h] = IMAGES.find(([i]) => i === id);
+  const [, w, h] = IMAGES.find(([i]) => i === id);
   return {
     ddd: 0,
     ind,
     ty: 2,
     nm: id,
-    refId: `v2-${id}`,
+    refId: `v3-${id}`,
     sr: 1,
     ao: 0,
     ip: 0,
@@ -88,6 +89,7 @@ const layer = (ind, id, ks, extra = {}) => {
 };
 
 // --- zigzag ribbon polygon (18 vertices, corner points) ---------------------
+// cx,cy center · w width · A peak amplitude (0 = flat bar) · T thickness
 const ribbon = (cx, cy, w, A, T) => {
   const n = 9;
   const top = [];
@@ -103,8 +105,8 @@ const ribbon = (cx, cy, w, A, T) => {
 };
 
 const GREEN = [0, 1, 0.255, 1];
-const GRAY = [0.702, 0.702, 0.702, 1];
-const MX = 400;
+const WHITE = [1, 1, 1, 1];
+const MX = 169.7;
 
 // ♒ start: two waves stacked at the mark position → morph to bar1/bar3
 const zig = (ind, nm, y0, yBar) => ({
@@ -140,10 +142,10 @@ const zig = (ind, nm, y0, yBar) => ({
           ks: {
             a: 1,
             k: [
-              { t: 8, s: [ribbon(MX, y0, 260, 24, 13)], o: easeInOut.o, i: easeInOut.i },
-              { t: 16, s: [ribbon(MX, y0, 260, -24, 13)], o: easeInOut.o, i: easeInOut.i },
-              { t: 24, s: [ribbon(MX, y0, 260, 24, 13)], o: easeInOut.o, i: easeInOut.i },
-              { t: 44, s: [ribbon(MX, yBar, 206, 0, 44)] },
+              { t: 8, s: [ribbon(MX, y0, 130, 14, 7)], o: easeInOut.o, i: easeInOut.i },
+              { t: 16, s: [ribbon(MX, y0, 130, -14, 7)], o: easeInOut.o, i: easeInOut.i },
+              { t: 24, s: [ribbon(MX, y0, 130, 14, 7)], o: easeInOut.o, i: easeInOut.i },
+              { t: 44, s: [ribbon(MX, yBar, 100.1, 0, 20.7)] },
             ],
           },
         },
@@ -153,7 +155,7 @@ const zig = (ind, nm, y0, yBar) => ({
             a: 1,
             k: [
               { t: 24, s: GREEN, o: easeInOut.o, i: easeInOut.i },
-              { t: 44, s: GRAY },
+              { t: 44, s: WHITE },
             ],
           },
           o: still(100),
@@ -174,14 +176,14 @@ const zig = (ind, nm, y0, yBar) => ({
   ],
 });
 
-const zigLayers = [zig(11, 'zig-top', 215, 156.4), zig(12, 'zig-bottom', 265, 324.3)];
+const zigLayers = [zig(11, 'zig-top', 283, 260.1), zig(12, 'zig-bottom', 317, 340.6)];
 
-// --- raster bars: take over from the ribbons, float on a cascading bob ------
-const barLayers = IMAGES.slice(0, 3).map(([id, , , , x, y, S], i) => {
+// --- raster bars: take over from the flat ribbons, ripple in the loop -------
+const barLayers = IMAGES.slice(0, 3).map(([id, , , x0, y], i) => {
   const phase = i * 1.05;
   const wave = [];
   for (let t = 90; t <= 210; t += 5) {
-    wave.push([t, [x, y + 3 * Math.sin((2 * Math.PI * (t - 90)) / 60 - phase), 0], linear]);
+    wave.push([t, [x0 + 4 * Math.sin((2 * Math.PI * (t - 90)) / 60 - phase), y, 0], linear]);
   }
   const oIn =
     id === 'bar2'
@@ -196,29 +198,86 @@ const barLayers = IMAGES.slice(0, 3).map(([id, , , , x, y, S], i) => {
   return layer(1 + i, id, {
     o: anim(oIn),
     r: still(0),
-    p: anim([[78, [x, y, 0], easeInOut], ...wave]),
+    p: anim([[78, [x0, y, 0], easeInOut], ...wave]),
     s: still([S, S, 100]),
   });
 });
 
-// --- letters: rise in softly, left to right ---------------------------------
-const letterLayers = IMAGES.slice(3).map(([id, , , , x, y, S], i) => {
+// --- letters: typewriter ----------------------------------------------------
+const letterLayers = IMAGES.slice(3).map(([id, , , x, y], i) => {
   const t0 = 46 + i * 3;
   return layer(4 + i, id, {
     o: anim([
-      [t0, 0, linear],
-      [t0 + 6, 100],
+      [0, 0, null, true],
+      [t0, 100, null, true],
     ]),
     r: still(0),
-    p: anim([
-      [t0, [x, y + 14, 0], easeOut],
-      [t0 + 8, [x, y, 0]],
-    ]),
+    p: still([x, y, 0]),
     s: still([S, S, 100]),
   });
 });
 
-// --- background: print white ------------------------------------------------
+// --- cursor: steps with the typing, blinks in the loop ----------------------
+const CURSOR_STEPS = [
+  [44, 272],
+  [46, 341.9],
+  [49, 416.1],
+  [52, 475.6],
+  [55, 547.0],
+  [58, 598.1],
+  [61, 619.8],
+  [64, 700.3],
+];
+const cursor = {
+  ddd: 0,
+  ind: 15,
+  ty: 4,
+  nm: 'cursor',
+  sr: 1,
+  ao: 0,
+  ip: 0,
+  op: OP,
+  st: 0,
+  bm: 0,
+  ks: {
+    o: anim([
+      [0, 0, null, true],
+      [44, 100, null, true],
+      [84, 0, null, true],
+      [114, 100, null, true],
+      [144, 0, null, true],
+      [174, 100, null, true],
+      [204, 0, null, true],
+      [234, 100, null, true],
+    ]),
+    r: still(0),
+    p: anim(CURSOR_STEPS.map(([t, x]) => [t, [x, 300.4, 0], null, true])),
+    a: still([0, 0, 0]),
+    s: still([100, 100, 100]),
+  },
+  shapes: [
+    {
+      ty: 'gr',
+      nm: 'cursor-g',
+      it: [
+        { ty: 'rc', d: 1, s: still([30, 62]), p: still([0, 0]), r: still(2) },
+        { ty: 'fl', c: still(GREEN), o: still(100), r: 1 },
+        {
+          ty: 'tr',
+          p: still([0, 0]),
+          a: still([0, 0]),
+          s: still([100, 100]),
+          r: still(0),
+          o: still(100),
+          sk: still(0),
+          sa: still(0),
+        },
+      ],
+    },
+  ],
+};
+
+// --- background: aq1.co black ----------------------------------------------
 const bg = {
   ddd: 0,
   ind: 20,
@@ -235,7 +294,7 @@ const bg = {
   ao: 0,
   sw: 800,
   sh: 600,
-  sc: '#ffffff',
+  sc: '#000000',
   ip: 0,
   op: OP,
   st: 0,
@@ -250,16 +309,16 @@ const lottie = {
   op: OP,
   w: 800,
   h: 600,
-  nm: 'AQUARIO — loading v2 (water sign, surface & float)',
+  nm: 'AQUARIO — loading v3 (from the water sign)',
   ddd: 0,
   assets,
-  layers: [...zigLayers, ...barLayers, ...letterLayers, bg],
+  layers: [...zigLayers, ...barLayers, ...letterLayers, cursor, bg],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },
   ],
 };
 
-const out = join(root, 'public/aquario-loading-v2.json');
+const out = join(root, 'public/aquario-loading-v3.json');
 writeFileSync(out, JSON.stringify(lottie));
 console.log(`wrote ${out} (${(JSON.stringify(lottie).length / 1024).toFixed(0)} KB)`);
