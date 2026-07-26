@@ -7,6 +7,7 @@ const LOOP = [90, 210];
 const PANELS = [
   { id: 'v1', path: '/balance-loading.json' },
   { id: 'v2', path: '/balance-loading-v2.json' },
+  { id: 'v3', path: '/balance-loading-v3.json' },
 ];
 
 for (const { id, path } of PANELS) {

@@ -10,7 +10,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | COURTHAUS | [/courthaus/](https://spinbase-animation.web.app/courthaus/) | Letters pop in one by one, tennis ball drops into the "O" |
 | FUZE TRAINING | [/fuze/](https://spinbase-animation.web.app/fuze/) | Logo mark halves slam together, beat pulse on loop |
 | สร้างสรรค์ปัญญา (Creative Intelligent) | [/sspy/](https://spinbase-animation.web.app/sspy/) | Pen nib rises, idea bulb pops and glows, Thai + English text reveal |
-| BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 2 variants: counter-rotating balls, roll-in-and-rest |
+| BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 3 variants: counter-rotating balls, roll-in-and-rest, balancing act — the solid ball lands on the outline ball and teeters |
 | Bitkub Capital | [/bitkub/](https://spinbase-animation.web.app/bitkub/) | Diamond-mark hooks fly in from opposite corners and interlock, coin dots pop in |
 | Pantip | [/pantip/](https://spinbase-animation.web.app/pantip/) | Face pops in like a sticker, letters pop one by one, the i-dot bounces in last |
 | NY SPACE | [/nyspace/](https://spinbase-animation.web.app/nyspace/) | 2 variants: drop-and-bounce; trace the line — the ball rides the letterform's stroke and rests on its dot |
@@ -32,6 +32,7 @@ node scripts/generate-fuze.mjs          # FUZE       → public/fuze-loading.jso
 node scripts/generate-sspy.mjs          # สร้างสรรค์ปัญญา → public/sspy-loading.json
 node scripts/generate-balance.mjs       # BALANCE v1 → public/balance-loading.json
 node scripts/generate-balance-v2.mjs    # BALANCE v2 → public/balance-loading-v2.json
+node scripts/generate-balance-v3.mjs    # BALANCE v3 → public/balance-loading-v3.json
 node scripts/generate-bitkub.mjs        # Bitkub     → public/bitkub-loading.json
 node scripts/generate-pantip.mjs        # Pantip     → public/pantip-loading.json
 node scripts/generate-nyspace.mjs       # NY SPACE v1 → public/nyspace-loading.json
