@@ -13,6 +13,7 @@ export default defineConfig({
         bitkub: resolve(import.meta.dirname, 'bitkub/index.html'),
         pantip: resolve(import.meta.dirname, 'pantip/index.html'),
         nyspace: resolve(import.meta.dirname, 'nyspace/index.html'),
+        fastcourt: resolve(import.meta.dirname, 'fastcourt/index.html'),
       },
     },
   },

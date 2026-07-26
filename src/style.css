@@ -423,3 +423,45 @@ body.theme-paper {
 .theme-paper .actions a:hover {
   background: rgba(78, 138, 150, 0.22);
 }
+
+/* deep-navy speed theme for the FastCourt page */
+body.theme-fastcourt {
+  background: radial-gradient(1200px 800px at 50% 30%, #1a2450 0%, #121a40 55%, #0f1638 100%);
+  color: #ffffff;
+}
+
+.theme-fastcourt header p,
+.theme-fastcourt .meta p,
+.theme-fastcourt .chip {
+  color: #9fb0d8;
+}
+
+.theme-fastcourt .panel {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(181, 224, 57, 0.2);
+}
+
+.theme-fastcourt .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(46, 59, 155, 0.25), transparent);
+}
+
+.theme-fastcourt .meta {
+  border-top-color: rgba(181, 224, 57, 0.15);
+}
+
+.theme-fastcourt .chip {
+  background: rgba(181, 224, 57, 0.08);
+  border-color: rgba(181, 224, 57, 0.25);
+}
+
+.theme-fastcourt .actions button,
+.theme-fastcourt .actions a {
+  color: #b5e039;
+  background: rgba(181, 224, 57, 0.08);
+  border-color: rgba(181, 224, 57, 0.3);
+}
+
+.theme-fastcourt .actions button:hover,
+.theme-fastcourt .actions a:hover {
+  background: rgba(181, 224, 57, 0.18);
+}

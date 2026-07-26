@@ -13,7 +13,8 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 2 variants: counter-rotating balls, roll-in-and-rest |
 | Bitkub Capital | [/bitkub/](https://spinbase-animation.web.app/bitkub/) | Diamond-mark hooks fly in from opposite corners and interlock, coin dots pop in |
 | Pantip | [/pantip/](https://spinbase-animation.web.app/pantip/) | Face pops in like a sticker, letters pop one by one, the i-dot bounces in last |
-| NY SPACE | [/nyspace/](https://spinbase-animation.web.app/nyspace/) | 2 variants: drop-and-bounce; orbit — the ball laps the mark once per loop and lands back on its dot |
+| NY SPACE | [/nyspace/](https://spinbase-animation.web.app/nyspace/) | 2 variants: drop-and-bounce; trace the line — the ball rides the letterform's stroke and rests on its dot |
+| FastCourt | [/fastcourt/](https://spinbase-animation.web.app/fastcourt/) | The F mark dashes in stretched by its own speed, letters land in its wake, speed lines whoosh on loop |
 
 ## Quick start
 
@@ -35,6 +36,7 @@ node scripts/generate-bitkub.mjs        # Bitkub     → public/bitkub-loading.j
 node scripts/generate-pantip.mjs        # Pantip     → public/pantip-loading.json
 node scripts/generate-nyspace.mjs       # NY SPACE v1 → public/nyspace-loading.json
 node scripts/generate-nyspace-v2.mjs    # NY SPACE v2 → public/nyspace-loading-v2.json
+node scripts/generate-fastcourt.mjs     # FastCourt  → public/fastcourt-loading.json
 ```
 
 Deploy:
