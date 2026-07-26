@@ -15,6 +15,7 @@ export default defineConfig({
         nyspace: resolve(import.meta.dirname, 'nyspace/index.html'),
         fastcourt: resolve(import.meta.dirname, 'fastcourt/index.html'),
         aquario: resolve(import.meta.dirname, 'aquario/index.html'),
+        anthropic: resolve(import.meta.dirname, 'anthropic/index.html'),
       },
     },
   },

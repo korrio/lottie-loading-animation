@@ -507,3 +507,45 @@ body.theme-aquario {
 .theme-aquario .actions a:hover {
   background: rgba(0, 255, 65, 0.16);
 }
+
+/* ivory paper theme for the Anthropic page — book-cloth coral accents */
+body.theme-anthropic {
+  background: radial-gradient(1200px 800px at 50% 30%, #faf9f5 0%, #f0f0eb 55%, #e8e6dd 100%);
+  color: #181818;
+}
+
+.theme-anthropic header p,
+.theme-anthropic .meta p,
+.theme-anthropic .chip {
+  color: #73726c;
+}
+
+.theme-anthropic .panel {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(204, 120, 92, 0.3);
+}
+
+.theme-anthropic .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.7), transparent);
+}
+
+.theme-anthropic .meta {
+  border-top-color: rgba(204, 120, 92, 0.2);
+}
+
+.theme-anthropic .chip {
+  background: rgba(204, 120, 92, 0.08);
+  border-color: rgba(204, 120, 92, 0.3);
+}
+
+.theme-anthropic .actions button,
+.theme-anthropic .actions a {
+  color: #b0603f;
+  background: rgba(204, 120, 92, 0.08);
+  border-color: rgba(204, 120, 92, 0.35);
+}
+
+.theme-anthropic .actions button:hover,
+.theme-anthropic .actions a:hover {
+  background: rgba(204, 120, 92, 0.2);
+}
