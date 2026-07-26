@@ -178,13 +178,8 @@ const zig = (ind, nm, y0, yBar) => ({
 
 const zigLayers = [zig(11, 'zig-top', 283, 260.1), zig(12, 'zig-bottom', 317, 340.6)];
 
-// --- raster bars: take over from the flat ribbons, ripple in the loop -------
+// --- raster bars: take over from the flat ribbons, then rest still ----------
 const barLayers = IMAGES.slice(0, 3).map(([id, , , x0, y], i) => {
-  const phase = i * 1.05;
-  const wave = [];
-  for (let t = 90; t <= 210; t += 5) {
-    wave.push([t, [x0 + 4 * Math.sin((2 * Math.PI * (t - 90)) / 60 - phase), y, 0], linear]);
-  }
   const oIn =
     id === 'bar2'
       ? [
@@ -198,7 +193,7 @@ const barLayers = IMAGES.slice(0, 3).map(([id, , , x0, y], i) => {
   return layer(1 + i, id, {
     o: anim(oIn),
     r: still(0),
-    p: anim([[78, [x0, y, 0], easeInOut], ...wave]),
+    p: still([x0, y, 0]),
     s: still([S, S, 100]),
   });
 });

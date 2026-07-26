@@ -94,15 +94,9 @@ const layer = (ind, refId, ks, extra = {}) => {
   };
 };
 
-// --- bars: slide in stacked, then ripple like water in the loop -------------
+// --- bars: slide in stacked, then rest still --------------------------------
 const barLayers = IMAGES.slice(0, 3).map(([id, , , x0, y], i) => {
   const t0 = 4 + i * 4;
-  const phase = i * 1.05;
-  const wave = [];
-  for (let t = 90; t <= 210; t += 5) {
-    wave.push([t, [x0 + 4 * Math.sin((2 * Math.PI * (t - 90)) / 60 - phase), y, 0], linear]);
-  }
-  wave[wave.length - 1] = [210, wave[wave.length - 1][1]];
   return layer(1 + i, id, {
     o: anim([
       [t0, 0, linear],
@@ -111,9 +105,7 @@ const barLayers = IMAGES.slice(0, 3).map(([id, , , x0, y], i) => {
     r: still(0),
     p: anim([
       [t0, [x0 - 50, y, 0], easeOut],
-      [t0 + 12, [x0, y, 0], easeInOut],
-      [78, [x0, y, 0], easeInOut],
-      ...wave,
+      [t0 + 12, [x0, y, 0]],
     ]),
     s: still([S, S, 100]),
   });

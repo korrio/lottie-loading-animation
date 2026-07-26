@@ -176,13 +176,8 @@ const zig = (ind, nm, y0, yBar) => ({
 
 const zigLayers = [zig(11, 'zig-top', 215, 156.4), zig(12, 'zig-bottom', 265, 324.3)];
 
-// --- raster bars: take over from the ribbons, float on a cascading bob ------
+// --- raster bars: take over from the ribbons, then rest still ---------------
 const barLayers = IMAGES.slice(0, 3).map(([id, , , , x, y, S], i) => {
-  const phase = i * 1.05;
-  const wave = [];
-  for (let t = 90; t <= 210; t += 5) {
-    wave.push([t, [x, y + 3 * Math.sin((2 * Math.PI * (t - 90)) / 60 - phase), 0], linear]);
-  }
   const oIn =
     id === 'bar2'
       ? [
@@ -196,7 +191,7 @@ const barLayers = IMAGES.slice(0, 3).map(([id, , , , x, y, S], i) => {
   return layer(1 + i, id, {
     o: anim(oIn),
     r: still(0),
-    p: anim([[78, [x, y, 0], easeInOut], ...wave]),
+    p: still([x, y, 0]),
     s: still([S, S, 100]),
   });
 });
