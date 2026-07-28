@@ -16,6 +16,7 @@ export default defineConfig({
         fastcourt: resolve(import.meta.dirname, 'fastcourt/index.html'),
         aquario: resolve(import.meta.dirname, 'aquario/index.html'),
         anthropic: resolve(import.meta.dirname, 'anthropic/index.html'),
+        sss: resolve(import.meta.dirname, 'sss/index.html'),
       },
     },
   },

@@ -549,3 +549,45 @@ body.theme-anthropic {
 .theme-anthropic .actions a:hover {
   background: rgba(204, 120, 92, 0.2);
 }
+
+/* clay court theme for the SSS Half Tennis page */
+body.theme-sss {
+  background: radial-gradient(1200px 800px at 50% 30%, #c96f45 0%, #ba623a 55%, #a55430 100%);
+  color: #ffffff;
+}
+
+.theme-sss header p,
+.theme-sss .meta p,
+.theme-sss .chip {
+  color: #f3d9c9;
+}
+
+.theme-sss .panel {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.theme-sss .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.theme-sss .meta {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-sss .chip {
+  background: rgba(156, 197, 69, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.theme-sss .actions button,
+.theme-sss .actions a {
+  color: #ffffff;
+  background: rgba(156, 197, 69, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.theme-sss .actions button:hover,
+.theme-sss .actions a:hover {
+  background: rgba(156, 197, 69, 0.4);
+}
