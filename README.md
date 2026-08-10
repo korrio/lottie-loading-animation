@@ -18,7 +18,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | AQUARIO | [/aquario/](https://spinbase-animation.web.app/aquario/) | 3 variants: type-on over the aq1.co ocean photo; surface-and-float from the vertical lockup; the Aquarius glyph ♒ morphs into the mark |
 | Anthropic | [/anthropic/](https://spinbase-animation.web.app/anthropic/) | A coral Claude spark spins where the "I" belongs, letters rise around it, then it collapses into the iconic backslash |
 | SSS Half Tennis | [/sss/](https://spinbase-animation.web.app/sss/) | The court frame pops in with the cat dozing, its eyes open, the ball drops to its paws — on loop the cat blinks lazily |
-| One Piece | [/onepiece/](https://spinbase-animation.web.app/onepiece/) | 2 variants: hung like a pirate flag with a pendulum settle; slammed down like a wanted poster with parchment dust |
+| One Piece | [/onepiece/](https://spinbase-animation.web.app/onepiece/) | 3 variants: pirate-flag hang; wanted-poster slam; set sail — the lockup surfaces from an animated sea and bobs under a turning sunburst |
 
 ## Quick start
 
@@ -51,6 +51,7 @@ node scripts/generate-anthropic-v2.mjs  # Anthropic v2 → public/anthropic-load
 node scripts/generate-sss.mjs           # SSS Half Tennis → public/sss-loading.json
 node scripts/generate-onepiece.mjs      # One Piece v1 → public/onepiece-loading.json
 node scripts/generate-onepiece-v2.mjs   # One Piece v2 → public/onepiece-loading-v2.json
+node scripts/generate-onepiece-v3.mjs   # One Piece v3 → public/onepiece-loading-v3.json
 ```
 
 Deploy:

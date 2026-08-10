@@ -7,6 +7,7 @@ const LOOP = [90, 210];
 const PANELS = [
   { id: 'v1', path: '/onepiece-loading.json' },
   { id: 'v2', path: '/onepiece-loading-v2.json' },
+  { id: 'v3', path: '/onepiece-loading-v3.json' },
 ];
 
 for (const { id, path } of PANELS) {
