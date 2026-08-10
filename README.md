@@ -18,6 +18,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | AQUARIO | [/aquario/](https://spinbase-animation.web.app/aquario/) | 3 variants: type-on over the aq1.co ocean photo; surface-and-float from the vertical lockup; the Aquarius glyph ♒ morphs into the mark |
 | Anthropic | [/anthropic/](https://spinbase-animation.web.app/anthropic/) | A coral Claude spark spins where the "I" belongs, letters rise around it, then it collapses into the iconic backslash |
 | SSS Half Tennis | [/sss/](https://spinbase-animation.web.app/sss/) | The court frame pops in with the cat dozing, its eyes open, the ball drops to its paws — on loop the cat blinks lazily |
+| One Piece | [/onepiece/](https://spinbase-animation.web.app/onepiece/) | The jolly-roger lockup drops in hung like a pirate flag and pendulum-settles; treasure glints twinkle as it sways |
 
 ## Quick start
 
@@ -48,6 +49,7 @@ node scripts/generate-aquario-v3.mjs    # AQUARIO v3 → public/aquario-loading-
 node scripts/generate-anthropic.mjs     # Anthropic  → public/anthropic-loading.json
 node scripts/generate-anthropic-v2.mjs  # Anthropic v2 → public/anthropic-loading-v2.json
 node scripts/generate-sss.mjs           # SSS Half Tennis → public/sss-loading.json
+node scripts/generate-onepiece.mjs      # One Piece  → public/onepiece-loading.json
 ```
 
 Deploy:

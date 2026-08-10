@@ -17,6 +17,7 @@ export default defineConfig({
         aquario: resolve(import.meta.dirname, 'aquario/index.html'),
         anthropic: resolve(import.meta.dirname, 'anthropic/index.html'),
         sss: resolve(import.meta.dirname, 'sss/index.html'),
+        onepiece: resolve(import.meta.dirname, 'onepiece/index.html'),
       },
     },
   },

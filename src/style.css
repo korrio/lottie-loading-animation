@@ -591,3 +591,45 @@ body.theme-sss {
 .theme-sss .actions a:hover {
   background: rgba(156, 197, 69, 0.4);
 }
+
+/* parchment theme for the One Piece page */
+body.theme-onepiece {
+  background: radial-gradient(1200px 800px at 50% 30%, #f7f6f0 0%, #f0efe9 55%, #e5e2d6 100%);
+  color: #14100c;
+}
+
+.theme-onepiece header p,
+.theme-onepiece .meta p,
+.theme-onepiece .chip {
+  color: #7b7466;
+}
+
+.theme-onepiece .panel {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(221, 29, 36, 0.25);
+}
+
+.theme-onepiece .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.7), transparent);
+}
+
+.theme-onepiece .meta {
+  border-top-color: rgba(221, 29, 36, 0.18);
+}
+
+.theme-onepiece .chip {
+  background: rgba(251, 201, 23, 0.15);
+  border-color: rgba(20, 16, 12, 0.25);
+}
+
+.theme-onepiece .actions button,
+.theme-onepiece .actions a {
+  color: #b3161c;
+  background: rgba(221, 29, 36, 0.07);
+  border-color: rgba(221, 29, 36, 0.35);
+}
+
+.theme-onepiece .actions button:hover,
+.theme-onepiece .actions a:hover {
+  background: rgba(221, 29, 36, 0.16);
+}
