@@ -20,6 +20,7 @@ export default defineConfig({
         onepiece: resolve(import.meta.dirname, 'onepiece/index.html'),
         geometry: resolve(import.meta.dirname, 'geometry/index.html'),
         korrio: resolve(import.meta.dirname, 'korrio/index.html'),
+        jkt: resolve(import.meta.dirname, 'jkt/index.html'),
       },
     },
   },

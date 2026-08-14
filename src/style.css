@@ -717,3 +717,45 @@ body.theme-korrio {
 .theme-korrio .actions a:hover {
   background: rgba(110, 231, 183, 0.18);
 }
+
+/* forest daylight theme for the จุดกางเต็นท์ page */
+body.theme-jkt {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f4f7ef 55%, #e6ecdc 100%);
+  color: #22380c;
+}
+
+.theme-jkt header p,
+.theme-jkt .meta p,
+.theme-jkt .chip {
+  color: #6d7d5c;
+}
+
+.theme-jkt .panel {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(44, 81, 5, 0.25);
+}
+
+.theme-jkt .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.theme-jkt .meta {
+  border-top-color: rgba(44, 81, 5, 0.15);
+}
+
+.theme-jkt .chip {
+  background: rgba(44, 81, 5, 0.06);
+  border-color: rgba(44, 81, 5, 0.28);
+}
+
+.theme-jkt .actions button,
+.theme-jkt .actions a {
+  color: #2c5105;
+  background: rgba(44, 81, 5, 0.07);
+  border-color: rgba(44, 81, 5, 0.35);
+}
+
+.theme-jkt .actions button:hover,
+.theme-jkt .actions a:hover {
+  background: rgba(44, 81, 5, 0.16);
+}
