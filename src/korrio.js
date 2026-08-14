@@ -3,6 +3,7 @@ import lottie from 'lottie-web';
 
 const PANELS = [
   { id: 'v1', path: '/korrio-loading.json', intro: [0, 90], loop: [90, 210] },
+  { id: 'v11', path: '/korrio-loading-v1-1.json', intro: [0, 90], loop: [90, 210] },
   { id: 'v2', path: '/korrio-loading-v2.json', intro: [0, 150], loop: [150, 270] },
   { id: 'v3', path: '/korrio-loading-v3.json', intro: [0, 90], loop: [90, 210] },
 ];
