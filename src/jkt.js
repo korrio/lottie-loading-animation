@@ -1,27 +1,37 @@
 import './style.css';
 import lottie from 'lottie-web';
 
-const chip = document.querySelector('#chip-v1');
+const INTRO = [0, 90];
+const LOOP = [90, 210];
 
-const anim = lottie.loadAnimation({
-  container: document.querySelector('#stage-v1'),
-  renderer: 'svg',
-  loop: false,
-  autoplay: false,
-  path: '/jkt-loading.json',
-});
+const PANELS = [
+  { id: 'v1', path: '/jkt-loading.json' },
+  { id: 'v2', path: '/jkt-loading-v2.json' },
+];
 
-const playIntro = () => {
-  chip.textContent = 'intro';
-  anim.loop = false;
-  anim.playSegments([0, 90], true);
-};
+for (const { id, path } of PANELS) {
+  const chip = document.querySelector(`#chip-${id}`);
 
-anim.addEventListener('DOMLoaded', playIntro);
-anim.addEventListener('complete', () => {
-  chip.textContent = 'loop';
-  anim.loop = true;
-  anim.playSegments([90, 210], true);
-});
+  const anim = lottie.loadAnimation({
+    container: document.querySelector(`#stage-${id}`),
+    renderer: 'svg',
+    loop: false,
+    autoplay: false,
+    path,
+  });
 
-document.querySelector('#replay-v1').addEventListener('click', playIntro);
+  const playIntro = () => {
+    chip.textContent = 'intro';
+    anim.loop = false;
+    anim.playSegments(INTRO, true);
+  };
+
+  anim.addEventListener('DOMLoaded', playIntro);
+  anim.addEventListener('complete', () => {
+    chip.textContent = 'loop';
+    anim.loop = true;
+    anim.playSegments(LOOP, true);
+  });
+
+  document.querySelector(`#replay-${id}`).addEventListener('click', playIntro);
+}

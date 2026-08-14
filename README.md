@@ -21,7 +21,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | One Piece | [/onepiece/](https://spinbase-animation.web.app/onepiece/) | 3 variants: pirate-flag hang; wanted-poster slam; set sail — the lockup surfaces from an animated sea and bobs under a turning sunburst |
 | Geometry | [/geometry/](https://spinbase-animation.web.app/geometry/) | Eight isometric wireframe solids on graph paper — true 3D rotation projected per frame, each turning a symmetry angle per loop |
 | korrio | [/korrio/](https://spinbase-animation.web.app/korrio/) | The neon-sign avatar buzzes alight tube by tube, then hums — glow breath, a stray flicker, and a blink |
-| จุดกางเต็นท์ (Campsite Thailand) | [/jkt/](https://spinbase-animation.web.app/jkt/) | The terrain fades up and the sun rises from behind the ridge; the Thai wordmark pops in glyph by glyph |
+| จุดกางเต็นท์ (Campsite Thailand) | [/jkt/](https://spinbase-animation.web.app/jkt/) | 2 variants: horizontal and vertical lockups — the full-circle sun rises from behind the ridge, the Thai wordmark pops in glyph by glyph |
 
 ## Quick start
 
@@ -58,7 +58,8 @@ node scripts/generate-onepiece-v2.mjs   # One Piece v2 → public/onepiece-loadi
 node scripts/generate-onepiece-v3.mjs   # One Piece v3 → public/onepiece-loading-v3.json
 node scripts/generate-geometry.mjs      # Geometry   → public/geometry-loading.json
 node scripts/generate-korrio.mjs        # korrio     → public/korrio-loading.json
-node scripts/generate-jkt.mjs           # จุดกางเต็นท์ → public/jkt-loading.json
+node scripts/generate-jkt.mjs           # จุดกางเต็นท์ v1 → public/jkt-loading.json
+node scripts/generate-jkt-v2.mjs        # จุดกางเต็นท์ v2 → public/jkt-loading-v2.json
 ```
 
 Deploy:
