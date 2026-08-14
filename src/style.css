@@ -675,3 +675,45 @@ body.theme-geometry {
 .theme-geometry .actions a:hover {
   background: rgba(20, 16, 12, 0.12);
 }
+
+/* midnight neon theme for the korrio avatar page */
+body.theme-korrio {
+  background: radial-gradient(1200px 800px at 50% 30%, #232238 0%, #1b1a2a 55%, #141320 100%);
+  color: #eef2ff;
+}
+
+.theme-korrio header p,
+.theme-korrio .meta p,
+.theme-korrio .chip {
+  color: #8f93b3;
+}
+
+.theme-korrio .panel {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(110, 231, 183, 0.25);
+}
+
+.theme-korrio .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(96, 165, 250, 0.08), transparent);
+}
+
+.theme-korrio .meta {
+  border-top-color: rgba(110, 231, 183, 0.18);
+}
+
+.theme-korrio .chip {
+  background: rgba(110, 231, 183, 0.08);
+  border-color: rgba(110, 231, 183, 0.3);
+}
+
+.theme-korrio .actions button,
+.theme-korrio .actions a {
+  color: #6ee7b7;
+  background: rgba(110, 231, 183, 0.08);
+  border-color: rgba(110, 231, 183, 0.35);
+}
+
+.theme-korrio .actions button:hover,
+.theme-korrio .actions a:hover {
+  background: rgba(110, 231, 183, 0.18);
+}
