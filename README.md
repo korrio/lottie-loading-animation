@@ -19,6 +19,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | Anthropic | [/anthropic/](https://spinbase-animation.web.app/anthropic/) | A coral Claude spark spins where the "I" belongs, letters rise around it, then it collapses into the iconic backslash |
 | SSS Half Tennis | [/sss/](https://spinbase-animation.web.app/sss/) | The court frame pops in with the cat dozing, its eyes open, the ball drops to its paws — on loop the cat blinks lazily |
 | One Piece | [/onepiece/](https://spinbase-animation.web.app/onepiece/) | 3 variants: pirate-flag hang; wanted-poster slam; set sail — the lockup surfaces from an animated sea and bobs under a turning sunburst |
+| Geometry | [/geometry/](https://spinbase-animation.web.app/geometry/) | Eight isometric wireframe solids on graph paper — true 3D rotation projected per frame, each turning a symmetry angle per loop |
 
 ## Quick start
 
@@ -52,6 +53,7 @@ node scripts/generate-sss.mjs           # SSS Half Tennis → public/sss-loading
 node scripts/generate-onepiece.mjs      # One Piece v1 → public/onepiece-loading.json
 node scripts/generate-onepiece-v2.mjs   # One Piece v2 → public/onepiece-loading-v2.json
 node scripts/generate-onepiece-v3.mjs   # One Piece v3 → public/onepiece-loading-v3.json
+node scripts/generate-geometry.mjs      # Geometry   → public/geometry-loading.json
 ```
 
 Deploy:

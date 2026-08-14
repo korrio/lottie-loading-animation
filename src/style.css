@@ -633,3 +633,45 @@ body.theme-onepiece {
 .theme-onepiece .actions a:hover {
   background: rgba(221, 29, 36, 0.16);
 }
+
+/* graph-paper theme for the Geometry page */
+body.theme-geometry {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #faf9f5 55%, #efeee8 100%);
+  color: #14100c;
+}
+
+.theme-geometry header p,
+.theme-geometry .meta p,
+.theme-geometry .chip {
+  color: #8a877d;
+}
+
+.theme-geometry .panel {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(20, 16, 12, 0.18);
+}
+
+.theme-geometry .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(255, 255, 255, 0.9), transparent);
+}
+
+.theme-geometry .meta {
+  border-top-color: rgba(20, 16, 12, 0.12);
+}
+
+.theme-geometry .chip {
+  background: rgba(20, 16, 12, 0.05);
+  border-color: rgba(20, 16, 12, 0.22);
+}
+
+.theme-geometry .actions button,
+.theme-geometry .actions a {
+  color: #14100c;
+  background: rgba(20, 16, 12, 0.05);
+  border-color: rgba(20, 16, 12, 0.3);
+}
+
+.theme-geometry .actions button:hover,
+.theme-geometry .actions a:hover {
+  background: rgba(20, 16, 12, 0.12);
+}

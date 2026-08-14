@@ -18,6 +18,7 @@ export default defineConfig({
         anthropic: resolve(import.meta.dirname, 'anthropic/index.html'),
         sss: resolve(import.meta.dirname, 'sss/index.html'),
         onepiece: resolve(import.meta.dirname, 'onepiece/index.html'),
+        geometry: resolve(import.meta.dirname, 'geometry/index.html'),
       },
     },
   },
