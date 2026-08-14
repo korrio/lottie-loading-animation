@@ -269,13 +269,15 @@ const triPyramid = () => {
 };
 
 // ----------------------------------------------- v2 variants (full turns) ---
-// 1b. cube cluster — full 360° per loop, cubes still bobbing
+// 1b. cube cluster — full 360° per 240-frame loop, cubes still bobbing
+const V2LOOP = 240;
+const v2Phase = (t) => (2 * Math.PI * (t - 90)) / V2LOOP;
 const cubeClusterV2 = () => {
   const { v, e } = merge([cubeVE(-0.55, 0.52, 0.3, 0.5), cubeVE(0.55, 0.52, -0.15, 0.5), cubeVE(-0.05, -0.52, 0.05, 0.5)]);
   const move = (t) => {
-    const th = (2 * Math.PI * (t - 90)) / 120;
+    const th = v2Phase(t);
     return v.map((p, i) => {
-      const bob = 0.07 * Math.sin(loopPhase(t) + Math.floor(i / 8) * 2.1);
+      const bob = 0.07 * Math.sin(v2Phase(t) + Math.floor(i / 8) * 2.1);
       const [x, y, z] = rotY(p, th);
       return proj([x, y + bob, z]);
     });
@@ -289,7 +291,7 @@ const hexCubeV2 = () => {
   const hex = base.v.slice(0, 6).map((p) => [p[0], p[1]]);
   const inner = base.v.slice(6);
   const move = (t) => {
-    const th = (2 * Math.PI * (t - 90)) / 120;
+    const th = v2Phase(t);
     return [...hex.map((p) => [...p]), ...inner.map((p) => proj(rotY(p, th)))];
   };
   return { v: base.v, e: base.e, move };
@@ -298,7 +300,7 @@ const hexCubeV2 = () => {
 // 4b. 2×2×2 lattice — full 360° per loop
 const latticeV2 = () => {
   const base = lattice();
-  return { v: base.v, e: base.e, move: spinMove(base.v, 2 * Math.PI) };
+  return { v: base.v, e: base.e, move: (t) => base.v.map((p) => proj(rotY(p, v2Phase(t)))) };
 };
 
 // 7b. tesseract — a TRUE 4D rotation: the 8-cell turning in the x–w plane,
@@ -318,7 +320,7 @@ const tesseractV2 = () => {
   }
   const D = 3;
   const move = (t) => {
-    const a = ((Math.PI / 2) * (t - 90)) / 120;
+    const a = ((Math.PI / 2) * (t - 90)) / V2LOOP;
     return v.map(([x, y, z, w]) => {
       const x2 = x * Math.cos(a) - w * Math.sin(a);
       const w2 = x * Math.sin(a) + w * Math.cos(a);
@@ -377,16 +379,16 @@ const strokeOrders = (solid) => {
   return orders;
 };
 
-const solidLayer = (ind, builder, x, y, scalePx, phase, t0) => {
+const solidLayer = (ind, builder, x, y, scalePx, phase, t0, loopEnd = 210) => {
   const solid = builder();
   const orders = strokeOrders(solid);
   const keysPer = orders.map(() => []);
-  for (let t = 0; t <= 210; t += 6) {
+  for (let t = 0; t <= loopEnd; t += 6) {
     const pts = solid.move(t).map(([px, py]) => [Math.round(px * scalePx * 10) / 10, Math.round(py * scalePx * 10) / 10]);
     orders.forEach((order, oi) => {
       const v = order.map((vi) => pts[vi]);
       const k = { t, s: [{ c: false, v, i: v.map(() => [0, 0]), o: v.map(() => [0, 0]) }] };
-      if (t < 210) {
+      if (t < loopEnd) {
         k.o = linear.o;
         k.i = linear.i;
       }
@@ -401,7 +403,7 @@ const solidLayer = (ind, builder, x, y, scalePx, phase, t0) => {
     sr: 1,
     ao: 0,
     ip: 0,
-    op: OP,
+    op: loopEnd + 30,
     st: 0,
     bm: 0,
     ks: {
@@ -412,10 +414,10 @@ const solidLayer = (ind, builder, x, y, scalePx, phase, t0) => {
       r: still(0),
       p: anim([
         [90, [x, y + 3 * Math.sin(phase), 0], easeInOut],
-        [120, [x, y + 3 * Math.sin(phase + Math.PI / 2), 0], easeInOut],
-        [150, [x, y + 3 * Math.sin(phase + Math.PI), 0], easeInOut],
-        [180, [x, y + 3 * Math.sin(phase + 1.5 * Math.PI), 0], easeInOut],
-        [210, [x, y + 3 * Math.sin(phase), 0]],
+        [90 + (loopEnd - 90) / 4, [x, y + 3 * Math.sin(phase + Math.PI / 2), 0], easeInOut],
+        [90 + (loopEnd - 90) / 2, [x, y + 3 * Math.sin(phase + Math.PI), 0], easeInOut],
+        [90 + (3 * (loopEnd - 90)) / 4, [x, y + 3 * Math.sin(phase + 1.5 * Math.PI), 0], easeInOut],
+        [loopEnd, [x, y + 3 * Math.sin(phase), 0]],
       ]),
       a: still([0, 0, 0]),
       s: anim([
@@ -547,13 +549,14 @@ SOLIDS.forEach(([builder, , , scalePx, phase, slug], i) => {
 
 // --- v2 variants: standalone + transparent ----------------------------------
 SOLIDS_V2.forEach(([builder, slug, scalePx, phase]) => {
-  const solo = solidLayer(1, builder, 400, 300, scalePx * 2.1, phase, 4);
+  const loopEnd = 90 + V2LOOP;
+  const solo = solidLayer(1, builder, 400, 300, scalePx * 2.1, phase, 4, loopEnd);
   const mk = (layers, suffix, nm) => {
     const doc = {
       v: '5.9.6',
       fr: FR,
       ip: 0,
-      op: OP,
+      op: loopEnd + 30,
       w: 800,
       h: 600,
       nm,
@@ -562,7 +565,7 @@ SOLIDS_V2.forEach(([builder, slug, scalePx, phase]) => {
       layers,
       markers: [
         { tm: 0, cm: 'intro', dr: 90 },
-        { tm: 90, cm: 'loop', dr: 120 },
+        { tm: 90, cm: 'loop', dr: V2LOOP },
       ],
     };
     const file = join(root, `public/geometry-${slug}${suffix}.json`);
