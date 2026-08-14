@@ -153,3 +153,12 @@ For Instagram/TikTok convert to MP4 (uses ffmpeg if present):
 ffmpeg -i renders/aquario-v1.webm -c:v libx264 -pix_fmt yuv420p -crf 18 -r 30 \
        -movflags +faststart renders/aquario-v1.mp4
 ```
+
+For a **GIF** (no Lottie player has a built-in GIF export — render frames, then
+let ffmpeg build an optimized palette):
+
+```bash
+ffmpeg -i renders/korrio-v1.webm -vf "fps=20,scale=600:-1:flags=lanczos,\
+  split[s0][s1];[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=bayer:bayer_scale=4" \
+  renders/korrio-v1.gif
+```
