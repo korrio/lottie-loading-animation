@@ -7,12 +7,16 @@ const LOOP = [90, 210];
 const PANELS = [
   { id: 'v1', path: '/geometry-loading.json' },
   { id: 's1', path: '/geometry-01-cube-cluster.json' },
+  { id: 's1b', path: '/geometry-01-cube-cluster-v2.json' },
   { id: 's2', path: '/geometry-02-icosahedron.json' },
   { id: 's3', path: '/geometry-03-hex-cube.json' },
+  { id: 's3b', path: '/geometry-03-hex-cube-v2.json' },
   { id: 's4', path: '/geometry-04-lattice.json' },
+  { id: 's4b', path: '/geometry-04-lattice-v2.json' },
   { id: 's5', path: '/geometry-05-plus-cubes.json' },
   { id: 's6', path: '/geometry-06-octahedron.json' },
   { id: 's7', path: '/geometry-07-tesseract.json' },
+  { id: 's7b', path: '/geometry-07-tesseract-v2.json' },
   { id: 's8', path: '/geometry-08-tri-pyramid.json' },
 ];
 

@@ -268,6 +268,75 @@ const triPyramid = () => {
   return { v, e, move: spinMove(v, Math.PI / 2) };
 };
 
+// ----------------------------------------------- v2 variants (full turns) ---
+// 1b. cube cluster — full 360° per loop, cubes still bobbing
+const cubeClusterV2 = () => {
+  const { v, e } = merge([cubeVE(-0.55, 0.52, 0.3, 0.5), cubeVE(0.55, 0.52, -0.15, 0.5), cubeVE(-0.05, -0.52, 0.05, 0.5)]);
+  const move = (t) => {
+    const th = (2 * Math.PI * (t - 90)) / 120;
+    return v.map((p, i) => {
+      const bob = 0.07 * Math.sin(loopPhase(t) + Math.floor(i / 8) * 2.1);
+      const [x, y, z] = rotY(p, th);
+      return proj([x, y + bob, z]);
+    });
+  };
+  return { v, e, move };
+};
+
+// 3b. hexagon + cube — the inner cube spins fully round, links trailing
+const hexCubeV2 = () => {
+  const base = hexCube();
+  const hex = base.v.slice(0, 6).map((p) => [p[0], p[1]]);
+  const inner = base.v.slice(6);
+  const move = (t) => {
+    const th = (2 * Math.PI * (t - 90)) / 120;
+    return [...hex.map((p) => [...p]), ...inner.map((p) => proj(rotY(p, th)))];
+  };
+  return { v: base.v, e: base.e, move };
+};
+
+// 4b. 2×2×2 lattice — full 360° per loop
+const latticeV2 = () => {
+  const base = lattice();
+  return { v: base.v, e: base.e, move: spinMove(base.v, 2 * Math.PI) };
+};
+
+// 7b. tesseract — a TRUE 4D rotation: the 8-cell turning in the x–w plane,
+// perspective-projected 4D→3D (inner cube passes through the outer), then
+// isometric 3D→2D. A quarter turn maps the vertex set to itself, so 90°
+// of 4D rotation per loop is seamless.
+const tesseractV2 = () => {
+  const v = [];
+  for (const sx of [-1, 1]) for (const sy of [-1, 1]) for (const sz of [-1, 1]) for (const sw of [-1, 1]) v.push([sx, sy, sz, sw]);
+  const e = [];
+  for (let i = 0; i < 16; i++) {
+    for (let j = i + 1; j < 16; j++) {
+      let d = 0;
+      for (let k = 0; k < 4; k++) if (v[i][k] !== v[j][k]) d++;
+      if (d === 1) e.push([i, j]);
+    }
+  }
+  const D = 3;
+  const move = (t) => {
+    const a = ((Math.PI / 2) * (t - 90)) / 120;
+    return v.map(([x, y, z, w]) => {
+      const x2 = x * Math.cos(a) - w * Math.sin(a);
+      const w2 = x * Math.sin(a) + w * Math.cos(a);
+      const sc = D / (D - w2);
+      return proj(rotY([x2 * sc, y * sc, z * sc], 0.5));
+    });
+  };
+  return { v, e, move };
+};
+
+// [builder, slug, grid-equivalent scale, phase]
+const SOLIDS_V2 = [
+  [cubeClusterV2, '01-cube-cluster-v2', 50, 0.6],
+  [hexCubeV2, '03-hex-cube-v2', 55, 1.7],
+  [latticeV2, '04-lattice-v2', 48, 2.8],
+  [tesseractV2, '07-tesseract-v2', 27, 3.9],
+];
+
 // ------------------------------------------------------------- layout -------
 const SOLIDS = [
   [cubeCluster, 168, 142, 50, 0.0, 'cube-cluster'],
@@ -474,4 +543,32 @@ SOLIDS.forEach(([builder, , , scalePx, phase, slug], i) => {
   const fileT = join(root, `public/geometry-${String(i + 1).padStart(2, '0')}-${slug}-transparent.json`);
   writeFileSync(fileT, JSON.stringify(docT));
   console.log(`wrote ${fileT} (${(JSON.stringify(docT).length / 1024).toFixed(0)} KB)`);
+});
+
+// --- v2 variants: standalone + transparent ----------------------------------
+SOLIDS_V2.forEach(([builder, slug, scalePx, phase]) => {
+  const solo = solidLayer(1, builder, 400, 300, scalePx * 2.1, phase, 4);
+  const mk = (layers, suffix, nm) => {
+    const doc = {
+      v: '5.9.6',
+      fr: FR,
+      ip: 0,
+      op: OP,
+      w: 800,
+      h: 600,
+      nm,
+      ddd: 0,
+      assets: [],
+      layers,
+      markers: [
+        { tm: 0, cm: 'intro', dr: 90 },
+        { tm: 90, cm: 'loop', dr: 120 },
+      ],
+    };
+    const file = join(root, `public/geometry-${slug}${suffix}.json`);
+    writeFileSync(file, JSON.stringify(doc));
+    console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
+  };
+  mk([solo, paper, bg], '', `GEOMETRY — ${slug}`);
+  mk([solo], '-transparent', `GEOMETRY — ${slug} (transparent)`);
 });
