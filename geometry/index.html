@@ -3,24 +3,120 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Geometry · Loading Animation</title>
+    <title>Geometry · Loading Animations</title>
   </head>
   <body class="theme-geometry">
     <div id="app">
       <header>
-        <h1>GEOMETRY — Loading Animation</h1>
-        <p>intro plays once, then loops seamlessly · <a class="headlink" href="/">← All animations</a></p>
+        <h1>GEOMETRY — Loading Animations</h1>
+        <p>the full set plus each solid as its own file · intro plays once, then loops seamlessly · <a class="headlink" href="/">← All animations</a></p>
       </header>
       <main id="gallery">
         <section class="panel">
-          <div class="stage" id="stage-v1" aria-label="Geometry loading animation"></div>
+          <div class="stage" id="stage-v1" aria-label="Geometry loading animation, all eight solids"></div>
           <div class="meta">
-            <h2>v1 — the shapes keep turning</h2>
-            <p>The eight forms from the reference, each moving in place — a cube cluster, icosahedron, hexagon-with-cube, 2×2×2 lattice, 3D plus of cubes, octahedron, nested tesseract, and triangulated pyramid. Spinning solids turn exactly one symmetry angle per loop and the rest sway on period-120 sinusoids, so the loop never skips.</p>
+            <h2>the full set — the shapes keep turning</h2>
+            <p>The eight forms from the reference, each moving in place. Spinning solids turn exactly one symmetry angle per loop and the rest sway on period-120 sinusoids, so the loop never skips.</p>
             <div class="actions">
               <span class="chip" id="chip-v1">intro</span>
               <button type="button" id="replay-v1">Replay</button>
               <a href="/geometry-loading.json" download="geometry-loading.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s1" aria-label="Cube cluster"></div>
+          <div class="meta">
+            <h2>01 — cube cluster</h2>
+            <p>Three cubes wobbling together, each bobbing on its own phase.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s1">intro</span>
+              <button type="button" id="replay-s1">Replay</button>
+              <a href="/geometry-01-cube-cluster.json" download="geometry-01-cube-cluster.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s2" aria-label="Icosahedron"></div>
+          <div class="meta">
+            <h2>02 — icosahedron</h2>
+            <p>Twenty faces spinning one five-fold step (72°) per loop.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s2">intro</span>
+              <button type="button" id="replay-s2">Replay</button>
+              <a href="/geometry-02-icosahedron.json" download="geometry-02-icosahedron.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s3" aria-label="Hexagon with cube"></div>
+          <div class="meta">
+            <h2>03 — hexagon + cube</h2>
+            <p>A static hexagon silhouette, the inner cube swaying, corners linked.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s3">intro</span>
+              <button type="button" id="replay-s3">Replay</button>
+              <a href="/geometry-03-hex-cube.json" download="geometry-03-hex-cube.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s4" aria-label="2x2x2 lattice"></div>
+          <div class="meta">
+            <h2>04 — 2×2×2 lattice</h2>
+            <p>The rubik-style grid cube, wobbling on a period-120 sway.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s4">intro</span>
+              <button type="button" id="replay-s4">Replay</button>
+              <a href="/geometry-04-lattice.json" download="geometry-04-lattice.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s5" aria-label="3D plus of cubes"></div>
+          <div class="meta">
+            <h2>05 — plus of cubes</h2>
+            <p>Seven cubes in a 3D plus, spinning 90° per loop.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s5">intro</span>
+              <button type="button" id="replay-s5">Replay</button>
+              <a href="/geometry-05-plus-cubes.json" download="geometry-05-plus-cubes.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s6" aria-label="Octahedron"></div>
+          <div class="meta">
+            <h2>06 — octahedron</h2>
+            <p>The tall bipyramid with its polar seam, spinning 90° per loop.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s6">intro</span>
+              <button type="button" id="replay-s6">Replay</button>
+              <a href="/geometry-06-octahedron.json" download="geometry-06-octahedron.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s7" aria-label="Nested tesseract"></div>
+          <div class="meta">
+            <h2>07 — tesseract</h2>
+            <p>Nested cubes counter-swaying, all eight corners linked.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s7">intro</span>
+              <button type="button" id="replay-s7">Replay</button>
+              <a href="/geometry-07-tesseract.json" download="geometry-07-tesseract.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-s8" aria-label="Triangulated pyramid"></div>
+          <div class="meta">
+            <h2>08 — pyramid</h2>
+            <p>A square pyramid, each face split into four triangles, spinning 90°.</p>
+            <div class="actions">
+              <span class="chip" id="chip-s8">intro</span>
+              <button type="button" id="replay-s8">Replay</button>
+              <a href="/geometry-08-tri-pyramid.json" download="geometry-08-tri-pyramid.json">Download .json</a>
             </div>
           </div>
         </section>

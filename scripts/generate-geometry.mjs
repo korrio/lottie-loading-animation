@@ -270,14 +270,14 @@ const triPyramid = () => {
 
 // ------------------------------------------------------------- layout -------
 const SOLIDS = [
-  [cubeCluster, 168, 142, 50, 0.0],
-  [icosahedron, 400, 132, 62, 1.1],
-  [hexCube, 640, 140, 55, 2.2],
-  [lattice, 288, 300, 48, 3.3],
-  [plusCluster, 535, 300, 55, 4.4],
-  [octahedron, 165, 462, 55, 5.5],
-  [tesseract, 400, 466, 54, 6.6],
-  [triPyramid, 635, 460, 60, 7.7],
+  [cubeCluster, 168, 142, 50, 0.0, 'cube-cluster'],
+  [icosahedron, 400, 132, 62, 1.1, 'icosahedron'],
+  [hexCube, 640, 140, 55, 2.2, 'hex-cube'],
+  [lattice, 288, 300, 48, 3.3, 'lattice'],
+  [plusCluster, 535, 300, 55, 4.4, 'plus-cubes'],
+  [octahedron, 165, 462, 55, 5.5, 'octahedron'],
+  [tesseract, 400, 466, 54, 6.6, 'tesseract'],
+  [triPyramid, 635, 460, 60, 7.7, 'tri-pyramid'],
 ];
 
 // walk each connected component of the edge graph as one stroke, retracing
@@ -445,3 +445,27 @@ const lottie = {
 const out = join(root, 'public/geometry-loading.json');
 writeFileSync(out, JSON.stringify(lottie));
 console.log(`wrote ${out} (${(JSON.stringify(lottie).length / 1024).toFixed(0)} KB)`);
+
+// --- one standalone file per solid, centered and enlarged -------------------
+SOLIDS.forEach(([builder, , , scalePx, phase, slug], i) => {
+  const solo = solidLayer(1, builder, 400, 300, scalePx * 2.1, phase, 4);
+  const doc = {
+    v: '5.9.6',
+    fr: FR,
+    ip: 0,
+    op: OP,
+    w: 800,
+    h: 600,
+    nm: `GEOMETRY — ${slug}`,
+    ddd: 0,
+    assets: [],
+    layers: [solo, paper, bg],
+    markers: [
+      { tm: 0, cm: 'intro', dr: 90 },
+      { tm: 90, cm: 'loop', dr: 120 },
+    ],
+  };
+  const file = join(root, `public/geometry-${String(i + 1).padStart(2, '0')}-${slug}.json`);
+  writeFileSync(file, JSON.stringify(doc));
+  console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
+});
