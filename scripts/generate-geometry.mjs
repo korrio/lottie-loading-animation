@@ -468,4 +468,10 @@ SOLIDS.forEach(([builder, , , scalePx, phase, slug], i) => {
   const file = join(root, `public/geometry-${String(i + 1).padStart(2, '0')}-${slug}.json`);
   writeFileSync(file, JSON.stringify(doc));
   console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
+
+  // transparent variant: solid only, no graph paper, no background
+  const docT = { ...doc, nm: `GEOMETRY — ${slug} (transparent)`, layers: [solo] };
+  const fileT = join(root, `public/geometry-${String(i + 1).padStart(2, '0')}-${slug}-transparent.json`);
+  writeFileSync(fileT, JSON.stringify(docT));
+  console.log(`wrote ${fileT} (${(JSON.stringify(docT).length / 1024).toFixed(0)} KB)`);
 });
