@@ -1,27 +1,34 @@
 import './style.css';
 import lottie from 'lottie-web';
 
-const chip = document.querySelector('#chip-v1');
+const PANELS = [
+  { id: 'v1', path: '/korrio-loading.json', intro: [0, 90], loop: [90, 210] },
+  { id: 'v2', path: '/korrio-loading-v2.json', intro: [0, 150], loop: [150, 270] },
+];
 
-const anim = lottie.loadAnimation({
-  container: document.querySelector('#stage-v1'),
-  renderer: 'svg',
-  loop: false,
-  autoplay: false,
-  path: '/korrio-loading.json',
-});
+for (const { id, path, intro, loop } of PANELS) {
+  const chip = document.querySelector(`#chip-${id}`);
 
-const playIntro = () => {
-  chip.textContent = 'intro';
-  anim.loop = false;
-  anim.playSegments([0, 90], true);
-};
+  const anim = lottie.loadAnimation({
+    container: document.querySelector(`#stage-${id}`),
+    renderer: 'svg',
+    loop: false,
+    autoplay: false,
+    path,
+  });
 
-anim.addEventListener('DOMLoaded', playIntro);
-anim.addEventListener('complete', () => {
-  chip.textContent = 'loop';
-  anim.loop = true;
-  anim.playSegments([90, 210], true);
-});
+  const playIntro = () => {
+    chip.textContent = 'intro';
+    anim.loop = false;
+    anim.playSegments(intro, true);
+  };
 
-document.querySelector('#replay-v1').addEventListener('click', playIntro);
+  anim.addEventListener('DOMLoaded', playIntro);
+  anim.addEventListener('complete', () => {
+    chip.textContent = 'loop';
+    anim.loop = true;
+    anim.playSegments(loop, true);
+  });
+
+  document.querySelector(`#replay-${id}`).addEventListener('click', playIntro);
+}
