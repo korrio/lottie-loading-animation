@@ -361,7 +361,7 @@ const solidLayer = (ind, builder, x, y, scalePx, phase, t0) => {
         nm: `solid-${ind}-g`,
         it: [
           ...keysPer.map((keys) => ({ ty: 'sh', ks: { a: 1, k: keys } })),
-          { ty: 'st', c: still(INK), o: still(100), w: still(2.6), lc: 2, lj: 2 },
+          { ty: 'st', c: still(INK), o: still(100), w: still(7.8), lc: 2, lj: 2 },
           tr(),
         ],
       },
