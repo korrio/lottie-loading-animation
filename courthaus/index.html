@@ -4,23 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/assets/courthaus/ball.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>COURTHAUS · Loading Animation</title>
+    <title>COURTHAUS · Loading Animations</title>
   </head>
   <body class="theme-cream">
-    <div id="app" class="single">
+    <div id="app">
       <header>
-        <h1>COURTHAUS — Loading Animation</h1>
-        <p>Letters pop in, the ball drops &amp; spins · intro plays once, then loops seamlessly</p>
+        <h1>COURTHAUS — Loading Animations</h1>
+        <p>two Lottie variants · intro plays once, then loops seamlessly · <a class="headlink" href="/">← All animations</a></p>
       </header>
-      <main>
+      <main id="gallery">
         <section class="panel">
-          <div class="stage" id="stage" aria-label="COURTHAUS loading animation"></div>
+          <div class="stage" id="stage-v1" aria-label="COURTHAUS loading animation v1"></div>
           <div class="meta">
+            <h2>v1 — the ball drops in</h2>
+            <p>Letters pop in one by one and the tennis ball drops into the "O", spinning on loop.</p>
             <div class="actions">
-              <span class="chip" id="chip">intro</span>
-              <button type="button" id="replay">Replay</button>
+              <span class="chip" id="chip-v1">intro</span>
+              <button type="button" id="replay-v1">Replay</button>
               <a href="/courthaus-loading.json" download="courthaus-loading.json">Download .json</a>
-              <a class="crosslink" href="/">← SPIN BASE animations</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-v2" aria-label="COURTHAUS loading animation v2"></div>
+          <div class="meta">
+            <h2>v2 — the ball screws in</h2>
+            <p>From the new lockup: COURT and HAUS stamp in around an empty O slot, the ball-O spins itself into the gap, and the Tennis &amp; Pickleball Club script rises beneath. On loop only the ball keeps turning, its seams carrying the motion.</p>
+            <div class="actions">
+              <span class="chip" id="chip-v2">intro</span>
+              <button type="button" id="replay-v2">Replay</button>
+              <a href="/courthaus-loading-v2.json" download="courthaus-loading-v2.json">Download .json</a>
             </div>
           </div>
         </section>

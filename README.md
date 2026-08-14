@@ -7,7 +7,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | Brand | Page | Animation |
 | --- | --- | --- |
 | SPIN BASE | [/](https://spinbase-animation.web.app/) | 3 variants: flat spin, globe spin, 3D Earth-style ball rotation |
-| COURTHAUS | [/courthaus/](https://spinbase-animation.web.app/courthaus/) | Letters pop in one by one, tennis ball drops into the "O" |
+| COURTHAUS | [/courthaus/](https://spinbase-animation.web.app/courthaus/) | 2 variants: letters pop and the ball drops into the "O"; new lockup where the ball-O screws in and keeps turning |
 | FUZE TRAINING | [/fuze/](https://spinbase-animation.web.app/fuze/) | Logo mark halves slam together, beat pulse on loop |
 | สร้างสรรค์ปัญญา (Creative Intelligent) | [/sspy/](https://spinbase-animation.web.app/sspy/) | Pen nib rises, idea bulb pops and glows, Thai + English text reveal |
 | BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 3 variants: counter-rotating balls, roll-in-and-rest, balancing act — the solid ball lands on the outline ball and teeters |
@@ -32,7 +32,8 @@ Regenerate any animation after tweaking its script:
 
 ```bash
 node scripts/generate-lottie.mjs        # SPIN BASE  → public/spinbase-loading.json
-node scripts/generate-courthaus.mjs     # COURTHAUS  → public/courthaus-loading.json
+node scripts/generate-courthaus.mjs     # COURTHAUS v1 → public/courthaus-loading.json
+node scripts/generate-courthaus-v2.mjs  # COURTHAUS v2 → public/courthaus-loading-v2.json
 node scripts/generate-fuze.mjs          # FUZE       → public/fuze-loading.json
 node scripts/generate-sspy.mjs          # สร้างสรรค์ปัญญา → public/sspy-loading.json
 node scripts/generate-balance.mjs       # BALANCE v1 → public/balance-loading.json
