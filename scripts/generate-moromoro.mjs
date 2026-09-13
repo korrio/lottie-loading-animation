@@ -117,6 +117,40 @@ const build = (theme, version) => {
   const T = THEMES[theme];
   const [gx, gy] = T.gem;
 
+  // v3.1 "the juggle": the two diamond eyes and the brow gem circle each
+  // other like juggled balls — all three parented to a null at their
+  // centroid that turns one full revolution per loop (seamless), while each
+  // ball counter-rotates so it stays upright in flight.
+  const juggle = version === 'v3.1';
+  const cJx = (EYES[0][0] + EYES[1][0] + gx) / 3;
+  const cJy = (EYES[0][1] + EYES[1][1] + gy) / 3;
+  const counterR = () => anim([
+    [90, 0, linear],
+    [210, 360],
+  ]);
+  const juggleRig = {
+    ddd: 0,
+    ind: 21,
+    ty: 3,
+    nm: 'juggle-rig',
+    sr: 1,
+    ao: 0,
+    ip: 0,
+    op: OP,
+    st: 0,
+    bm: 0,
+    ks: {
+      o: still(0),
+      r: anim([
+        [90, 0, linear],
+        [210, -360],
+      ]),
+      p: still([cJx, cJy, 0]),
+      a: still([0, 0, 0]),
+      s: still([100, 100, 100]),
+    },
+  };
+
   const head = {
     ddd: 0,
     ind: 10,
@@ -185,16 +219,24 @@ const build = (theme, version) => {
     op: OP,
     st: 0,
     bm: 0,
+    ...(juggle ? { parent: 21 } : {}),
     ks: {
       o: anim([
         [22, 0, linear],
         [26, 100],
       ]),
-      r: anim([
-        [22, -160, easeOut],
-        [38, 0],
-      ]),
-      p: still([gx, gy, 0]),
+      r: juggle
+        ? anim([
+            [22, -160, easeOut],
+            [38, 0, easeInOut],
+            [90, 0, linear],
+            [210, 360],
+          ])
+        : anim([
+            [22, -160, easeOut],
+            [38, 0],
+          ]),
+      p: juggle ? still([gx - cJx, gy - cJy, 0]) : still([gx, gy, 0]),
       a: still([theme === 'dark' ? 377.1 : 374, theme === 'dark' ? 315.4 : 313.4, 0]),
       s: anim([
         [22, [0, 0, 100], easeOut],
@@ -206,7 +248,8 @@ const build = (theme, version) => {
   };
 
   // glint star at the gem's shoulder — pops after the gem lands, twinkles once
-  const glintPops = version === 'v3' ? [42, 148] : version === 'v5' ? [46, 166] : [42, 166];
+  const glintPops =
+    version === 'v3' ? [42, 148] : version === 'v3.1' ? [42] : version === 'v5' ? [46, 166] : [42, 166];
   const gK = [];
   const grK = [];
   glintPops.forEach((t0) => {
@@ -565,16 +608,22 @@ const build = (theme, version) => {
       shapeItems = [
         { ty: 'gr', nm: 'eye-g', it: [{ ty: 'sh', ks: { a: 0, k: diamondPath(23, 33) } }, { ty: 'fl', c: still(TEAL), o: still(100), r: 1 }, tr()] },
       ];
-      scaleKs = anim([
-        [46, [0, 0, 100], easeOut],
-        [52, [108, 115, 100], easeInOut],
-        [58, [100, 100, 100], easeInOut],
-        [90, [100, 100, 100], easeInOut],
-        [146, [100, 100, 100], easeInOut],
-        [150, [100, 8, 100], easeInOut],
-        [157, [100, 100, 100], easeInOut],
-        [210, [100, 100, 100]],
-      ]);
+      scaleKs = juggle
+        ? anim([
+            [46, [0, 0, 100], easeOut],
+            [52, [108, 115, 100], easeInOut],
+            [58, [100, 100, 100]],
+          ])
+        : anim([
+            [46, [0, 0, 100], easeOut],
+            [52, [108, 115, 100], easeInOut],
+            [58, [100, 100, 100], easeInOut],
+            [90, [100, 100, 100], easeInOut],
+            [146, [100, 100, 100], easeInOut],
+            [150, [100, 8, 100], easeInOut],
+            [157, [100, 100, 100], easeInOut],
+            [210, [100, 100, 100]],
+          ]);
     }
     return {
       ddd: 0,
@@ -587,13 +636,14 @@ const build = (theme, version) => {
       op: OP,
       st: 0,
       bm: 0,
+      ...(juggle ? { parent: 21 } : {}),
       ks: {
         o: anim([
           [46, 0, linear],
           [49, 100],
         ]),
-        r: still(0),
-        p: still([ex, ey, 0]),
+        r: juggle ? counterR() : still(0),
+        p: juggle ? still([ex - cJx, ey - cJy, 0]) : still([ex, ey, 0]),
         a: still([0, 0, 0]),
         s: scaleKs,
       },
@@ -650,7 +700,9 @@ const build = (theme, version) => {
           ? [glint, ring, gem, head]
           : version === 'v6.1'
             ? [glint, ring, ethBeat, head]
-            : [glint, ...eyeLayers, gem, head],
+            : juggle
+              ? [glint, ...eyeLayers, gem, juggleRig, head]
+              : [glint, ...eyeLayers, gem, head],
     markers: [
       { tm: 0, cm: 'intro', dr: 90 },
       { tm: 90, cm: 'loop', dr: 120 },
@@ -659,7 +711,7 @@ const build = (theme, version) => {
 };
 
 for (const theme of ['dark', 'light']) {
-  for (const version of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v6.1', 'v7']) {
+  for (const version of ['v1', 'v2', 'v3', 'v3.1', 'v4', 'v5', 'v6', 'v6.1', 'v7']) {
     const doc = build(theme, version);
     const file = join(root, `public/moromoro-${theme}-${version.replace('.', '-')}.json`);
     writeFileSync(file, JSON.stringify(doc));
