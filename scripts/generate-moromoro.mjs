@@ -70,7 +70,9 @@ const THEMES = {
 THEMES.dark.eyeColor = NAVY;
 THEMES.light.eyeColor = WHITE;
 
-const EYES = [M(295, 430), M(455, 430)];
+// positions studied from the chibi mascots (moro.exchange/brand):
+// eyes sit wide and low — 63% down the head, 0.39 face-widths apart
+const EYES = [M(282, 458), M(468, 458)];
 
 // --- eye shape paths (local coords, anchor at eye center) --------------------
 const ellipsePath = (w, h) => {
@@ -87,9 +89,9 @@ const ellipsePath = (w, h) => {
 // happy anime arc (closed smiling eye) — same 4-vertex topology as the oval
 const happyPath = () => ({
   c: true,
-  v: [[0, -15], [16, 4], [0, -5], [-16, 4]],
-  i: [[-9, 0], [3, -8], [9, 0], [-2, 8]],
-  o: [[9, 0], [-2, 8], [-9, 0], [3, -8]],
+  v: [[0, -26], [28, 7], [0, -9], [-28, 7]],
+  i: [[-16, 0], [5, -14], [16, 0], [-4, 14]],
+  o: [[16, 0], [-4, 14], [-16, 0], [5, -14]],
 });
 
 const diamondPath = (w, h) => ({
@@ -225,58 +227,84 @@ const build = (theme, version) => {
   };
 
   // --- eyes ------------------------------------------------------------------
+  // v1: chibi anime eyes — plum iris with white highlight sparkles, as on
+  // the official mascots. v2: happy arcs (the sleeping chibi's lash line).
+  // v3: teal gem diamonds. All blink from an eye-center anchor.
+  const PLUM = [0.196, 0.157, 0.271, 1];
   const eyeLayers = EYES.map(([ex, ey], i) => {
-    let shapeKs;
+    let shapeItems;
     let scaleKs;
-    const color = version === 'v3' ? TEAL : T.eyeColor;
-    if (version === 'v2') {
-      // path morph: happy arc ↔ open oval
+    let shapeKs = null;
+    if (version === 'v1') {
+      // anime eye: tall round iris + two highlights (big up-left, small low-right)
+      shapeItems = [
+        {
+          ty: 'gr',
+          nm: 'hl-big',
+          it: [{ ty: 'el', d: 1, s: still([17, 17]), p: still([-8, -11]) }, { ty: 'fl', c: still(WHITE), o: still(100), r: 1 }, tr()],
+        },
+        {
+          ty: 'gr',
+          nm: 'hl-small',
+          it: [{ ty: 'el', d: 1, s: still([8, 8]), p: still([8, 10]) }, { ty: 'fl', c: still(WHITE), o: still(92), r: 1 }, tr()],
+        },
+        {
+          ty: 'gr',
+          nm: 'iris',
+          it: [{ ty: 'el', d: 1, s: still([52, 60]), p: still([0, 0]) }, { ty: 'fl', c: still(PLUM), o: still(100), r: 1 }, tr()],
+        },
+        {
+          ty: 'gr',
+          nm: 'sclera',
+          it: [{ ty: 'el', d: 1, s: still([60, 68]), p: still([0, 0]) }, { ty: 'fl', c: still(WHITE), o: still(100), r: 1 }, tr()],
+        },
+      ];
+      scaleKs = anim([
+        [46, [0, 0, 100], easeOut],
+        [52, [108, 115, 100], easeInOut],
+        [58, [100, 100, 100], easeInOut],
+        [90, [100, 100, 100], easeInOut],
+        [146, [100, 100, 100], easeInOut],
+        [150, [100, 7, 100], easeInOut],
+        [157, [100, 100, 100], easeInOut],
+        [210, [100, 100, 100]],
+      ]);
+    } else if (version === 'v2') {
+      // path morph: happy arc <-> open oval (chibi-sized)
       shapeKs = {
         a: 1,
         k: kf([
           [46, [happyPath()], easeInOut],
-          [56, [ellipsePath(15, 21)], easeInOut],
-          // loop: close into the happy arc, hold the smile, open again
-          [90, [ellipsePath(15, 21)], easeInOut],
-          [138, [ellipsePath(15, 21)], easeInOut],
+          [56, [ellipsePath(26, 30)], easeInOut],
+          [90, [ellipsePath(26, 30)], easeInOut],
+          [138, [ellipsePath(26, 30)], easeInOut],
           [144, [happyPath()], easeInOut],
           [162, [happyPath()], easeInOut],
-          [168, [ellipsePath(15, 21)], easeInOut],
-          [210, [ellipsePath(15, 21)]],
+          [168, [ellipsePath(26, 30)], easeInOut],
+          [210, [ellipsePath(26, 30)]],
         ]),
       };
+      shapeItems = [
+        { ty: 'gr', nm: 'eye-g', it: [{ ty: 'sh', ks: shapeKs }, { ty: 'fl', c: still(T.eyeColor), o: still(100), r: 1 }, tr()] },
+      ];
       scaleKs = anim([
         [46, [0, 0, 100], easeOut],
         [52, [108, 108, 100], easeInOut],
         [58, [100, 100, 100]],
       ]);
     } else {
-      const path = version === 'v1' ? ellipsePath(15, 21) : diamondPath(14, 20);
-      shapeKs = { a: 0, k: path };
-      const blink =
-        version === 'v1'
-          ? [
-              // double blink
-              [90, [100, 100, 100], easeInOut],
-              [144, [100, 100, 100], easeInOut],
-              [148, [100, 6, 100], easeInOut],
-              [153, [100, 100, 100], easeInOut],
-              [158, [100, 6, 100], easeInOut],
-              [164, [100, 100, 100], easeInOut],
-              [210, [100, 100, 100]],
-            ]
-          : [
-              [90, [100, 100, 100], easeInOut],
-              [146, [100, 100, 100], easeInOut],
-              [150, [100, 8, 100], easeInOut],
-              [157, [100, 100, 100], easeInOut],
-              [210, [100, 100, 100]],
-            ];
+      shapeItems = [
+        { ty: 'gr', nm: 'eye-g', it: [{ ty: 'sh', ks: { a: 0, k: diamondPath(23, 33) } }, { ty: 'fl', c: still(TEAL), o: still(100), r: 1 }, tr()] },
+      ];
       scaleKs = anim([
         [46, [0, 0, 100], easeOut],
         [52, [108, 115, 100], easeInOut],
         [58, [100, 100, 100], easeInOut],
-        ...blink,
+        [90, [100, 100, 100], easeInOut],
+        [146, [100, 100, 100], easeInOut],
+        [150, [100, 8, 100], easeInOut],
+        [157, [100, 100, 100], easeInOut],
+        [210, [100, 100, 100]],
       ]);
     }
     return {
@@ -300,13 +328,7 @@ const build = (theme, version) => {
         a: still([0, 0, 0]),
         s: scaleKs,
       },
-      shapes: [
-        {
-          ty: 'gr',
-          nm: `eye-${i}-g`,
-          it: [{ ty: 'sh', ks: shapeKs }, { ty: 'fl', c: still(color), o: still(100), r: 1 }, tr()],
-        },
-      ],
+      shapes: shapeItems,
     };
   });
 
