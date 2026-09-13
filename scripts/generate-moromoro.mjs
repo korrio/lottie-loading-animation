@@ -237,8 +237,8 @@ const build = (theme, version) => {
     let shapeKs = null;
     if (version === 'v4') {
       // the actual painted eyes from the official chibi mascot (moscot-1),
-      // spaced 50% wider than the shape-eye versions
-      const ex4 = 400 + (ex - 400) * 1.5;
+      // spacing tuned per feedback (1.5x then -25% => 1.125x)
+      const ex4 = 400 + (ex - 400) * 1.125;
       const blink = anim([
         [46, [0, 0, 100], easeOut],
         [52, [108, 115, 100], easeInOut],
