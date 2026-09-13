@@ -759,3 +759,46 @@ body.theme-jkt {
 .theme-jkt .actions a:hover {
   background: rgba(44, 81, 5, 0.16);
 }
+
+
+/* midnight + teal theme for the moromoro page */
+body.theme-moromoro {
+  background: radial-gradient(1200px 800px at 50% 30%, #182040 0%, #101528 55%, #0a0e1c 100%);
+  color: #eef4ff;
+}
+
+.theme-moromoro header p,
+.theme-moromoro .meta p,
+.theme-moromoro .chip {
+  color: #8b95b8;
+}
+
+.theme-moromoro .panel {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(103, 250, 232, 0.22);
+}
+
+.theme-moromoro .stage {
+  background: radial-gradient(400px 300px at 50% 40%, rgba(103, 250, 232, 0.05), transparent);
+}
+
+.theme-moromoro .meta {
+  border-top-color: rgba(103, 250, 232, 0.15);
+}
+
+.theme-moromoro .chip {
+  background: rgba(103, 250, 232, 0.07);
+  border-color: rgba(103, 250, 232, 0.28);
+}
+
+.theme-moromoro .actions button,
+.theme-moromoro .actions a {
+  color: #67fae8;
+  background: rgba(103, 250, 232, 0.07);
+  border-color: rgba(103, 250, 232, 0.3);
+}
+
+.theme-moromoro .actions button:hover,
+.theme-moromoro .actions a:hover {
+  background: rgba(103, 250, 232, 0.17);
+}

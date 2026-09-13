@@ -21,6 +21,7 @@ export default defineConfig({
         geometry: resolve(import.meta.dirname, 'geometry/index.html'),
         korrio: resolve(import.meta.dirname, 'korrio/index.html'),
         jkt: resolve(import.meta.dirname, 'jkt/index.html'),
+        moromoro: resolve(import.meta.dirname, 'moromoro/index.html'),
       },
     },
   },
