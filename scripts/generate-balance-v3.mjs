@@ -229,7 +229,7 @@ const lottie = {
   nm: 'BALANCE AUTO TENNIS — loading v3 (balancing act)',
   ddd: 0,
   assets,
-  layers: [ballTop, ballBottom, ...balanceLayers, ...autoLayers, bg],
+  layers: [ballTop, ballBottom, ...balanceLayers, ...autoLayers],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

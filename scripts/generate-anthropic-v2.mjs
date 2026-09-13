@@ -202,7 +202,7 @@ const lottie = {
   nm: 'ANTHROPIC — loading v2 (the mark assembles)',
   ddd: 0,
   assets,
-  layers: [symA, bsSlate, bsCoral, rig, bg],
+  layers: [symA, bsSlate, bsCoral, rig],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

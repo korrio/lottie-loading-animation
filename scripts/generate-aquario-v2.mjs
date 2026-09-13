@@ -248,7 +248,7 @@ const lottie = {
   nm: 'AQUARIO — loading v2 (water sign, surface & float)',
   ddd: 0,
   assets,
-  layers: [...zigLayers, ...barLayers, ...letterLayers, bg],
+  layers: [...zigLayers, ...barLayers, ...letterLayers],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

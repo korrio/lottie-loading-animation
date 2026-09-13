@@ -223,7 +223,7 @@ const lottie = {
   nm: 'SSS HALF TENNIS — loading (the cat wakes up)',
   ddd: 0,
   assets,
-  layers: [ball, eyes, mark, ...sssLayers, ...htLayers, bg],
+  layers: [ball, eyes, mark, ...sssLayers, ...htLayers],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

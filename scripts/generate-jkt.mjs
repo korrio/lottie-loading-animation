@@ -184,7 +184,7 @@ const lottie = {
   nm: 'จุดกางเต็นท์ — loading (sunrise at the campsite)',
   ddd: 0,
   assets,
-  layers: [...thaiLayers, tagline, mark, sun, bg],
+  layers: [...thaiLayers, tagline, mark, sun],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

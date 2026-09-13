@@ -242,7 +242,7 @@ const lottie = {
   nm: 'ANTHROPIC — loading (spark to slash)',
   ddd: 0,
   assets,
-  layers: [bsSlate, bsCoral, spark, ...letterLayers, bg],
+  layers: [bsSlate, bsCoral, spark, ...letterLayers],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

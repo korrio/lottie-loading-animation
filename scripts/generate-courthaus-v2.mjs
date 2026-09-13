@@ -176,7 +176,7 @@ const lottie = {
   nm: 'COURTHAUS — loading v2 (the ball screws in)',
   ddd: 0,
   assets,
-  layers: [ball, ...letterLayers, tagline, bg],
+  layers: [ball, ...letterLayers, tagline],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

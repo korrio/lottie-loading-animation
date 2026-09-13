@@ -233,7 +233,7 @@ const lottie = {
   nm: 'จุดกางเต็นท์ — loading v2 (vertical lockup)',
   ddd: 0,
   assets,
-  layers: [...thaiLayers, tagline, mark, sun, sunFull, bg],
+  layers: [...thaiLayers, tagline, mark, sun, sunFull],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

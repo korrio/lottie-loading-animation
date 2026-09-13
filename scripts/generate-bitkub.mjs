@@ -279,7 +279,7 @@ const lottie = {
   nm: 'Bitkub Capital — loading',
   ddd: 0,
   assets,
-  layers: [hookA, hookB, dotA, dotB, bitkub, capital, dots, markCtrl, bg],
+  layers: [hookA, hookB, dotA, dotB, bitkub, capital, dots, markCtrl],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

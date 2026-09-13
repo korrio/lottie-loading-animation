@@ -183,7 +183,7 @@ const lottie = {
   nm: 'korrio — avatar (the sign hums on)',
   ddd: 0,
   assets,
-  layers: [...layers, bg],
+  layers: [...layers],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

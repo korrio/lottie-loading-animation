@@ -254,7 +254,7 @@ const lottie = {
   nm: 'ONE PIECE — loading v2 (wanted!)',
   ddd: 0,
   assets,
-  layers: [...glintLayers, ...dustLayers, flag, bg],
+  layers: [...glintLayers, ...dustLayers, flag],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

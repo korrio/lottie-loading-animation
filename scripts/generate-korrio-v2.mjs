@@ -203,7 +203,7 @@ const lottie = {
   nm: 'korrio — avatar v2 (drawn line by line)',
   ddd: 0,
   assets: [],
-  layers: [...layers, bg],
+  layers: [...layers],
   markers: [
     { tm: 0, cm: 'intro', dr: 150 },
     { tm: 150, cm: 'loop', dr: 120 },

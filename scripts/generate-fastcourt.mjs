@@ -254,7 +254,7 @@ const lottie = {
   nm: 'FastCourt — loading (dash in)',
   ddd: 0,
   assets,
-  layers: [mark, ...letterLayers, tagline, ...whooshes, bg],
+  layers: [mark, ...letterLayers, tagline, ...whooshes],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

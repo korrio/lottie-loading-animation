@@ -206,7 +206,7 @@ const lottie = {
   nm: 'ONE PIECE — loading (hoist the colors)',
   ddd: 0,
   assets,
-  layers: [...glintLayers, flag, bg],
+  layers: [...glintLayers, flag],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

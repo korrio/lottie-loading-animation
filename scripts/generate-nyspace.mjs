@@ -242,7 +242,7 @@ const lottie = {
   nm: 'NY SPACE — loading',
   ddd: 0,
   assets,
-  layers: [ball, mark, wordmark, dots, bg],
+  layers: [ball, mark, wordmark, dots],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

@@ -12,6 +12,7 @@ const PANELS = [
   { id: 'd5', path: '/moromoro-dark-v5.json' },
   { id: 'd6', path: '/moromoro-dark-v6.json' },
   { id: 'd61', path: '/moromoro-dark-v6-1.json' },
+  { id: 'd7', path: '/moromoro-dark-v7.json' },
   { id: 'l1', path: '/moromoro-light-v1.json' },
   { id: 'l2', path: '/moromoro-light-v2.json' },
   { id: 'l3', path: '/moromoro-light-v3.json' },
@@ -19,6 +20,7 @@ const PANELS = [
   { id: 'l5', path: '/moromoro-light-v5.json' },
   { id: 'l6', path: '/moromoro-light-v6.json' },
   { id: 'l61', path: '/moromoro-light-v6-1.json' },
+  { id: 'l7', path: '/moromoro-light-v7.json' },
 ];
 
 for (const { id, path } of PANELS) {

@@ -506,7 +506,7 @@ const lottie = {
   nm: 'GEOMETRY — loading (the shapes keep turning)',
   ddd: 0,
   assets: [],
-  layers: [...solids, paper, bg],
+  layers: [...solids, paper],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },
@@ -530,7 +530,7 @@ SOLIDS.forEach(([builder, , , scalePx, phase, slug], i) => {
     nm: `GEOMETRY — ${slug}`,
     ddd: 0,
     assets: [],
-    layers: [solo, paper, bg],
+    layers: [solo, paper],
     markers: [
       { tm: 0, cm: 'intro', dr: 90 },
       { tm: 90, cm: 'loop', dr: 120 },
@@ -572,6 +572,6 @@ SOLIDS_V2.forEach(([builder, slug, scalePx, phase]) => {
     writeFileSync(file, JSON.stringify(doc));
     console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
   };
-  mk([solo, paper, bg], '', `GEOMETRY — ${slug}`);
+  mk([solo, paper], '', `GEOMETRY — ${slug}`);
   mk([solo], '-transparent', `GEOMETRY — ${slug} (transparent)`);
 });

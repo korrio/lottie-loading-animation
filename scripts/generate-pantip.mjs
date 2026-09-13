@@ -262,7 +262,7 @@ const lottie = {
   nm: 'Pantip — loading',
   ddd: 0,
   assets,
-  layers: [face, lP, lA, lN, lT, lI, lIdot, lP2, tagline, dots, bg],
+  layers: [face, lP, lA, lN, lT, lI, lIdot, lP2, tagline, dots],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
     { tm: 90, cm: 'loop', dr: 120 },

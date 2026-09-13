@@ -802,3 +802,17 @@ body.theme-moromoro {
 .theme-moromoro .actions a:hover {
   background: rgba(103, 250, 232, 0.17);
 }
+
+
+/* Lottie files are transparent — the page owns each brand's background */
+.theme-club .stage { background: #cc7624; }
+.theme-tip .stage { background: #ffffff; }
+.theme-kub .stage { background: #ffffff; }
+.theme-space .stage { background: #195050; }
+.theme-fastcourt .stage { background: #0f1638; }
+.theme-anthropic .stage { background: #f0f0eb; }
+.theme-sss .stage { background: #ba623a; }
+.theme-onepiece .stage { background: #f0efe9; }
+.theme-geometry .stage { background: #fbfaf7; }
+.theme-korrio .stage { background: #1b1a2a; }
+.theme-jkt .stage { background: #ffffff; }

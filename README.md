@@ -120,7 +120,7 @@ Each brand gets `<brand>/index.html` + `src/<brand>.js` + a theme class in `src/
 - **Physically-coherent rolling** (BALANCE v2): position and rotation share the same easing curve, and spin degrees ≈ travel distance / ball radius, so the roll reads true.
 - **Occlusion reconstruction** (BALANCE): the outline ball's hidden arc and seam strokes are completed with concentric synthetic arcs so the ball can rotate 360° without gaps.
 - **Complex-script text as raster**: Thai text (สร้างสรรค์ปัญญา) rendered via PIL + raqm with SukhumvitSet Semi Bold, then embedded as an image layer.
-- **Embedded background**: a full-comp solid layer (`ty: 1`) bakes the brand background color into the JSON itself, so it renders in any player.
+- **Transparent like a PNG**: no Lottie bakes a background — every .json has a transparent backdrop and the page DOM owns each brand's background color (see the `.stage` styles), so a downloaded file drops onto any surface like a transparent PNG. (Backgrounds that are artwork — AQUARIO v1's ocean photo, One Piece v3's sky and sea — stay in the file.)
 
 ## Project layout
 

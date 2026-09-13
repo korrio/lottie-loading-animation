@@ -393,12 +393,76 @@ const build = (theme, version) => {
     ],
   };
 
+  // --- v7: "the swap" — the eyes are a token pair that trade places ----------
+  // A DEX aggregator's eyes: the teal diamond and the round token arc over
+  // and under each other to swap sockets at 100-122, and swap back at
+  // 160-182 — so the loop closes seamlessly. Each landing gets a squash.
+  const [[sxL, sy7], [sxR]] = EYES;
+  const midX = (sxL + sxR) / 2;
+  const swapP = (fromX, toX, up) => anim([
+    [90, [fromX, sy7, 0], easeInOut],
+    [100, [fromX, sy7, 0], easeInOut],
+    [111, [midX, sy7 + (up ? -46 : 40), 0], easeInOut],
+    [122, [toX, sy7, 0], easeInOut],
+    [160, [toX, sy7, 0], easeInOut],
+    [171, [midX, sy7 + (up ? 42 : -44), 0], easeInOut],
+    [182, [fromX, sy7, 0], easeInOut],
+    [210, [fromX, sy7, 0]],
+  ]);
+  const swapS = anim([
+    [46, [0, 0, 100], easeOut],
+    [52, [110, 116, 100], easeInOut],
+    [58, [100, 100, 100], easeInOut],
+    [120, [100, 100, 100], easeOut],
+    [124, [114, 86, 100], easeOut],
+    [130, [100, 100, 100], easeInOut],
+    [180, [100, 100, 100], easeOut],
+    [184, [114, 86, 100], easeOut],
+    [190, [100, 100, 100], easeInOut],
+    [210, [100, 100, 100]],
+  ]);
+  const swapEyes = [
+    {
+      ddd: 0,
+      ind: 13,
+      ty: 4,
+      nm: 'token-diamond',
+      sr: 1,
+      ao: 0,
+      ip: 0,
+      op: OP,
+      st: 0,
+      bm: 0,
+      ks: { o: anim([[46, 0, linear], [49, 100]]), r: still(0), p: swapP(sxL, sxR, true), a: still([0, 0, 0]), s: swapS },
+      shapes: [
+        { ty: 'gr', nm: 'g', it: [{ ty: 'sh', ks: { a: 0, k: diamondPath(23, 33) } }, { ty: 'fl', c: still(TEAL), o: still(100), r: 1 }, tr()] },
+      ],
+    },
+    {
+      ddd: 0,
+      ind: 14,
+      ty: 4,
+      nm: 'token-round',
+      sr: 1,
+      ao: 0,
+      ip: 0,
+      op: OP,
+      st: 0,
+      bm: 0,
+      ks: { o: anim([[46, 0, linear], [49, 100]]), r: still(0), p: swapP(sxR, sxL, false), a: still([0, 0, 0]), s: swapS },
+      shapes: [
+        { ty: 'gr', nm: 'hl', it: [{ ty: 'el', d: 1, s: still([13, 13]), p: still([-6, -8]) }, { ty: 'fl', c: still(theme === 'dark' ? WHITE : NAVY), o: still(100), r: 1 }, tr()] },
+        { ty: 'gr', nm: 'g', it: [{ ty: 'el', d: 1, s: still([50, 50]), p: still([0, 0]) }, { ty: 'fl', c: still(T.eyeColor), o: still(100), r: 1 }, tr()] },
+      ],
+    },
+  ];
+
   // --- eyes ------------------------------------------------------------------
   // v1: chibi anime eyes — plum iris with white highlight sparkles, as on
   // the official mascots. v2: happy arcs (the sleeping chibi's lash line).
   // v3: teal gem diamonds. All blink from an eye-center anchor.
   const PLUM = [0.196, 0.157, 0.271, 1];
-  const eyeLayers = version === 'v5' || version === 'v6' || version === 'v6.1' ? [] : EYES.map(([ex, ey], i) => {
+  const eyeLayers = version === 'v7' ? swapEyes : version === 'v5' || version === 'v6' || version === 'v6.1' ? [] : EYES.map(([ex, ey], i) => {
     let shapeItems;
     let scaleKs;
     let shapeKs = null;
@@ -581,12 +645,12 @@ const build = (theme, version) => {
     ],
     layers:
       version === 'v5'
-        ? [glint, ethEye, ethRig, head, bg]
+        ? [glint, ethEye, ethRig, head]
         : version === 'v6'
-          ? [glint, ring, gem, head, bg]
+          ? [glint, ring, gem, head]
           : version === 'v6.1'
-            ? [glint, ring, ethBeat, head, bg]
-            : [glint, ...eyeLayers, gem, head, bg],
+            ? [glint, ring, ethBeat, head]
+            : [glint, ...eyeLayers, gem, head],
     markers: [
       { tm: 0, cm: 'intro', dr: 90 },
       { tm: 90, cm: 'loop', dr: 120 },
@@ -595,7 +659,7 @@ const build = (theme, version) => {
 };
 
 for (const theme of ['dark', 'light']) {
-  for (const version of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v6.1']) {
+  for (const version of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v6.1', 'v7']) {
     const doc = build(theme, version);
     const file = join(root, `public/moromoro-${theme}-${version.replace('.', '-')}.json`);
     writeFileSync(file, JSON.stringify(doc));
