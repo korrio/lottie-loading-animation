@@ -146,7 +146,21 @@ const build = (theme, version) => {
 
   // gem: spins into the brow, breathes in the loop (v3 also twinkles on blink)
   const gemPulse =
-    version === 'v3'
+    version === 'v6'
+      ? [
+          [90, [S, S, 100], easeOut],
+          [96, [S * 1.24, S * 1.24, 100], easeOut],
+          [102, [S, S, 100], easeOut],
+          [108, [S * 1.13, S * 1.13, 100], easeOut],
+          [114, [S, S, 100], easeInOut],
+          [150, [S, S, 100], easeOut],
+          [156, [S * 1.24, S * 1.24, 100], easeOut],
+          [162, [S, S, 100], easeOut],
+          [168, [S * 1.13, S * 1.13, 100], easeOut],
+          [174, [S, S, 100], easeInOut],
+          [210, [S, S, 100]],
+        ]
+      : version === 'v3'
       ? [
           [90, [S, S, 100], easeInOut],
           [146, [S, S, 100], easeInOut],
@@ -192,7 +206,7 @@ const build = (theme, version) => {
   };
 
   // glint star at the gem's shoulder — pops after the gem lands, twinkles once
-  const glintPops = version === 'v3' ? [42, 148] : [42, 166];
+  const glintPops = version === 'v3' ? [42, 148] : version === 'v5' ? [46, 166] : [42, 166];
   const gK = [];
   const grK = [];
   glintPops.forEach((t0) => {
@@ -226,12 +240,120 @@ const build = (theme, version) => {
     ],
   };
 
+  // --- v5: the third eye is the Ethereum diamond, coin-spinning ---------------
+  // A parent rig cycles scale-x with cos(θ), one revolution per loop, so the
+  // glyph flips about its vertical axis like a coin — seamless at 90/210.
+  const ETH_DARK = [0.184, 0.847, 0.769, 1];
+  const ETH_LITE = [0.561, 0.988, 0.941, 1];
+  const ethPoly = (pts) => ({ c: true, v: pts, i: pts.map(() => [0, 0]), o: pts.map(() => [0, 0]) });
+  const ETH_FACETS = [
+    [ethPoly([[0, -208.5], [-128, 3.8], [0, 79.4]]), ETH_DARK],
+    [ethPoly([[0, -208.5], [128, 3.8], [0, 79.4]]), ETH_LITE],
+    [ethPoly([[-128, 28.1], [0, 103.7], [0, 208.4]]), ETH_DARK],
+    [ethPoly([[128, 28.1], [0, 103.7], [0, 208.4]]), ETH_LITE],
+  ];
+  const spinKeys = [];
+  for (let t = 22; t <= 210; t += 6) {
+    const sx = 100 * Math.cos((2 * Math.PI * (t - 90)) / 120);
+    const k = { t, s: [Math.round(sx * 10) / 10, 100, 100] };
+    spinKeys.push([k.t, k.s, linear]);
+  }
+  const ethRig = {
+    ddd: 0,
+    ind: 17,
+    ty: 3,
+    nm: 'eth-rig',
+    sr: 1,
+    ao: 0,
+    ip: 0,
+    op: OP,
+    st: 0,
+    bm: 0,
+    ks: {
+      o: still(0),
+      r: still(0),
+      p: still([gx, gy, 0]),
+      a: still([0, 0, 0]),
+      s: anim(spinKeys),
+    },
+  };
+  const ethEye = {
+    ddd: 0,
+    ind: 18,
+    ty: 4,
+    nm: 'eth-eye',
+    sr: 1,
+    ao: 0,
+    ip: 0,
+    op: OP,
+    st: 0,
+    bm: 0,
+    parent: 17,
+    ks: {
+      o: anim([
+        [22, 0, linear],
+        [26, 100],
+      ]),
+      r: still(0),
+      p: still([0, 0, 0]),
+      a: still([0, 0, 0]),
+      s: anim([
+        [22, [0, 0, 100], easeOut],
+        [34, [24.9, 24.9, 100], easeInOut],
+        [42, [21.6, 21.6, 100]],
+      ]),
+    },
+    shapes: ETH_FACETS.map(([path, col], fi) => ({
+      ty: 'gr',
+      nm: `facet-${fi}`,
+      it: [{ ty: 'sh', ks: { a: 0, k: path } }, { ty: 'fl', c: still(col), o: still(100), r: 1 }, tr()],
+    })),
+  };
+
+  // --- v6: shockwave ring that ripples out on each heartbeat ------------------
+  const ringSK = [];
+  const ringOK = [];
+  for (const c of [90, 150]) {
+    ringSK.push([c, [26, 26, 100], easeOut], [c + 22, [150, 150, 100], null, true], [c + 59, [26, 26, 100], null, true]);
+    ringOK.push([c, 55, easeOut], [c + 22, 0, null, true], [c + 59, 0, null, true]);
+  }
+  const ring = {
+    ddd: 0,
+    ind: 19,
+    ty: 4,
+    nm: 'beat-ring',
+    sr: 1,
+    ao: 0,
+    ip: 0,
+    op: OP,
+    st: 0,
+    bm: 0,
+    ks: {
+      o: anim(ringOK),
+      r: still(0),
+      p: still([gx, gy, 0]),
+      a: still([0, 0, 0]),
+      s: anim(ringSK),
+    },
+    shapes: [
+      {
+        ty: 'gr',
+        nm: 'ring-g',
+        it: [
+          { ty: 'el', d: 1, s: still([100, 100]), p: still([0, 0]) },
+          { ty: 'st', c: still(TEAL), o: still(100), w: still(6), lc: 2, lj: 2 },
+          tr(),
+        ],
+      },
+    ],
+  };
+
   // --- eyes ------------------------------------------------------------------
   // v1: chibi anime eyes — plum iris with white highlight sparkles, as on
   // the official mascots. v2: happy arcs (the sleeping chibi's lash line).
   // v3: teal gem diamonds. All blink from an eye-center anchor.
   const PLUM = [0.196, 0.157, 0.271, 1];
-  const eyeLayers = EYES.map(([ex, ey], i) => {
+  const eyeLayers = version === 'v5' || version === 'v6' ? [] : EYES.map(([ex, ey], i) => {
     let shapeItems;
     let scaleKs;
     let shapeKs = null;
@@ -412,7 +534,12 @@ const build = (theme, version) => {
           ]
         : []),
     ],
-    layers: [glint, ...eyeLayers, gem, head, bg],
+    layers:
+      version === 'v5'
+        ? [glint, ethEye, ethRig, head, bg]
+        : version === 'v6'
+          ? [glint, ring, gem, head, bg]
+          : [glint, ...eyeLayers, gem, head, bg],
     markers: [
       { tm: 0, cm: 'intro', dr: 90 },
       { tm: 90, cm: 'loop', dr: 120 },
@@ -421,7 +548,7 @@ const build = (theme, version) => {
 };
 
 for (const theme of ['dark', 'light']) {
-  for (const version of ['v1', 'v2', 'v3', 'v4']) {
+  for (const version of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']) {
     const doc = build(theme, version);
     const file = join(root, `public/moromoro-${theme}-${version}.json`);
     writeFileSync(file, JSON.stringify(doc));
