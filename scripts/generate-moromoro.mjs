@@ -310,6 +310,51 @@ const build = (theme, version) => {
     })),
   };
 
+  // --- v6.1: the Ethereum diamond itself beats --------------------------------
+  const B = 21.6;
+  const ethBeat = {
+    ddd: 0,
+    ind: 18,
+    ty: 4,
+    nm: 'eth-beat',
+    sr: 1,
+    ao: 0,
+    ip: 0,
+    op: OP,
+    st: 0,
+    bm: 0,
+    ks: {
+      o: anim([
+        [22, 0, linear],
+        [26, 100],
+      ]),
+      r: still(0),
+      p: still([gx, gy, 0]),
+      a: still([0, 0, 0]),
+      s: anim([
+        [22, [0, 0, 100], easeOut],
+        [34, [B * 1.15, B * 1.15, 100], easeInOut],
+        [42, [B, B, 100], easeInOut],
+        [90, [B, B, 100], easeOut],
+        [96, [B * 1.24, B * 1.24, 100], easeOut],
+        [102, [B, B, 100], easeOut],
+        [108, [B * 1.13, B * 1.13, 100], easeOut],
+        [114, [B, B, 100], easeInOut],
+        [150, [B, B, 100], easeOut],
+        [156, [B * 1.24, B * 1.24, 100], easeOut],
+        [162, [B, B, 100], easeOut],
+        [168, [B * 1.13, B * 1.13, 100], easeOut],
+        [174, [B, B, 100], easeInOut],
+        [210, [B, B, 100]],
+      ]),
+    },
+    shapes: ETH_FACETS.map(([path, col], fi) => ({
+      ty: 'gr',
+      nm: `facet-${fi}`,
+      it: [{ ty: 'sh', ks: { a: 0, k: path } }, { ty: 'fl', c: still(col), o: still(100), r: 1 }, tr()],
+    })),
+  };
+
   // --- v6: shockwave ring that ripples out on each heartbeat ------------------
   const ringSK = [];
   const ringOK = [];
@@ -353,7 +398,7 @@ const build = (theme, version) => {
   // the official mascots. v2: happy arcs (the sleeping chibi's lash line).
   // v3: teal gem diamonds. All blink from an eye-center anchor.
   const PLUM = [0.196, 0.157, 0.271, 1];
-  const eyeLayers = version === 'v5' || version === 'v6' ? [] : EYES.map(([ex, ey], i) => {
+  const eyeLayers = version === 'v5' || version === 'v6' || version === 'v6.1' ? [] : EYES.map(([ex, ey], i) => {
     let shapeItems;
     let scaleKs;
     let shapeKs = null;
@@ -539,7 +584,9 @@ const build = (theme, version) => {
         ? [glint, ethEye, ethRig, head, bg]
         : version === 'v6'
           ? [glint, ring, gem, head, bg]
-          : [glint, ...eyeLayers, gem, head, bg],
+          : version === 'v6.1'
+            ? [glint, ring, ethBeat, head, bg]
+            : [glint, ...eyeLayers, gem, head, bg],
     markers: [
       { tm: 0, cm: 'intro', dr: 90 },
       { tm: 90, cm: 'loop', dr: 120 },
@@ -548,9 +595,9 @@ const build = (theme, version) => {
 };
 
 for (const theme of ['dark', 'light']) {
-  for (const version of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6']) {
+  for (const version of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v6.1']) {
     const doc = build(theme, version);
-    const file = join(root, `public/moromoro-${theme}-${version}.json`);
+    const file = join(root, `public/moromoro-${theme}-${version.replace('.', '-')}.json`);
     writeFileSync(file, JSON.stringify(doc));
     console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
   }
