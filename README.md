@@ -19,7 +19,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | Anthropic | [/anthropic/](https://spinbase-animation.web.app/anthropic/) | A coral Claude spark spins where the "I" belongs, letters rise around it, then it collapses into the iconic backslash |
 | SSS Half Tennis | [/sss/](https://spinbase-animation.web.app/sss/) | The court frame pops in with the cat dozing, its eyes open, the ball drops to its paws — on loop the cat blinks lazily |
 | One Piece | [/onepiece/](https://spinbase-animation.web.app/onepiece/) | 3 variants: pirate-flag hang; wanted-poster slam; set sail — the lockup surfaces from an animated sea and bobs under a turning sunburst |
-| Geometry | [/geometry/](https://spinbase-animation.web.app/geometry/) | Eight isometric wireframe solids on graph paper — true 3D rotation projected per frame, each turning a symmetry angle per loop |
+| Geometry | [/geometry/](https://spinbase-animation.web.app/geometry/) | Nine isometric wireframe solids on graph paper (incl. the Ethereum octahedron) — true 3D rotation projected per frame, each turning a symmetry angle per loop |
 | korrio | [/korrio/](https://spinbase-animation.web.app/korrio/) | The neon-sign avatar buzzes alight tube by tube, then hums — glow breath, a stray flicker, and a blink |
 | จุดกางเต็นท์ (Campsite Thailand) | [/jkt/](https://spinbase-animation.web.app/jkt/) | 2 variants: horizontal and vertical lockups — the full-circle sun rises from behind the ridge, the Thai wordmark pops in glyph by glyph |
 | moromoro (moro.exchange) | [/moromoro/](https://spinbase-animation.web.app/moromoro/) | 6 variants: the fox mascot in dark/light themes with three blinking eye shapes — round, happy-arc morph, gem diamonds |

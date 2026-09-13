@@ -17,6 +17,7 @@ const PANELS = [
   { id: 's7', path: '/geometry-07-tesseract.json' },
   { id: 's7b', loop: [90, 330], path: '/geometry-07-tesseract-v2.json' },
   { id: 's8', path: '/geometry-08-tri-pyramid.json' },
+  { id: 's9', path: '/geometry-09-ethereum.json' },
 ];
 
 for (const { id, path, loop = [90, 210] } of PANELS) {

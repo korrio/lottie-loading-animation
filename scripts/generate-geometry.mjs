@@ -339,16 +339,37 @@ const SOLIDS_V2 = [
   [tesseractV2, '07-tesseract-v2', 27, 3.9],
 ];
 
+// 9. Ethereum — the ETH octahedron: two square-pyramid halves separated by
+// the signature gap, spinning 90° per loop (4-fold about y)
+const ethereum = () => {
+  const R = 0.92;
+  const top = [[0, -1.42, 0]];
+  const bot = [[0, 1.18, 0]];
+  for (let k = 0; k < 4; k++) {
+    const a = (Math.PI * (45 + 90 * k)) / 180;
+    top.push([R * Math.cos(a), 0.12, R * Math.sin(a)]);
+    bot.push([R * Math.cos(a), 0.38, R * Math.sin(a)]);
+  }
+  const v = [...top, ...bot];
+  const e = [];
+  for (let k = 0; k < 4; k++) {
+    e.push([0, 1 + k], [1 + k, 1 + ((k + 1) % 4)]);          // top: apex + ring
+    e.push([5, 6 + k], [6 + k, 6 + ((k + 1) % 4)]);          // bottom: apex + ring
+  }
+  return { v, e, move: spinMove(v, Math.PI / 2) };
+};
+
 // ------------------------------------------------------------- layout -------
 const SOLIDS = [
   [cubeCluster, 168, 142, 50, 0.0, 'cube-cluster'],
   [icosahedron, 400, 132, 62, 1.1, 'icosahedron'],
   [hexCube, 640, 140, 55, 2.2, 'hex-cube'],
-  [lattice, 288, 300, 48, 3.3, 'lattice'],
-  [plusCluster, 535, 300, 55, 4.4, 'plus-cubes'],
+  [lattice, 200, 300, 46, 3.3, 'lattice'],
+  [plusCluster, 600, 300, 52, 4.4, 'plus-cubes'],
   [octahedron, 165, 462, 55, 5.5, 'octahedron'],
   [tesseract, 400, 466, 54, 6.6, 'tesseract'],
   [triPyramid, 635, 460, 60, 7.7, 'tri-pyramid'],
+  [ethereum, 400, 300, 56, 8.8, 'ethereum'],
 ];
 
 // walk each connected component of the edge graph as one stroke, retracing
