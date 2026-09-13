@@ -235,6 +235,42 @@ const build = (theme, version) => {
     let shapeItems;
     let scaleKs;
     let shapeKs = null;
+    if (version === 'v4') {
+      // the actual painted eyes from the official chibi mascot (moscot-1)
+      const blink = anim([
+        [46, [0, 0, 100], easeOut],
+        [52, [108, 115, 100], easeInOut],
+        [58, [100, 100, 100], easeInOut],
+        [90, [100, 100, 100], easeInOut],
+        [146, [100, 100, 100], easeInOut],
+        [150, [100, 7, 100], easeInOut],
+        [157, [100, 100, 100], easeInOut],
+        [210, [100, 100, 100]],
+      ]);
+      return {
+        ddd: 0,
+        ind: 13 + i,
+        ty: 2,
+        nm: `eye-${i}`,
+        refId: i === 0 ? 'eyeL' : 'eyeR',
+        sr: 1,
+        ao: 0,
+        ip: 0,
+        op: OP,
+        st: 0,
+        bm: 0,
+        ks: {
+          o: anim([
+            [46, 0, linear],
+            [49, 100],
+          ]),
+          r: still(0),
+          p: still([ex, ey, 0]),
+          a: still([40, 31, 0]),
+          s: blink,
+        },
+      };
+    }
     if (version === 'v1') {
       // anime eye: tall round iris + two highlights (big up-left, small low-right)
       shapeItems = [
@@ -367,6 +403,12 @@ const build = (theme, version) => {
     assets: [
       { id: 'head', w: 750, h: 750, u: '', p: `data:image/png;base64,${asset(`head-${theme}.png`)}`, e: 1 },
       { id: 'gem', w: 750, h: 750, u: '', p: `data:image/png;base64,${asset(`gem-${theme}.png`)}`, e: 1 },
+      ...(version === 'v4'
+        ? [
+            { id: 'eyeL', w: 80, h: 62, u: '', p: `data:image/png;base64,${asset('eye-real-l.png')}`, e: 1 },
+            { id: 'eyeR', w: 80, h: 62, u: '', p: `data:image/png;base64,${asset('eye-real-r.png')}`, e: 1 },
+          ]
+        : []),
     ],
     layers: [glint, ...eyeLayers, gem, head, bg],
     markers: [
@@ -377,7 +419,7 @@ const build = (theme, version) => {
 };
 
 for (const theme of ['dark', 'light']) {
-  for (const version of ['v1', 'v2', 'v3']) {
+  for (const version of ['v1', 'v2', 'v3', 'v4']) {
     const doc = build(theme, version);
     const file = join(root, `public/moromoro-${theme}-${version}.json`);
     writeFileSync(file, JSON.stringify(doc));

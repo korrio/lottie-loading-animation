@@ -8,9 +8,11 @@ const PANELS = [
   { id: 'd1', path: '/moromoro-dark-v1.json' },
   { id: 'd2', path: '/moromoro-dark-v2.json' },
   { id: 'd3', path: '/moromoro-dark-v3.json' },
+  { id: 'd4', path: '/moromoro-dark-v4.json' },
   { id: 'l1', path: '/moromoro-light-v1.json' },
   { id: 'l2', path: '/moromoro-light-v2.json' },
   { id: 'l3', path: '/moromoro-light-v3.json' },
+  { id: 'l4', path: '/moromoro-light-v4.json' },
 ];
 
 for (const { id, path } of PANELS) {
