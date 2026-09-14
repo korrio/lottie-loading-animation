@@ -1,5 +1,7 @@
 /**
- * Generates the moromoro ecosystem orbit — public/moromoro-light-orbit.json.
+ * Generates the moromoro ecosystem orbits:
+ *   public/moromoro-light-orbit.json     v1 — alternating directions, 240f loop
+ *   public/moromoro-light-orbit-v2.json  v2 — all clockwise, Kepler speeds, 50% slower
  *
  * The moro.exchange "plain visualization" (2-image-hq.png) brought to life:
  * the light-theme fox with its beating gem (v6) sits in the hub where the
@@ -8,9 +10,12 @@
  * clockwise, DEX rings counter-turning alternately, every bubble
  * counter-rotating so it stays upright.
  *
- * Timeline deviates from the house 120-frame loop (an orbit needs to be
- * slow): intro [0..90], loop [90..330] — one full revolution per ring and
- * four gem heartbeats per loop, seamless at the seam.
+ * Timelines deviate from the house 120-frame loop (an orbit needs to be
+ * slow): v1 intro [0..90], loop [90..330] — one revolution per ring, four
+ * heartbeats per loop. v2 loop [90..2010] (32s): every ring drifts the same
+ * way at its own speed — networks 4 revs (8s/rev, half of v1's pace), then
+ * 3 / 2 / 1 revs moving outward, the heart beating every second throughout.
+ * Seamless because every ring completes whole revolutions per loop.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +25,11 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const asset = (name) => readFileSync(join(root, 'public/assets/moromoro', name)).toString('base64');
 
 const FR = 60;
-const OP = 340;
+let OP = 340;
+let LOOP_END = 330;
+let BEATS = [90, 150, 210, 270];
+let RING_REVS = { net: 1, dex: [1, 1, 1] };
+let RING_DIRS = { net: 1, dex: [-1, 1, -1] };
 
 const easeInOut = { o: { x: [0.42], y: [0] }, i: { x: [0.58], y: [1] } };
 const easeOut = { o: { x: [0.25], y: [0.6] }, i: { x: [0.45], y: [1] } };
@@ -85,7 +94,7 @@ const DEX_ANGLES = [
 
 // orbit rigs: networks turn clockwise, DEX rings alternate — all exactly
 // one revolution per 240-frame loop, children counter-rotate to stay upright
-const nullRig = (ind, dir) => ({
+const nullRig = (ind, revs, dir) => ({
   ddd: 0,
   ind,
   ty: 3,
@@ -100,20 +109,20 @@ const nullRig = (ind, dir) => ({
     o: still(0),
     r: anim([
       [90, 0, linear],
-      [330, 360 * dir],
+      [LOOP_END, 360 * revs * dir],
     ]),
     p: still([CX, CY, 0]),
     a: still([0, 0, 0]),
     s: still([100, 100, 100]),
   },
 });
-const counterR = (dir) => anim([
+const counterR = (revs, dir) => anim([
   [90, 0, linear],
-  [330, -360 * dir],
+  [LOOP_END, -360 * revs * dir],
 ]);
 
 // one orbiting bubble: image layer parented to its rig, popping in at t0
-const bubble = (ind, refId, parentInd, dir, ringR, theta, size, t0, scale = K) => ({
+const bubble = (ind, refId, parentInd, revs, dir, ringR, theta, size, t0, scale = K) => ({
   ddd: 0,
   ind,
   ty: 2,
@@ -131,7 +140,7 @@ const bubble = (ind, refId, parentInd, dir, ringR, theta, size, t0, scale = K) =
       [t0, 0, linear],
       [t0 + 3, 100],
     ]),
-    r: counterR(dir),
+    r: counterR(revs, dir),
     p: still([R1(ringR * Math.cos(rad(theta))), R1(ringR * Math.sin(rad(theta))), 0]),
     a: still([size / 2, size / 2, 0]),
     s: anim([
@@ -142,6 +151,7 @@ const bubble = (ind, refId, parentInd, dir, ringR, theta, size, t0, scale = K) =
   },
 });
 
+const buildDoc = (nm) => {
 // --- the hub: white circle + the light v6 fox with the beating gem ----------
 const HUB_R = 56;
 const FOX = 13; // head display scale %
@@ -219,7 +229,7 @@ const beatKeys = [
   [34, [G * 1.15, G * 1.15, 100], easeInOut],
   [42, [G, G, 100], easeInOut],
 ];
-for (const c of [90, 150, 210, 270]) {
+for (const c of BEATS) {
   beatKeys.push(
     [c, [G, G, 100], easeOut],
     [c + 6, [G * 1.24, G * 1.24, 100], easeOut],
@@ -228,7 +238,7 @@ for (const c of [90, 150, 210, 270]) {
     [c + 24, [G, G, 100], easeInOut]
   );
 }
-beatKeys.push([330, [G, G, 100]]);
+beatKeys.push([LOOP_END, [G, G, 100]]);
 
 const gem = {
   ddd: 0,
@@ -260,7 +270,7 @@ const gem = {
 // teal shockwave ring through the hub on every beat
 const ringSK = [];
 const ringOK = [];
-for (const c of [90, 150, 210, 270]) {
+for (const c of BEATS) {
   ringSK.push([c, [12, 12, 100], easeOut], [c + 22, [110, 110, 100], null, true], [c + 59, [12, 12, 100], null, true]);
   ringOK.push([c, 55, easeOut], [c + 22, 0, null, true], [c + 59, 0, null, true]);
 }
@@ -382,15 +392,16 @@ const dashRings = {
 
 // --- assemble ----------------------------------------------------------------
 const netLayers = NETWORKS.map(([slug, theta, size], i) =>
-  bubble(5 + i, `n-${slug}`, 40, 1, R_NET, theta, size, 44 + i * 4)
+  bubble(5 + i, `n-${slug}`, 40, RING_REVS.net, RING_DIRS.net, R_NET, theta, size, 44 + i * 4)
 );
 
 const dexLayers = [];
 let di = 0;
 DEX_ANGLES.forEach((angles, ringIdx) => {
-  const dir = ringIdx === 1 ? 1 : -1;
   for (const theta of angles) {
-    dexLayers.push(bubble(14 + di, 'dex', 41 + ringIdx, dir, R_DEX[ringIdx], theta, 198, 56 + di * 1.6));
+    dexLayers.push(
+      bubble(14 + di, 'dex', 41 + ringIdx, RING_REVS.dex[ringIdx], RING_DIRS.dex[ringIdx], R_DEX[ringIdx], theta, 198, 56 + di * 1.6)
+    );
     di += 1;
   }
 });
@@ -402,7 +413,7 @@ const doc = {
   op: OP,
   w: 800,
   h: 600,
-  nm: 'moromoro — the ecosystem orbit',
+  nm,
   ddd: 0,
   assets: [
     { id: 'head', w: 750, h: 750, u: '', p: `data:image/png;base64,${asset('head-light.png')}`, e: 1 },
@@ -426,17 +437,37 @@ const doc = {
     innerRing,
     ...dexLayers,
     dashRings,
-    nullRig(40, 1),
-    nullRig(41, -1),
-    nullRig(42, 1),
-    nullRig(43, -1),
+    nullRig(40, RING_REVS.net, RING_DIRS.net),
+    nullRig(41, RING_REVS.dex[0], RING_DIRS.dex[0]),
+    nullRig(42, RING_REVS.dex[1], RING_DIRS.dex[1]),
+    nullRig(43, RING_REVS.dex[2], RING_DIRS.dex[2]),
   ],
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
-    { tm: 90, cm: 'loop', dr: 240 },
+    { tm: 90, cm: 'loop', dr: LOOP_END - 90 },
   ],
 };
 
-const file = join(root, 'public/moromoro-light-orbit.json');
-writeFileSync(file, JSON.stringify(doc));
-console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
+return doc;
+};
+
+const emit = (name, nm) => {
+  const doc = buildDoc(nm);
+  const file = join(root, `public/${name}`);
+  writeFileSync(file, JSON.stringify(doc));
+  console.log(`wrote ${file} (${(JSON.stringify(doc).length / 1024).toFixed(0)} KB)`);
+};
+
+// v1 — alternating directions, one revolution each, 240-frame loop
+emit('moromoro-light-orbit.json', 'moromoro — the ecosystem orbit');
+
+// v2 — everything clockwise at Kepler speeds, 50% slower base pace:
+// networks 4 revs over the 1920-frame loop (8s/rev — half of v1's pace),
+// DEX rings 3 / 2 / 1 revs moving outward. Heart keeps beating every second.
+OP = 2020;
+LOOP_END = 2010;
+BEATS = [];
+for (let c = 90; c <= LOOP_END - 60; c += 60) BEATS.push(c);
+RING_REVS = { net: 4, dex: [3, 2, 1] };
+RING_DIRS = { net: 1, dex: [1, 1, 1] };
+emit('moromoro-light-orbit-v2.json', 'moromoro — the ecosystem orbit v2 (Kepler drift)');

@@ -24,6 +24,7 @@ const PANELS = [
   { id: 'l61', path: '/moromoro-light-v6-1.json' },
   { id: 'l7', path: '/moromoro-light-v7.json' },
   { id: 'lorbit', path: '/moromoro-light-orbit.json', loop: [90, 330] },
+  { id: 'lorbit2', path: '/moromoro-light-orbit-v2.json', loop: [90, 2010] },
 ];
 
 for (const { id, path, loop = LOOP } of PANELS) {
