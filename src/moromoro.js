@@ -23,9 +23,10 @@ const PANELS = [
   { id: 'l6', path: '/moromoro-light-v6.json' },
   { id: 'l61', path: '/moromoro-light-v6-1.json' },
   { id: 'l7', path: '/moromoro-light-v7.json' },
+  { id: 'lorbit', path: '/moromoro-light-orbit.json', loop: [90, 330] },
 ];
 
-for (const { id, path } of PANELS) {
+for (const { id, path, loop = LOOP } of PANELS) {
   const chip = document.querySelector(`#chip-${id}`);
 
   const anim = lottie.loadAnimation({
@@ -46,7 +47,7 @@ for (const { id, path } of PANELS) {
   anim.addEventListener('complete', () => {
     chip.textContent = 'loop';
     anim.loop = true;
-    anim.playSegments(LOOP, true);
+    anim.playSegments(loop, true);
   });
 
   document.querySelector(`#replay-${id}`).addEventListener('click', playIntro);
