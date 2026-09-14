@@ -22,6 +22,7 @@ export default defineConfig({
         korrio: resolve(import.meta.dirname, 'korrio/index.html'),
         jkt: resolve(import.meta.dirname, 'jkt/index.html'),
         moromoro: resolve(import.meta.dirname, 'moromoro/index.html'),
+        sunnyday: resolve(import.meta.dirname, 'sunnyday/index.html'),
       },
     },
   },

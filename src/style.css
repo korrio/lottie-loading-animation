@@ -816,3 +816,45 @@ body.theme-moromoro {
 .theme-geometry .stage { background: #fbfaf7; }
 .theme-korrio .stage { background: #1b1a2a; }
 .theme-jkt .stage { background: #ffffff; }
+
+/* warm split-sun theme for the SunnyDay page */
+body.theme-sunnyday {
+  background: radial-gradient(1200px 800px at 50% 30%, #fdfaf2 0%, #f4efe2 55%, #e9e1cd 100%);
+  color: #1c4a58;
+}
+
+.theme-sunnyday header p,
+.theme-sunnyday .meta p,
+.theme-sunnyday .chip {
+  color: #7a7461;
+}
+
+.theme-sunnyday .panel {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(28, 74, 88, 0.22);
+}
+
+.theme-sunnyday .stage {
+  background: #f6f3ea;
+}
+
+.theme-sunnyday .meta {
+  border-top-color: rgba(28, 74, 88, 0.14);
+}
+
+.theme-sunnyday .chip {
+  background: rgba(240, 96, 0, 0.06);
+  border-color: rgba(240, 96, 0, 0.3);
+}
+
+.theme-sunnyday .actions button,
+.theme-sunnyday .actions a {
+  color: #b34700;
+  background: rgba(240, 96, 0, 0.07);
+  border-color: rgba(240, 96, 0, 0.35);
+}
+
+.theme-sunnyday .actions button:hover,
+.theme-sunnyday .actions a:hover {
+  background: rgba(240, 96, 0, 0.16);
+}

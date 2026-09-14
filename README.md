@@ -22,6 +22,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | Geometry | [/geometry/](https://spinbase-animation.web.app/geometry/) | Nine isometric wireframe solids on graph paper (incl. the Ethereum octahedron) — true 3D rotation projected per frame, each turning a symmetry angle per loop |
 | korrio | [/korrio/](https://spinbase-animation.web.app/korrio/) | The neon-sign avatar buzzes alight tube by tube, then hums — glow breath, a stray flicker, and a blink |
 | จุดกางเต็นท์ (Campsite Thailand) | [/jkt/](https://spinbase-animation.web.app/jkt/) | 2 variants: horizontal and vertical lockups — the full-circle sun rises from behind the ridge, the Thai wordmark pops in glyph by glyph |
+| SunnyDay 365 | [/sunnyday/](https://spinbase-animation.web.app/sunnyday/) | 3 variants: the split day/night ring disk blooms outward; revolves like a year passing; and types the company tagline behind a blinking cursor |
 | moromoro (moro.exchange) | [/moromoro/](https://spinbase-animation.web.app/moromoro/) | 20 variants: the fox mascot in dark/light themes with nine eye styles — round, happy-arc morph, gem diamonds, a three-gem juggle, the real chibi eyes, ETH coin-spin and heartbeat third eyes, a token-pair swap — plus two ecosystem orbits: networks and DEXes circling the beating-gem fox (alternating rings, and a Kepler drift where every ring shares a direction at its own speed) |
 
 ## Quick start
@@ -61,6 +62,7 @@ node scripts/generate-geometry.mjs      # Geometry   → public/geometry-loading
 node scripts/generate-korrio.mjs        # korrio     → public/korrio-loading.json
 node scripts/generate-jkt.mjs           # จุดกางเต็นท์ v1 → public/jkt-loading.json
 node scripts/generate-jkt-v2.mjs        # จุดกางเต็นท์ v2 → public/jkt-loading-v2.json
+node scripts/generate-sunnyday.mjs      # SunnyDay   → public/sunnyday-loading{,-v2,-v3}.json
 node scripts/generate-moromoro.mjs      # moromoro   → public/moromoro-{dark,light}-{v1..v7}.json
 ```
 
