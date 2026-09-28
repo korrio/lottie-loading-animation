@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/assets/baseline/baseline-ball.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>BASELINE · Loading Animations</title>
+  </head>
+  <body class="theme-baseline">
+    <div id="app">
+      <header>
+        <h1>BASELINE — Loading Animations</h1>
+        <p>auto tennis · two Lottie variants · intro plays once, then loops seamlessly · <a class="headlink" href="/">← All animations</a></p>
+      </header>
+      <main id="gallery">
+        <section class="panel">
+          <div class="stage" id="stage-v1" style="background:#ffffff" aria-label="BASELINE loading animation v1"></div>
+          <div class="meta">
+            <h2>v1 — the passing shot</h2>
+            <p>The navy letters stamp in, then the ball rockets in from off-canvas painting its gradient trail behind it and lands above the "i" with a squash. On loop the ball keeps rolling in place while the trail shimmers.</p>
+            <div class="actions">
+              <span class="chip" id="chip-v1">intro</span>
+              <button type="button" id="replay-v1">Replay</button>
+              <a href="/baseline-loading.json" download="baseline-loading.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-v2" style="background:#ffffff" aria-label="BASELINE loading animation v2"></div>
+          <div class="meta">
+            <h2>v2 — bounce &amp; roll</h2>
+            <p>After the client’s GIF prototype: the ball drops onto the B and bounces along the letter tops with decaying arcs, then rolls right extruding its trail until the lockup completes. On loop it does two lazy idle hops.</p>
+            <div class="actions">
+              <span class="chip" id="chip-v2">intro</span>
+              <button type="button" id="replay-v2">Replay</button>
+              <a href="/baseline-loading-v2.json" download="baseline-loading-v2.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/baseline.js"></script>
+  </body>
+</html>

@@ -858,3 +858,45 @@ body.theme-sunnyday {
 .theme-sunnyday .actions a:hover {
   background: rgba(240, 96, 0, 0.16);
 }
+
+/* court white + navy/green theme for the BASELINE page */
+body.theme-baseline {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f4f6fb 55%, #e7ebf5 100%);
+  color: #2b3990;
+}
+
+.theme-baseline header p,
+.theme-baseline .meta p,
+.theme-baseline .chip {
+  color: #6d76a8;
+}
+
+.theme-baseline .panel {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(43, 57, 144, 0.22);
+}
+
+.theme-baseline .stage {
+  background: #ffffff;
+}
+
+.theme-baseline .meta {
+  border-top-color: rgba(43, 57, 144, 0.14);
+}
+
+.theme-baseline .chip {
+  background: rgba(141, 198, 63, 0.1);
+  border-color: rgba(141, 198, 63, 0.45);
+}
+
+.theme-baseline .actions button,
+.theme-baseline .actions a {
+  color: #2b3990;
+  background: rgba(43, 57, 144, 0.06);
+  border-color: rgba(43, 57, 144, 0.32);
+}
+
+.theme-baseline .actions button:hover,
+.theme-baseline .actions a:hover {
+  background: rgba(141, 198, 63, 0.22);
+}

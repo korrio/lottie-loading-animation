@@ -23,6 +23,7 @@ export default defineConfig({
         jkt: resolve(import.meta.dirname, 'jkt/index.html'),
         moromoro: resolve(import.meta.dirname, 'moromoro/index.html'),
         sunnyday: resolve(import.meta.dirname, 'sunnyday/index.html'),
+        baseline: resolve(import.meta.dirname, 'baseline/index.html'),
       },
     },
   },
