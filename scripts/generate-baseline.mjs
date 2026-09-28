@@ -5,6 +5,9 @@
  *                                    BASELINE_F.gif prototype: the ball
  *                                    bounces along the letter tops, then
  *                                    rolls right extruding its trail)
+ *   public/baseline-loading-v3.json  v3 — v1 with solid-white letters
+ *   public/baseline-loading-v4.json  v4 — v2 with solid-white letters
+ *                                    (for dark surfaces; still transparent)
  *
  * "The passing shot": the eight navy letters stamp in left to right, then
  * the green tennis ball rockets in from off-canvas painting its gradient
@@ -352,9 +355,21 @@ const doc2 = {
   layers: [ball2, trail2, ...letters2],
 };
 
+// v3/v4 — the same two animations with solid-white letters for dark surfaces
+const whiteAssets = (d) => ({
+  ...d,
+  assets: d.assets.map((a) =>
+    a.id.startsWith('l-') ? { ...a, p: `data:image/png;base64,${asset(`baseline-${a.id.slice(2)}-w.png`)}` } : a
+  ),
+});
+const doc3 = { ...whiteAssets(doc), nm: 'BASELINE — the passing shot (white)' };
+const doc4 = { ...whiteAssets(doc2), nm: 'BASELINE — bounce & roll (white)' };
+
 for (const [name, d] of [
   ['baseline-loading.json', doc],
   ['baseline-loading-v2.json', doc2],
+  ['baseline-loading-v3.json', doc3],
+  ['baseline-loading-v4.json', doc4],
 ]) {
   const file = join(root, `public/${name}`);
   writeFileSync(file, JSON.stringify(d));
