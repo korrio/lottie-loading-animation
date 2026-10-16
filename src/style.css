@@ -900,3 +900,120 @@ body.theme-baseline {
 .theme-baseline .actions a:hover {
   background: rgba(141, 198, 63, 0.22);
 }
+
+/* title-card teal theme for the ไกลบ้าน page */
+body.theme-farose {
+  background: radial-gradient(1200px 800px at 50% 30%, #12306f 0%, #0d2457 55%, #081838 100%);
+  color: #f2f7ff;
+}
+
+.theme-farose header p,
+.theme-farose .meta p,
+.theme-farose .chip {
+  color: #a9bde6;
+}
+
+.theme-farose .panel {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(94, 214, 226, 0.25);
+}
+
+.theme-farose .stage-teal {
+  background: radial-gradient(420px 320px at 50% 45%, #5fd0d6 0%, #3fb4c4 55%, #2a8aa6 100%);
+}
+
+.theme-farose .stage-paper {
+  background: radial-gradient(420px 320px at 50% 45%, #ffffff 0%, #f1f5fb 70%, #e3eaf5 100%);
+}
+
+.theme-farose .meta {
+  border-top-color: rgba(94, 214, 226, 0.18);
+}
+
+.theme-farose .chip {
+  background: rgba(94, 214, 226, 0.08);
+  border-color: rgba(94, 214, 226, 0.3);
+}
+
+.theme-farose .actions button,
+.theme-farose .actions a {
+  color: #7fe3ec;
+  background: rgba(94, 214, 226, 0.08);
+  border-color: rgba(94, 214, 226, 0.35);
+}
+
+.theme-farose .actions button:hover,
+.theme-farose .actions a:hover {
+  background: rgba(94, 214, 226, 0.18);
+}
+
+/* transparent, trimmed ไกลบ้าน files: a checkerboard shows the transparency and
+   a dashed box marks the file's own (trimmed) edge */
+.theme-farose .stage-checker {
+  display: grid;
+  place-items: center;
+  --sq: 14px;
+  background: repeating-conic-gradient(var(--c1) 0% 25%, var(--c2) 0% 50%) 0 0 / calc(var(--sq) * 2) calc(var(--sq) * 2);
+}
+
+.theme-farose .stage-checker.dark {
+  --c1: #1b2a4a;
+  --c2: #24365c;
+}
+
+.theme-farose .stage-checker.light {
+  --c1: #ffffff;
+  --c2: #e6ebf3;
+}
+
+.theme-farose .trim-box {
+  height: 84%;
+  aspect-ratio: 418 / 492;
+  outline: 1px dashed rgba(127, 227, 236, 0.7);
+}
+
+.theme-farose .stage-checker.light .trim-box {
+  outline-color: rgba(18, 58, 140, 0.45);
+}
+
+/* trustworthy blue + warm gold theme for the LegalConnect page */
+body.theme-legalconnect {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f3f7fc 55%, #e6eef7 100%);
+  color: #1d4e7e;
+}
+
+.theme-legalconnect header p,
+.theme-legalconnect .meta p,
+.theme-legalconnect .chip {
+  color: #6b7f94;
+}
+
+.theme-legalconnect .panel {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(53, 132, 203, 0.26);
+}
+
+.theme-legalconnect .stage {
+  background: #ffffff;
+}
+
+.theme-legalconnect .meta {
+  border-top-color: rgba(53, 132, 203, 0.15);
+}
+
+.theme-legalconnect .chip {
+  background: rgba(250, 189, 61, 0.1);
+  border-color: rgba(245, 132, 31, 0.4);
+}
+
+.theme-legalconnect .actions button,
+.theme-legalconnect .actions a {
+  color: #2a6cab;
+  background: rgba(53, 132, 203, 0.07);
+  border-color: rgba(53, 132, 203, 0.35);
+}
+
+.theme-legalconnect .actions button:hover,
+.theme-legalconnect .actions a:hover {
+  background: rgba(250, 189, 61, 0.2);
+}

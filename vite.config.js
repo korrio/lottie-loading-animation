@@ -24,6 +24,8 @@ export default defineConfig({
         moromoro: resolve(import.meta.dirname, 'moromoro/index.html'),
         sunnyday: resolve(import.meta.dirname, 'sunnyday/index.html'),
         baseline: resolve(import.meta.dirname, 'baseline/index.html'),
+        legalconnect: resolve(import.meta.dirname, 'legalconnect/index.html'),
+        farose: resolve(import.meta.dirname, 'farose/index.html'),
       },
     },
   },
