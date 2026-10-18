@@ -6,6 +6,7 @@ const LOOP = [90, 210];
 
 const PANELS = [
   { id: 'v1', path: '/fuze-loading.json' },
+  { id: 'v11', path: '/fuze-loading-v1-white.json' },
   { id: 'v21', path: '/fuze-loading-v2-1.json' },
   { id: 'v22', path: '/fuze-loading-v2-2.json' },
 ];

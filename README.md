@@ -8,7 +8,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | --- | --- | --- |
 | SPIN BASE | [/](https://spinbase-animation.web.app/) | 3 variants: flat spin, globe spin, 3D Earth-style ball rotation |
 | COURTHAUS | [/courthaus/](https://spinbase-animation.web.app/courthaus/) | 2 variants: letters pop and the ball drops into the "O"; new lockup where the ball-O screws in and keeps turning |
-| FUZE TRAINING | [/fuze/](https://spinbase-animation.web.app/fuze/) | 3 variants: mark halves slam together with a beat pulse; v2 vector draw-on (traced to SVG) where the X draws itself and a spark races its silhouette — in white and black editions |
+| FUZE TRAINING | [/fuze/](https://spinbase-animation.web.app/fuze/) | 4 variants: mark halves slam together with a beat pulse (black and white editions); v2 vector draw-on (traced to SVG) where the X draws itself and a spark races its silhouette — in white and black editions |
 | สร้างสรรค์ปัญญา (Creative Intelligent) | [/sspy/](https://spinbase-animation.web.app/sspy/) | Pen nib rises, idea bulb pops and glows, Thai + English text reveal |
 | BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 3 variants: counter-rotating balls, roll-in-and-rest, balancing act — the solid ball lands on the outline ball and teeters |
 | Bitkub Capital | [/bitkub/](https://spinbase-animation.web.app/bitkub/) | Diamond-mark hooks fly in from opposite corners and interlock, coin dots pop in |

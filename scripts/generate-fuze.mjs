@@ -223,3 +223,19 @@ const lottie = {
 const out = join(root, 'public/fuze-loading.json');
 writeFileSync(out, JSON.stringify(lottie));
 console.log(`wrote ${out} (${(JSON.stringify(lottie).length / 1024).toFixed(0)} KB)`);
+
+// --- v1.1: the same slam with the art in solid white, for dark surfaces ----
+const white = JSON.parse(JSON.stringify(lottie));
+white.nm = 'FUZE TRAINING — loading (white)';
+for (const a of white.assets) a.p = `data:image/png;base64,${asset(`${a.id}-w.png`)}`;
+const whiten = (node) => {
+  if (Array.isArray(node)) return node.forEach(whiten);
+  if (node && typeof node === 'object') {
+    if (node.ty === 'fl' && node.c) node.c = { a: 0, k: [1, 1, 1, 1] };
+    for (const k of Object.keys(node)) whiten(node[k]);
+  }
+};
+whiten(white.layers);
+const outW = join(root, 'public/fuze-loading-v1-white.json');
+writeFileSync(outW, JSON.stringify(white));
+console.log(`wrote ${outW} (${(JSON.stringify(white).length / 1024).toFixed(0)} KB)`);
