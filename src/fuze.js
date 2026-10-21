@@ -11,6 +11,8 @@ const PANELS = [
   { id: 'v22', path: '/fuze-loading-v2-2.json' },
   { id: 'v31', path: '/fuze-loading-v3-1.json' },
   { id: 'v32', path: '/fuze-loading-v3-2.json' },
+  { id: 'v33', path: '/fuze-loading-v3-3.json' },
+  { id: 'v34', path: '/fuze-loading-v3-4.json' },
 ];
 
 for (const { id, path } of PANELS) {

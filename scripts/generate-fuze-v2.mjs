@@ -7,6 +7,10 @@
  *                           in from the left, TRAINING from the right, and
  *                           the divider stamps down where they meet
  *   fuze-loading-v3-2.json  v3.2 — the convergence, black
+ *   fuze-loading-v3-3.json  v3.3 — the collision, white: both sides charge
+ *                           and SLAM at the divider — impact squash, screen
+ *                           shake, shockwaves and sparks flying
+ *   fuze-loading-v3-4.json  v3.4 — the collision, black
  *
  * The official fuze-logo-white.png was vectorized with potrace (per-component,
  * bezier paths in scripts/fuze-vec.json; also emitted as public/fuze-logo-white.svg).
@@ -30,6 +34,7 @@ const OP = 240;
 const easeInOut = { o: { x: [0.42], y: [0] }, i: { x: [0.58], y: [1] } };
 const easeOut = { o: { x: [0.25], y: [0.6] }, i: { x: [0.45], y: [1] } };
 const linear = { o: { x: [0.167], y: [0.167] }, i: { x: [0.833], y: [0.833] } };
+const easeIn = { o: { x: [0.55], y: [0] }, i: { x: [0.95], y: [0.85] } };
 
 const kf = (frames) =>
   frames.map(([t, s, ease, hold], idx) => {
@@ -389,6 +394,192 @@ const build3 = (edition, color) => {
   };
 };
 
+// ============================================================================
+// v3.3/3.4 — the collision: full-power slam at the divider
+// ============================================================================
+const build4 = (edition, color) => {
+  const DX = R1(OX + 555 * K); // collision point: the divider
+  const DY = 300;
+  const IMPACT = 26;
+
+  // screen-shake rig: everything hangs off this, decaying jolts after impact
+  const shakeKeys = [[IMPACT, [0, 0, 0], linear]];
+  const JOLTS = [[9, -4], [-8, 3], [6, -3], [-5, 2], [4, -2], [-3, 1], [2, -1], [-1, 0], [0, 0]];
+  JOLTS.forEach(([jx, jy], i) => shakeKeys.push([IMPACT + 1 + i * 1.5, [jx, jy, 0], linear]));
+  shakeKeys.push([210, [0, 0, 0]]);
+  const shake = {
+    ddd: 0, ind: 50, ty: 3, nm: 'shake', sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0,
+    ks: { o: still(0), r: still(0), p: anim(shakeKeys), a: still([0, 0, 0]), s: still([100, 100, 100]) },
+  };
+
+  // charge rigs, anchored at the collision interface so the squash drives INTO it
+  const chargeRig = (ind, fromLeft) => ({
+    ddd: 0, ind, ty: 3, nm: fromLeft ? 'rig-left' : 'rig-right', sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0,
+    parent: 50,
+    ks: {
+      o: still(0),
+      r: still(0),
+      p: anim([
+        [8, [fromLeft ? DX - 490 : DX + 490, DY, 0], easeIn],
+        [IMPACT, [DX, DY, 0]],
+      ]),
+      a: still([0, 0, 0]),
+      s: anim([
+        [8, [111, 95, 100], linear],
+        [IMPACT - 1, [111, 95, 100], easeOut],
+        [IMPACT + 2, [84, 108, 100], easeOut],
+        [IMPACT + 7, [106, 97, 100], easeInOut],
+        [IMPACT + 13, [100, 100, 100]],
+      ]),
+    },
+  });
+
+  const child = (ind, comp, nm, parent, scaleKs) => {
+    const [x0, y0, x1, y1] = comp.bbox;
+    const w = x1 - x0;
+    const h = y1 - y0;
+    return {
+      ddd: 0, ind, ty: 4, nm, sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0, parent,
+      ks: {
+        o: still(100),
+        r: still(0),
+        p: parent === 50
+          ? still([R1(OX + (x0 + w / 2) * K), R1(OY + (y0 + h / 2) * K), 0])
+          : still([R1(OX + (x0 + w / 2) * K - DX), R1(OY + (y0 + h / 2) * K - DY), 0]),
+        a: still([w / 2, h / 2, 0]),
+        s: scaleKs ?? still([K * 100, K * 100, 100]),
+      },
+      shapes: [
+        { ty: 'gr', nm: 'fill', it: [...comp.paths.map(sh), { ty: 'fl', c: still(color), o: still(100), r: 2 }, tr()] },
+      ],
+    };
+  };
+
+  // the X beats hard on loop
+  const xBeat = anim([
+    [90, [K * 100, K * 100, 100], easeOut],
+    [96, [K * 104, K * 104, 100], easeOut],
+    [104, [K * 100, K * 100, 100], easeInOut],
+    [152, [K * 100, K * 100, 100], easeOut],
+    [158, [K * 104, K * 104, 100], easeOut],
+    [166, [K * 100, K * 100, 100], easeInOut],
+    [210, [K * 100, K * 100, 100]],
+  ]);
+  const left = [XM, F, U, Z, E].map((comp, i) => child(10 + i, comp, `left-${i}`, 51, i === 0 ? xBeat : null));
+  const right = TRAIN.map((comp, i) => child(16 + i, comp, `right-${i}`, 52, null));
+
+  // divider slams in at impact, overshooting tall
+  const [dvx0, dvy0, dvx1] = DIV.bbox;
+  const divider = {
+    ddd: 0, ind: 15, ty: 4, nm: 'divider', sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0, parent: 50,
+    ks: {
+      o: anim([[IMPACT - 1, 0, linear], [IMPACT, 100]]),
+      r: still(0),
+      p: still([R1(OX + (dvx0 + (dvx1 - dvx0) / 2) * K), R1(OY + dvy0 * K), 0]),
+      a: still([(dvx1 - dvx0) / 2, 0, 0]),
+      s: anim([
+        [IMPACT, [K * 100, 0, 100], easeOut],
+        [IMPACT + 4, [K * 118, K * 142, 100], easeInOut],
+        [IMPACT + 11, [K * 100, K * 100, 100]],
+      ]),
+    },
+    shapes: [
+      { ty: 'gr', nm: 'fill', it: [...DIV.paths.map(sh), { ty: 'fl', c: still(color), o: still(100), r: 2 }, tr()] },
+    ],
+  };
+
+  // shockwave rings bursting from the collision point (intro) and on loop beats at the X
+  const ring = (ind, px, py, cycles, r0, r1, w) => {
+    const sk = [];
+    const ok = [];
+    for (const [c, dur] of cycles) {
+      sk.push([c, [r0, r0, 100], easeOut], [c + dur, [r1, r1, 100], null, true]);
+      ok.push([c - 0.5, 0, null, true], [c, 65, easeOut], [c + dur, 0, null, true]);
+    }
+    ok.push([210, 0]);
+    sk.push([210, [r0, r0, 100]]);
+    return {
+      ddd: 0, ind, ty: 4, nm: `ring-${ind}`, sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0, parent: 50,
+      ks: { o: anim(ok), r: still(0), p: still([px, py, 0]), a: still([0, 0, 0]), s: anim(sk) },
+      shapes: [
+        { ty: 'gr', nm: 'g', it: [
+          { ty: 'el', d: 1, s: still([100, 100]), p: still([0, 0]) },
+          { ty: 'st', c: still(color), o: still(100), w: still(w), lc: 2, lj: 2 },
+          tr(),
+        ] },
+      ],
+    };
+  };
+  const XMC = [R1(OX + 101.5 * K), R1(OY + 58.5 * K)];
+  const rings = [
+    ring(3, DX, DY, [[IMPACT, 16]], 8, 150, 4),
+    ring(4, DX, DY, [[IMPACT + 5, 18]], 8, 210, 2.5),
+    ring(5, XMC[0], XMC[1], [[96, 20], [158, 20]], 22, 120, 3),
+  ];
+
+  // sparks flying out of the impact
+  const sparks = [60, 120, 240, 300, 80, 260].map((deg, i) => {
+    const a = (deg * Math.PI) / 180;
+    const ex = R1(DX + 130 * Math.cos(a));
+    const ey = R1(DY + 110 * Math.sin(a));
+    return {
+      ddd: 0, ind: 30 + i, ty: 4, nm: `spark-p${i}`, sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0, parent: 50,
+      ks: {
+        o: anim([[IMPACT, 0, null, true], [IMPACT + 1, 90, easeOut], [IMPACT + 14, 0, null, true], [210, 0]]),
+        r: still(R1(deg + 90)),
+        p: anim([[IMPACT, [DX, DY, 0], easeOut], [IMPACT + 14, [ex, ey, 0]]]),
+        a: still([0, 0, 0]),
+        s: anim([[IMPACT, [100, 100, 100], easeOut], [IMPACT + 14, [30, 30, 100]]]),
+      },
+      shapes: [
+        { ty: 'gr', nm: 'g', it: [
+          { ty: 'rc', d: 1, s: still([4, 16]), p: still([0, 0]), r: still(2) },
+          { ty: 'fl', c: still(color), o: still(100), r: 1 },
+          tr(),
+        ] },
+      ],
+    };
+  });
+
+  // the racing spark on the X silhouette, as in v2/v3
+  const [sx0, sy0, sx1, sy1] = XM.bbox;
+  const spark = {
+    ddd: 0, ind: 2, ty: 4, nm: 'spark', sr: 1, ao: 0, ip: 0, op: OP, st: 0, bm: 0, parent: 51,
+    ks: {
+      o: anim([[89, 0, linear], [90, 75]]),
+      r: still(0),
+      p: still([R1(OX + (sx0 + (sx1 - sx0) / 2) * K - DX), R1(OY + (sy0 + (sy1 - sy0) / 2) * K - DY), 0]),
+      a: still([(sx1 - sx0) / 2, (sy1 - sy0) / 2, 0]),
+      s: still([K * 100, K * 100, 100]),
+    },
+    shapes: [
+      { ty: 'gr', nm: 'spark-g', it: [
+        ...XM.paths.map(sh),
+        { ty: 'tm', s: still(0), e: still(7), o: anim([[90, 0, linear], [210, 360]]), m: 1 },
+        { ty: 'st', c: still(color), o: still(100), w: still(4.5), lc: 2, lj: 2 },
+        tr(),
+      ] },
+    ],
+  };
+
+  return {
+    v: '5.9.6',
+    fr: FR,
+    ip: 0,
+    op: OP,
+    w: 800,
+    h: 600,
+    nm: `FUZE — the collision (${edition})`,
+    ddd: 0,
+    assets: [],
+    layers: [spark, ...rings, ...sparks, ...left, divider, ...right, chargeRig(51, true), chargeRig(52, false), shake],
+    markers: [
+      { tm: 0, cm: 'intro', dr: 90 },
+      { tm: 90, cm: 'loop', dr: 120 },
+    ],
+  };
+};
+
 const WHITE = [1, 1, 1, 1];
 const BLACK = [0.07, 0.07, 0.09, 1];
 for (const [name, d] of [
@@ -396,6 +587,8 @@ for (const [name, d] of [
   ['fuze-loading-v2-2.json', build('black', BLACK)],
   ['fuze-loading-v3-1.json', build3('white', WHITE)],
   ['fuze-loading-v3-2.json', build3('black', BLACK)],
+  ['fuze-loading-v3-3.json', build4('white', WHITE)],
+  ['fuze-loading-v3-4.json', build4('black', BLACK)],
 ]) {
   const file = join(root, `public/${name}`);
   writeFileSync(file, JSON.stringify(d));
