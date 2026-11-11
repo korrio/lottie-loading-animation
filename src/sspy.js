@@ -7,6 +7,7 @@ const LOOP = [90, 210];
 const PANELS = [
   { id: 'v1', path: '/sspy-loading.json' },
   { id: 'v2', path: '/sspy-loading-v2.json' },
+  { id: 'v3', path: '/sspy-loading-v3.json' },
 ];
 
 for (const { id, path } of PANELS) {

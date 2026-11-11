@@ -342,3 +342,15 @@ const lottieV2 = {
 const outV2 = join(root, 'public/sspy-loading-v2.json');
 writeFileSync(outV2, JSON.stringify(lottieV2));
 console.log(`wrote ${outV2} (${(JSON.stringify(lottieV2).length / 1024).toFixed(0)} KB)`);
+
+// --- v3: the logo icon only — no text, no dots ------------------------------
+const DROP_V3 = new Set(['loading-dots', 'thai', 'eng']);
+const lottieV3 = {
+  ...lottie,
+  nm: 'สร้างสรรค์ปัญญา — loading v3 (icon only)',
+  assets: assets.filter((a) => a.id !== 'thai' && a.id !== 'eng'),
+  layers: lottie.layers.filter((l) => !DROP_V3.has(l.nm)),
+};
+const outV3 = join(root, 'public/sspy-loading-v3.json');
+writeFileSync(outV3, JSON.stringify(lottieV3));
+console.log(`wrote ${outV3} (${(JSON.stringify(lottieV3).length / 1024).toFixed(0)} KB)`);
