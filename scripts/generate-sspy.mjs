@@ -332,3 +332,13 @@ const lottie = {
 const out = join(root, 'public/sspy-loading.json');
 writeFileSync(out, JSON.stringify(lottie));
 console.log(`wrote ${out} (${(JSON.stringify(lottie).length / 1024).toFixed(0)} KB)`);
+
+// --- v2: the same animation without the loading dots -----------------------
+const lottieV2 = {
+  ...lottie,
+  nm: 'สร้างสรรค์ปัญญา — loading v2 (no dots)',
+  layers: lottie.layers.filter((l) => l.nm !== 'loading-dots'),
+};
+const outV2 = join(root, 'public/sspy-loading-v2.json');
+writeFileSync(outV2, JSON.stringify(lottieV2));
+console.log(`wrote ${outV2} (${(JSON.stringify(lottieV2).length / 1024).toFixed(0)} KB)`);

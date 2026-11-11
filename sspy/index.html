@@ -4,23 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/assets/sspy/bulb.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>สร้างสรรค์ปัญญา · Loading Animation</title>
+    <title>สร้างสรรค์ปัญญา · Loading Animations</title>
   </head>
   <body class="theme-paper">
-    <div id="app" class="single">
+    <div id="app">
       <header>
-        <h1>สร้างสรรค์ปัญญา — Loading Animation</h1>
-        <p>Creative Intelligent · the pen rises, the idea lights up · intro plays once, then loops seamlessly</p>
+        <h1>สร้างสรรค์ปัญญา — Loading Animations</h1>
+        <p>Creative Intelligent · the pen rises, the idea lights up · intro plays once, then loops seamlessly · <a class="headlink" href="/">← All animations</a></p>
       </header>
-      <main>
+      <main id="gallery">
         <section class="panel">
-          <div class="stage" id="stage" aria-label="สร้างสรรค์ปัญญา loading animation"></div>
+          <div class="stage" id="stage-v1" aria-label="สร้างสรรค์ปัญญา loading animation"></div>
           <div class="meta">
+            <h2>v1 — with loading dots</h2>
+            <p>The pen nib rises, the idea-bulb pops out, the name appears — with the tri-color loading dots pulsing below the logo.</p>
             <div class="actions">
-              <span class="chip" id="chip">intro</span>
-              <button type="button" id="replay">Replay</button>
+              <span class="chip" id="chip-v1">intro</span>
+              <button type="button" id="replay-v1">Replay</button>
               <a href="/sspy-loading.json" download="sspy-loading.json">Download .json</a>
-              <a class="crosslink" href="/">← All animations</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-v2" aria-label="สร้างสรรค์ปัญญา loading animation v2 without dots"></div>
+          <div class="meta">
+            <h2>v2 — logo only, no dots</h2>
+            <p>The same story without the loading-progress dots below the logo: just the pen, the glowing bulb and the wordmark breathing on loop.</p>
+            <div class="actions">
+              <span class="chip" id="chip-v2">intro</span>
+              <button type="button" id="replay-v2">Replay</button>
+              <a href="/sspy-loading-v2.json" download="sspy-loading-v2.json">Download .json</a>
             </div>
           </div>
         </section>
