@@ -25,6 +25,7 @@ export default defineConfig({
         sunnyday: resolve(import.meta.dirname, 'sunnyday/index.html'),
         baseline: resolve(import.meta.dirname, 'baseline/index.html'),
         legalconnect: resolve(import.meta.dirname, 'legalconnect/index.html'),
+        commonspin: resolve(import.meta.dirname, 'commonspin/index.html'),
         farose: resolve(import.meta.dirname, 'farose/index.html'),
       },
     },
