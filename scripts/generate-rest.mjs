@@ -1,6 +1,8 @@
 /**
- * Generates public/rest-loading.json — a Lottie loading animation for
- * RE:st (Relational Structured Truth · documents that work together).
+ * Generates public/rest-loading.json — a PURE VECTOR Lottie loading
+ * animation for RE:st (Relational Structured Truth · documents that
+ * work together), built from potrace-traced paths (scripts/rest-vec.json)
+ * with gradient fills sampled from the source art (scripts/rest-colors.json).
  *
  * "Documents that work together": the three facets of the R mark fly in
  * from different directions like separate documents and snap together
@@ -16,7 +18,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const META = JSON.parse(readFileSync(join(root, 'scripts/rest-meta.json')));
+const VEC = JSON.parse(readFileSync(join(root, 'scripts/rest-vec.json')));
+const COL = JSON.parse(readFileSync(join(root, 'scripts/rest-colors.json')));
 
 const FR = 60;
 const OP = 240;
@@ -45,45 +48,61 @@ const px = (cx) => OX + cx * K;
 const py = (cy) => OY + cy * K;
 const S = K * 100;
 
-const asset = (nm) =>
-  readFileSync(join(root, `public/assets/rest/rest-${nm}.png`)).toString('base64');
+const c01 = (c) => c.map((v) => Math.round((v / 255) * 1000) / 1000);
 
-const assets = Object.entries(META).map(([id, { w, h }]) => ({
-  id,
-  w,
-  h,
-  u: '',
-  p: `data:image/png;base64,${asset(id)}`,
-  e: 1,
-}));
+const center = (nm) => {
+  const [x0, y0, x1, y1] = VEC[nm].bbox;
+  return [(x0 + x1) / 2, (y0 + y1) / 2];
+};
 
-const layer = (ind, id, ks, extra = {}) => {
-  const { w, h } = META[id];
+const shapes = (nm) => VEC[nm].paths.map((p) => ({ ty: 'sh', ks: { a: 0, k: { c: true, v: p.v, i: p.i, o: p.o } } }));
+
+const TR = { ty: 'tr', p: still([0, 0]), a: still([0, 0]), s: still([100, 100]), r: still(0), o: still(100), sk: still(0), sa: still(0) };
+
+const fillFlat = (nm) => ({ ty: 'fl', nm: 'fill', c: still([...c01(COL[nm].color), 1]), o: still(100), r: 1 });
+
+const fillGrad = (nm) => {
+  const { axis, stops } = COL[nm];
+  const [s0, s1, s2] = stops.map(c01);
+  return {
+    ty: 'gf',
+    nm: 'grad',
+    o: still(100),
+    r: 1,
+    t: 1,
+    s: still(axis[0]),
+    e: still(axis[1]),
+    g: { p: 3, k: still([0, ...s0, 0.5, ...s1, 1, ...s2]) },
+  };
+};
+
+// vector layer: paths live in logo px coords; the layer transform maps to comp
+const vlayer = (ind, nm, fill, ks, extra = {}) => {
+  const [cx, cy] = center(nm);
   return {
     ddd: 0,
     ind,
-    ty: 2,
-    nm: id,
-    refId: id,
+    ty: 4,
+    nm,
     sr: 1,
     ao: 0,
     ip: 0,
     op: OP,
     st: 0,
     bm: 0,
-    ks: { a: still([w / 2, h / 2, 0]), ...ks },
+    ks: { a: still([cx, cy, 0]), ...ks },
+    shapes: [{ ty: 'gr', nm, it: [...shapes(nm), fill, TR] }],
     ...extra,
   };
 };
 
 // --- the mark: three facets fly in like documents and snap together --------
-const MX = px(627);
-const MY = py(429);
-
-const facet = (ind, id, t0, fromX, fromY, fromR) =>
-  layer(
+const facet = (ind, nm, t0, fromX, fromY, fromR) => {
+  const [cx, cy] = center(nm);
+  return vlayer(
     ind,
-    id,
+    nm,
+    fillGrad(nm),
     {
       o: anim([
         [t0, 0, easeOut],
@@ -95,16 +114,19 @@ const facet = (ind, id, t0, fromX, fromY, fromR) =>
         [t0 + 19, 0],
       ]),
       p: anim([
-        [t0, [MX + fromX, MY + fromY, 0], easeOut],
-        [t0 + 14, [MX - fromX * 0.04, MY - fromY * 0.04, 0], easeInOut],
-        [t0 + 19, [MX, MY, 0]],
+        [t0, [px(cx) + fromX, py(cy) + fromY, 0], easeOut],
+        [t0 + 14, [px(cx) - fromX * 0.04, py(cy) - fromY * 0.04, 0], easeInOut],
+        [t0 + 19, [px(cx), py(cy), 0]],
       ]),
       s: still([S, S, 100]),
     },
     { parent: 30 },
   );
+};
 
 // mark rig — the assembled mark breathes as one piece in the loop
+const MX = px(627);
+const MY = py(429);
 const rig = {
   ddd: 0,
   ind: 30,
@@ -130,9 +152,9 @@ const rig = {
 };
 
 // --- wordmark + taglines ---------------------------------------------------
-const rise = (ind, id, t0, dy = 26) => {
-  const { cx, cy } = META[id];
-  return layer(ind, id, {
+const rise = (ind, nm, t0, dy = 26) => {
+  const [cx, cy] = center(nm);
+  return vlayer(ind, nm, fillFlat(nm), {
     o: anim([
       [t0, 0, easeOut],
       [t0 + 10, 100],
@@ -147,8 +169,8 @@ const rise = (ind, id, t0, dy = 26) => {
 };
 
 // colon dots pop in, then exchange a sync pulse in the loop (alternating)
-const dot = (ind, id, t0, beats) => {
-  const { cx, cy } = META[id];
+const dot = (ind, nm, t0, beats) => {
+  const [cx, cy] = center(nm);
   const pulses = [];
   for (const c of beats) {
     pulses.push(
@@ -157,7 +179,7 @@ const dot = (ind, id, t0, beats) => {
       [c + 18, [S, S, 100], easeInOut],
     );
   }
-  return layer(ind, id, {
+  return vlayer(ind, nm, fillFlat(nm), {
     o: anim([
       [t0, 0, easeOut],
       [t0 + 6, 100],
@@ -197,7 +219,7 @@ const lottie = {
   h: 600,
   nm: 'RE:st — loading',
   ddd: 0,
-  assets,
+  assets: [],
   layers,
   markers: [
     { tm: 0, cm: 'intro', dr: 90 },
