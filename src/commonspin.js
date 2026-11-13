@@ -7,6 +7,8 @@ const LOOP = [90, 210];
 const PANELS = [
   { id: 'v1', path: '/commonspin-loading.json' },
   { id: 'v11', path: '/commonspin-loading-white.json' },
+  { id: 'v2', path: '/commonspin-loading-v2.json' },
+  { id: 'v21', path: '/commonspin-loading-v2-white.json' },
 ];
 
 for (const { id, path } of PANELS) {
