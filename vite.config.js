@@ -26,6 +26,7 @@ export default defineConfig({
         baseline: resolve(import.meta.dirname, 'baseline/index.html'),
         legalconnect: resolve(import.meta.dirname, 'legalconnect/index.html'),
         commonspin: resolve(import.meta.dirname, 'commonspin/index.html'),
+        rest: resolve(import.meta.dirname, 'rest/index.html'),
         farose: resolve(import.meta.dirname, 'farose/index.html'),
       },
     },
