@@ -1022,3 +1022,8 @@ body.theme-commonspin {
   background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #f2f2f2 55%, #e6e6e6 100%);
   color: #111111;
 }
+
+body.theme-dcms {
+  background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #eef2fa 55%, #dde6f4 100%);
+  color: #10264c;
+}

@@ -9,6 +9,7 @@ Programmatically-generated **Lottie loading animations** for a collection of bra
 | SPIN BASE | [/](https://spinbase-animation.web.app/) | 3 variants: flat spin, globe spin, 3D Earth-style ball rotation |
 | COURTHAUS | [/courthaus/](https://spinbase-animation.web.app/courthaus/) | 2 variants: letters pop and the ball drops into the "O"; new lockup where the ball-O screws in and keeps turning |
 | FUZE TRAINING | [/fuze/](https://spinbase-animation.web.app/fuze/) | 8 variants: mark halves slam together with a beat pulse (black/white editions); v2 vector draw-on (traced to SVG) where the X draws itself and a spark races its silhouette; v3 convergence — FUZE charges in from the left, TRAINING from the right, the divider stamps where they meet; v3.3/3.4 full-power collision with impact squash, screen shake, shockwaves and flying sparks — each in white and black editions |
+| DCMS 365 | [/dcms/](https://spinbase-animation.web.app/dcms/) | Debt collection system: letters stamp in with firm settles, the 365 call badge drops like a stamp of approval and pulses like a live PBX line with signal rings; logo traced to dcms-logo.svg (tagline removed) |
 | The Common Spin | [/commonspin/](https://spinbase-animation.web.app/commonspin/) | v1 letters spin into place + the mm line draws itself, v2 orbit rings expand while rotating around the spinning wordmark — black and white editions |
 | สร้างสรรค์ปัญญา (Creative Intelligent) | [/sspy/](https://spinbase-animation.web.app/sspy/) | Pen nib rises, idea bulb pops and glows, Thai + English text reveal — v1 with loading dots, v2 logo only, v3 icon only (no text) |
 | BALANCE AUTO TENNIS | [/balance/](https://spinbase-animation.web.app/balance/) | 3 variants: counter-rotating balls, roll-in-and-rest, balancing act — the solid ball lands on the outline ball and teeters |
@@ -44,6 +45,7 @@ node scripts/generate-courthaus.mjs     # COURTHAUS v1 → public/courthaus-load
 node scripts/generate-courthaus-v2.mjs  # COURTHAUS v2 → public/courthaus-loading-v2.json
 node scripts/generate-fuze.mjs          # FUZE v1    → public/fuze-loading.json
 node scripts/generate-fuze-v2.mjs       # FUZE v2    → public/fuze-loading-v2-{1,2}.json (white/black)
+node scripts/generate-dcms.mjs          # DCMS 365 → public/dcms-loading.json
 node scripts/generate-commonspin.mjs    # The Common Spin → public/commonspin-loading{,-white,-v2,-v2-white}.json
 node scripts/generate-sspy.mjs          # สร้างสรรค์ปัญญา → public/sspy-loading.json, -v2.json, -v3.json
 node scripts/generate-balance.mjs       # BALANCE v1 → public/balance-loading.json
