@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/dink-logo.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>MOUNTAIN DINK · Loading Animations</title>
+  </head>
+  <body class="theme-dink">
+    <div id="app">
+      <header>
+        <h1>MOUNTAIN DINK — Loading Animations</h1>
+        <p>two Lottie editions · intro plays once, then loops seamlessly · <a class="headlink" href="/dink-logo.svg" download="dink-logo.svg">Download logo .svg</a> · <a class="headlink" href="/">← All animations</a></p>
+      </header>
+      <main id="gallery">
+        <section class="panel">
+          <div class="stage" id="stage-v1" style="background:#ececee" aria-label="MOUNTAIN DINK loading animation, light"></div>
+          <div class="meta">
+            <h2>v1 — the collision, light</h2>
+            <p>Full power: MOUNTAIN charges in from the left, DINK from the right, and the two slam together at the gap — impact squash driving into the hit, a screen shake with decaying jolts, two shockwave rings and sparks flying radially. On loop DINK beats like a power pulse, each beat radiating a teal ring.</p>
+            <div class="actions">
+              <span class="chip" id="chip-v1">intro</span>
+              <button type="button" id="replay-v1">Replay</button>
+              <a href="/dink-loading.json" download="dink-loading.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="stage" id="stage-v2" style="background:#121212" aria-label="MOUNTAIN DINK loading animation, dark"></div>
+          <div class="meta">
+            <h2>v2 — the collision, dark</h2>
+            <p>The same collision with MOUNTAIN in a silver gradient and DINK in bright teal for dark surfaces, matching the metallic edition of the logo. Both files are transparent — the panel colors are just the page.</p>
+            <div class="actions">
+              <span class="chip" id="chip-v2">intro</span>
+              <button type="button" id="replay-v2">Replay</button>
+              <a href="/dink-loading-dark.json" download="dink-loading-dark.json">Download .json</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/dink.js"></script>
+  </body>
+</html>

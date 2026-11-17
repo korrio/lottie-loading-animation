@@ -1027,3 +1027,8 @@ body.theme-dcms {
   background: radial-gradient(1200px 800px at 50% 30%, #ffffff 0%, #eef2fa 55%, #dde6f4 100%);
   color: #10264c;
 }
+
+body.theme-dink {
+  background: radial-gradient(1200px 800px at 50% 30%, #f4f4f5 0%, #e6e7e9 55%, #d8dadd 100%);
+  color: #2b2b30;
+}

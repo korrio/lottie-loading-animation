@@ -27,6 +27,7 @@ export default defineConfig({
         legalconnect: resolve(import.meta.dirname, 'legalconnect/index.html'),
         commonspin: resolve(import.meta.dirname, 'commonspin/index.html'),
         dcms: resolve(import.meta.dirname, 'dcms/index.html'),
+        dink: resolve(import.meta.dirname, 'dink/index.html'),
         farose: resolve(import.meta.dirname, 'farose/index.html'),
       },
     },
