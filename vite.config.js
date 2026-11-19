@@ -29,6 +29,7 @@ export default defineConfig({
         dcms: resolve(import.meta.dirname, 'dcms/index.html'),
         dink: resolve(import.meta.dirname, 'dink/index.html'),
         r101: resolve(import.meta.dirname, '101/index.html'),
+        gymconnect: resolve(import.meta.dirname, 'gymconnect/index.html'),
         farose: resolve(import.meta.dirname, 'farose/index.html'),
       },
     },

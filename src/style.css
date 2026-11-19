@@ -1037,3 +1037,9 @@ body.theme-101 {
   background: radial-gradient(1200px 800px at 50% 30%, #fbf9f3 0%, #f3f0e6 55%, #e9e5d7 100%);
   color: #12463a;
 }
+
+body.theme-gymconnect {
+  background: radial-gradient(1200px 800px at 50% 30%, #2a2e35 0%, #1f2227 55%, #16181c 100%);
+  color: #e4e7eb;
+}
+.theme-gymconnect header p, .theme-gymconnect .meta p, .theme-gymconnect .chip { color: #9aa3ad; }
