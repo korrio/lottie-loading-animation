@@ -28,6 +28,7 @@ export default defineConfig({
         commonspin: resolve(import.meta.dirname, 'commonspin/index.html'),
         dcms: resolve(import.meta.dirname, 'dcms/index.html'),
         dink: resolve(import.meta.dirname, 'dink/index.html'),
+        r101: resolve(import.meta.dirname, '101/index.html'),
         farose: resolve(import.meta.dirname, 'farose/index.html'),
       },
     },

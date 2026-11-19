@@ -1032,3 +1032,8 @@ body.theme-dink {
   background: radial-gradient(1200px 800px at 50% 30%, #f4f4f5 0%, #e6e7e9 55%, #d8dadd 100%);
   color: #2b2b30;
 }
+
+body.theme-101 {
+  background: radial-gradient(1200px 800px at 50% 30%, #fbf9f3 0%, #f3f0e6 55%, #e9e5d7 100%);
+  color: #12463a;
+}
